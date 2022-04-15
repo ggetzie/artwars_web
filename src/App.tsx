@@ -3,7 +3,7 @@ import {Provider} from "react-redux";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import {store} from "./store";
 import "./styles/App.css";
-import {Home, About} from "./screens";
+import {Home, About, NewGame} from "./screens";
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/new-game" element={<NewGame />} />
             </Routes>
           </main>
           <footer>

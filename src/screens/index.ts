@@ -1,4 +1,5 @@
 import Home from "./Home";
 import About from "./About";
+import NewGame from "./NewGame";
 
-export {Home, About};
+export {Home, About, NewGame};
