@@ -1,4 +1,5 @@
-import {CategoryName, HighScore} from './types';
+// Type imports
+import {CategoryName, HighScore} from "./types";
 
 // NPC imports
 import {
@@ -7,48 +8,47 @@ import {
   considerBuy,
   getNPCForCity,
   NPCImages,
-} from './npcs';
-export {setupNPCs, considerBuy, considerSell, getNPCForCity, NPCImages};
+} from "./npcs";
 
 // Cities imports
-import {Cities, setupDuties} from './cities';
-export {Cities, setupDuties};
+import {Cities, setupDuties} from "./cities";
 
 // Artworks imports
-import {setupArtworks, ARTWORKS} from './artworks';
+import {setupArtworks, ARTWORKS} from "./artworks";
+
+// shop imports
+import {setupPowerUps} from "./shop";
+export {setupNPCs, considerBuy, considerSell, getNPCForCity, NPCImages};
+export {Cities, setupDuties};
 export {setupArtworks, ARTWORKS};
 
 const Categories = {
-  AncientAsia: 'Ancient Arts of Asia',
-  ModernAsia: 'Modern Arts of Asia',
-  ContemporaryChinese: 'Contemporary Chinese Art',
-  GreekAndRoman: 'Greek and Roman Art',
-  Islamic: 'Islamic Art',
-  Egypt: 'Arts of Egypt',
-  AncientNearEast: 'Ancient Near East',
-  Medieval: 'Medieval Art',
-  Decorative: 'Decorative Arts',
-  Africa: 'Arts of Africa',
-  AncientAmerican: 'Ancient American',
-  Oceanic: 'Oceanic Art',
-  Baroque: 'Baroque Art',
-  Neoclassical: 'Neoclassical Art',
-  Romanticism: 'Romanticism',
-  Realism: 'Realism',
-  Impressionism: 'Impressionism and Post-Impressionism',
-  EuropeanAvantGarde: '20th century European Avant-Garde',
-  AbstractExpressionism: 'Abstract Expressionism',
-  PopArt: 'Pop Art',
-  Photography: 'Photography',
-  Contemporary: 'Contemporary',
+  AncientAsia: "Ancient Arts of Asia",
+  ModernAsia: "Modern Arts of Asia",
+  ContemporaryChinese: "Contemporary Chinese Art",
+  GreekAndRoman: "Greek and Roman Art",
+  Islamic: "Islamic Art",
+  Egypt: "Arts of Egypt",
+  AncientNearEast: "Ancient Near East",
+  Medieval: "Medieval Art",
+  Decorative: "Decorative Arts",
+  Africa: "Arts of Africa",
+  AncientAmerican: "Ancient American",
+  Oceanic: "Oceanic Art",
+  Baroque: "Baroque Art",
+  Neoclassical: "Neoclassical Art",
+  Romanticism: "Romanticism",
+  Realism: "Realism",
+  Impressionism: "Impressionism and Post-Impressionism",
+  EuropeanAvantGarde: "20th century European Avant-Garde",
+  AbstractExpressionism: "Abstract Expressionism",
+  PopArt: "Pop Art",
+  Photography: "Photography",
+  Contemporary: "Contemporary",
 } as const;
-
-// shop imports
-import {setupPowerUps} from './shop';
 export {setupPowerUps};
 
 // Random functions
-
 function randInt(min: number, max: number): number {
   // return a random integer between min and max (min included, max excluded)
   const res = Math.floor(Math.random() * (max - min)) + min;
@@ -63,7 +63,7 @@ function randomChoiceNR(arr: any[]): {selected: any; remaining: any[]} {
   // select a random element from an array without replacement
   // returns the selected element and the original array without the selection
   if (arr.length === 0) {
-    throw 'Empty array';
+    throw new Error("Empty array");
   }
   const index = randInt(0, arr.length);
   return {
@@ -79,7 +79,7 @@ function diceRoll(threshold: number): boolean {
 function randomChoiceR(arr: any[]): any {
   // select a random element from an array
   if (arr.length === 0) {
-    throw 'Empty array';
+    throw new Error("Empty array");
   }
   const index = randInt(0, arr.length);
   return arr[index];
@@ -139,7 +139,7 @@ function sortScoresDescending(a: HighScore, b: HighScore): number {
 
 function insertNewHS(
   scores: HighScore[],
-  newScore: HighScore,
+  newScore: HighScore
 ): [HighScore[], number] {
   if (scores.length === 0) {
     return [[newScore], 0];

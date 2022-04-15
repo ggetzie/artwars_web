@@ -1,7 +1,5 @@
-import React from 'react';
-import {View, FlatList, Text} from 'react-native';
-import {HighScore} from '../util/types';
-import BaseStyle from '../styles/base';
+import React from "react";
+import {HighScore} from "../util/types";
 
 const ScoreList = ({
   scores,
@@ -11,22 +9,15 @@ const ScoreList = ({
   highlight: number;
 }) => {
   return (
-    <View>
-      <FlatList
-        data={scores}
-        renderItem={({item, index}) => (
-          <Text
-            style={
-              index === highlight
-                ? {fontWeight: 'bold'}
-                : {fontWeight: 'normal'}
-            }>
-            {item.player} - {new Date(item.date).toLocaleDateString()} -{' '}
-            {item.score.toLocaleString()}
-          </Text>
-        )}
-      />
-    </View>
+    <div>
+      <ul>
+        {scores.map((v, i) => (
+          <li key={i} className={i === highlight ? "highlight" : ""}>
+            {v.player} - {v.score} - {v.date}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

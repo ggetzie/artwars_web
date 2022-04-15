@@ -1,10 +1,82 @@
 .App {
+  max-width: 40rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.hot {
+  color: orangered;
+}
+
+.card {
+  padding: 0 1em 1em 1em;
+}
+
+.quit-button {
+  font-size: 1.2em;
+}
+
+.menu-link {
+  font-size: 1.5em;
+  max-width: 10em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1em;
+}
+
+.pic-small {
+  height: 50px;
+  width: 50px;
+}
+
+.pic-medium {
+  height: 100px;
+  width: 100px;
+}
+
+.pic-large {
+  height: 150px;
+  width: 150px;
+}
+.error {
+  font-weight: bold;
+  color: red;
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+  max-height: 2em;
+  justify-content: space-evenly;
+  padding-top: 0.5em;
+}
+
+.button {
+  min-width: 3em;
+  border-radius: 0.2em;
+  font-weight: bold;
   text-align: center;
+}
+
+.danger {
+  background-color: red;
+  color: white;
+}
+
+.success {
+  background-color: green;
+  color: white
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.highlight {
+  font-weight: bold;
 }
 
 @media (prefers-reduced-motion: no-preference) {

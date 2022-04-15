@@ -1,13 +1,14 @@
-import React from 'react';
-import {TouchableOpacity} from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import React from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTimesCircle} from "@fortawesome/free-solid-svg-icons";
 
-const QuitButton = ({navigation}: {navigation: any}) => (
-  <TouchableOpacity
-    style={{maxWidth: 40}}
-    onPress={() => navigation.navigate('Home')}>
-    <FontAwesome5 name={'times-circle'} color={'red'} size={20} />
-  </TouchableOpacity>
+const QuitButton = () => (
+  <FontAwesomeIcon
+    icon={faTimesCircle}
+    color={"red"}
+    fixedWidth
+    className="quit-button"
+  />
 );
 
 export default QuitButton;

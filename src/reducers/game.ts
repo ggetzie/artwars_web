@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {v4 as uuidv4} from 'uuid';
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {v4 as uuidv4} from "uuid";
 import {
   Cities,
   setupNPCs,
@@ -13,7 +13,7 @@ import {
   setupDuties,
   ARTWORKS,
   setupPowerUps,
-} from '../util';
+} from "../util";
 import {
   CategoryName,
   CityName,
@@ -24,8 +24,8 @@ import {
   Artwork,
   ArtworkData,
   PowerUp,
-} from '../util/types';
-import {ArtWorkFilter} from '../util/awFilter';
+} from "../util/types";
+import {ArtWorkFilter} from "../util/awFilter";
 
 export interface gameState {
   readonly id: string;
@@ -47,7 +47,7 @@ export interface gameState {
 export function defaultGame(): gameState {
   return {
     id: uuidv4(),
-    player: 'Player',
+    player: "Player",
     started: new Date().toISOString(),
     turn: 1,
     maxTurns: 30,
@@ -66,7 +66,7 @@ export function defaultGame(): gameState {
 const initialState: gameState = defaultGame();
 
 export const gameSlice = createSlice({
-  name: 'game',
+  name: "game",
   initialState,
   reducers: {
     setGame: (_, action: PayloadAction<gameState>) => {
@@ -112,14 +112,14 @@ export const gameSlice = createSlice({
     },
     setArtworks: (state, action: PayloadAction<ArtworkData[]>) => {
       state.artworksData = action.payload.sort(
-        (a: ArtworkData, b: ArtworkData): number => a.id - b.id,
+        (a: ArtworkData, b: ArtworkData): number => a.id - b.id
       );
     },
     setInvestigation: (state, action: PayloadAction<boolean>) => {
       state.underInvestigation = action.payload;
     },
     buyPowerUp: (state, action: PayloadAction<string>) => {
-      state.powerUps = state.powerUps.map(p => {
+      state.powerUps = state.powerUps.map((p) => {
         if (p.name === action.payload) {
           state.balance -= p.price;
           return {
@@ -131,7 +131,7 @@ export const gameSlice = createSlice({
         }
       });
     },
-    processTurn: state => {
+    processTurn: (state) => {
       // randomly select new hot category
       // adjust artwork valuations
       // hot category artworks go up 1.5x - 3x (select random factor)
@@ -148,12 +148,12 @@ export const gameSlice = createSlice({
       let messages: string[] = [];
       let artworks = [...state.artworksData];
       const ownsYacht = state.powerUps
-        .filter(p => p.name === 'Yacht')
-        .map(p => p.purchased)[0];
+        .filter((p) => p.name === "Yacht")
+        .map((p) => p.purchased)[0];
 
       const portfolioIds = artworks
-        .filter(artwork => artwork.owner === state.player)
-        .map(artwork => artwork.id);
+        .filter((artwork) => artwork.owner === state.player)
+        .map((artwork) => artwork.id);
 
       // process events specific to player
       if (portfolioIds.length > 0) {
@@ -172,7 +172,7 @@ export const gameSlice = createSlice({
             if (diceRoll(irsChance)) {
               setInvestigation(true);
               messages.push(
-                "Tax authorities have become suspicious of your dealings. You're unable to move artworks between cities.",
+                "Tax authorities have become suspicious of your dealings. You're unable to move artworks between cities."
               );
             }
           }
@@ -180,7 +180,7 @@ export const gameSlice = createSlice({
         // Fire?
         const hadAFire = diceRoll(0.01);
         if (hadAFire) {
-          const playerCities = portfolioIds.map(awId => artworks[awId].city);
+          const playerCities = portfolioIds.map((awId) => artworks[awId].city);
           const fireCity = randomChoiceR(playerCities);
           for (let id of portfolioIds) {
             if (artworks[id].city === fireCity) {
@@ -189,7 +189,7 @@ export const gameSlice = createSlice({
             }
           }
           messages.push(
-            `Oh no! A fire in ${fireCity} destroyed your warehouse and all artworks there.`,
+            `Oh no! A fire in ${fireCity} destroyed your warehouse and all artworks there.`
           );
         }
 
@@ -197,22 +197,22 @@ export const gameSlice = createSlice({
         const hadATheft = diceRoll(0.05);
         if (hadATheft) {
           const nonDestroyed = portfolioIds.filter(
-            awId => !artworks[awId].destroyed,
+            (awId) => !artworks[awId].destroyed
           );
           const stolen = randomChoiceR(nonDestroyed);
-          artworks[stolen].owner = 'anon';
+          artworks[stolen].owner = "anon";
           messages.push(
-            `A dastardly thief stole ${ARTWORKS[artworks[stolen].id].title}!`,
+            `A dastardly thief stole ${ARTWORKS[artworks[stolen].id].title}!`
           );
         }
 
         // Retrospective?
         const hadARetro = diceRoll(0.1);
-        const playerArtists = portfolioIds.map(id => ARTWORKS[id].artist);
+        const playerArtists = portfolioIds.map((id) => ARTWORKS[id].artist);
         if (hadARetro) {
           const selected = randomChoiceR(playerArtists);
           messages.push(
-            `A major museum just announced a retrospective of ${selected}. Their work increased in value by 50%!`,
+            `A major museum just announced a retrospective of ${selected}. Their work increased in value by 50%!`
           );
           for (let aw of artworks) {
             const awIm = ARTWORKS[aw.id];
@@ -226,7 +226,7 @@ export const gameSlice = createSlice({
         if (problematic) {
           const selected = randomChoiceR(playerArtists);
           messages.push(
-            `${selected} has been declared problematic! Their work decreased in value by 50%!`,
+            `${selected} has been declared problematic! Their work decreased in value by 50%!`
           );
           for (let aw of artworks) {
             const awIm = ARTWORKS[aw.id];
@@ -241,9 +241,9 @@ export const gameSlice = createSlice({
         if (repatriated) {
           const selected = randomChoiceR(portfolioIds);
           messages.push(
-            `${ARTWORKS[selected].title} has been repatriated to its home country and returned to the rightful owners.`,
+            `${ARTWORKS[selected].title} has been repatriated to its home country and returned to the rightful owners.`
           );
-          artworks[selected].owner = 'anon';
+          artworks[selected].owner = "anon";
         }
       }
       // Update values for all based on category
@@ -254,7 +254,7 @@ export const gameSlice = createSlice({
       for (let category of Object.values(Categories)) {
         adjustments.set(
           category,
-          category === newHot ? randRange(1.5, 3) : randRange(0.5, 1.5),
+          category === newHot ? randRange(1.5, 3) : randRange(0.5, 1.5)
         );
       }
       for (let aw of artworks) {
@@ -304,11 +304,11 @@ export const getArtwork = (game: gameState, awId: number): Artwork => {
 
 export const filterArtWorks = (
   game: gameState,
-  criteria: ArtWorkFilter,
+  criteria: ArtWorkFilter
 ): Artwork[] => {
   return game.artworksData
-    .filter(aw => criteria.match(aw))
-    .map(data => {
+    .filter((aw) => criteria.match(aw))
+    .map((data) => {
       return {static: ARTWORKS[data.id], data: data};
     });
 };
@@ -333,7 +333,7 @@ export const getMaxTurns = (game: gameState) => game.maxTurns;
 export const portfolioValue = (game: gameState) =>
   game.artworksData.reduce(
     (p, c) => (c.owner === game.player ? p + c.currentValue : p),
-    0,
+    0
   );
 
 export const getMessages = (game: gameState) => game.messages;
@@ -348,7 +348,7 @@ export const getPowerUp = (game: gameState, name: string) => {
       return p;
     }
   }
-  throw 'Invalid PowerUp Name';
+  throw new Error("Invalid PowerUp Name");
 };
 
 export const ownsPowerUp = (game: gameState, name: string): boolean => {
@@ -357,7 +357,7 @@ export const ownsPowerUp = (game: gameState, name: string): boolean => {
       return p.purchased;
     }
   }
-  throw `Unknown PowerUp: ${name}`;
+  throw new Error(`Unknown PowerUp: ${name}`);
 };
 
 export default gameSlice.reducer;
