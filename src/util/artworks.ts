@@ -1,9 +1,9 @@
-import {Artwork, ArtworkData, ArtworkStatic, CityName} from './types';
-import {randomChoiceR, getNPCForCity, Cities} from '.';
+import {ArtworkData, ArtworkStatic, CityName} from "./types";
+import {randomChoiceR, getNPCForCity, Cities} from ".";
 
 const MAX_OWNED_BY_NPC = 10;
 const MAX_ON_AUCTION = 20;
-const ARTWORKS: ArtworkStatic[] = require('../../res/data/artworks.json');
+const ARTWORKS: ArtworkStatic[] = require("../res/data/artworks.json");
 
 function setupArtworks(): ArtworkData[] {
   let res = [];
@@ -12,7 +12,7 @@ function setupArtworks(): ArtworkData[] {
   const chanceOnAuction = MAX_ON_AUCTION / (ARTWORKS.length / cities.length);
   for (const aw of ARTWORKS) {
     const city = randomChoiceR(cities);
-    let owner = '';
+    let owner = "";
     let auction = false;
     if (Math.random() <= chanceOwnedByNPC) {
       const npc = getNPCForCity(city);
