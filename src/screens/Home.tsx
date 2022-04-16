@@ -7,7 +7,7 @@ const Home = () => {
       <Link to="/new-game" className="main-menu-button">
         New Game
       </Link>
-      <Link to="continue" className="main-menu-button">
+      <Link to="/continue" className="main-menu-button">
         Continue
       </Link>
       <Link to="/high-scores" className="main-menu-button">

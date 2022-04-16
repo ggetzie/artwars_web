@@ -1,65 +1,73 @@
-import {gameState} from '../reducers/game';
-import {HighScore} from './types';
-const GAME_KEY = 'artwars_SavedGames';
-const HS_KEY = 'artwars_HighScores';
+import {gameState} from "../reducers/game";
+import {HighScore} from "./types";
+const GAME_KEY = "artwars_SavedGames";
+const HS_KEY = "artwars_HighScores";
 
 async function saveGame(game: gameState) {
-  if (typeof window !== undefined) {
+  try {
     const games = await loadGames();
-    const res = games.filter(s => s.id !== game.id); // replace previous save, if it exists
+    const res = games.filter((s) => s.id !== game.id); // replace previous save, if it exists
     window.localStorage.setItem(GAME_KEY, JSON.stringify(res.concat(game)));
     return new Promise<void>((resolve, _) => resolve());
+  } catch (e) {
+    console.log(`Error saving game - ${game.id} - ${e}`);
   }
-  throw 'window undefined! - saveGame';
 }
 
 async function deleteGame(gameId: string) {
-  if (typeof window !== undefined) {
+  try {
     const games = await loadGames();
     window.localStorage.setItem(
       GAME_KEY,
-      JSON.stringify(games.filter(g => g.id !== gameId)),
+      JSON.stringify(games.filter((g) => g.id !== gameId))
     );
+  } catch (e) {
+    console.log(`Error deleting game ${gameId} - ${e}`);
   }
-  throw 'window undefined! - deleteGame';
 }
 
 async function loadGames(): Promise<gameState[]> {
-  if (typeof window !== undefined) {
+  try {
     const games = window.localStorage.get(GAME_KEY);
     const res = games ? JSON.parse(games) : [];
     return new Promise((resolve, _) => resolve(res));
+  } catch (e) {
+    console.log(`Error loading game list - ${e}`);
+    return [];
   }
-  throw 'window undefined! - loadGames';
 }
 
-async function loadGame(gameId: string): Promise<gameState> {
-  if (typeof window !== undefined) {
+async function loadGame(gameId: string): Promise<gameState | undefined> {
+  try {
     const games = window.localStorage.get(GAME_KEY);
     for (const game of games) {
       if (game.id === gameId) {
         return new Promise((resolve, _) => resolve(game));
       }
     }
-    throw `Game not found: ${gameId}`;
+    throw new Error(`Game not found: ${gameId}`);
+  } catch (e) {
+    console.log(`Error loading game - ${gameId} - ${e}`);
   }
-  throw 'window undefined! - loadGame';
 }
 
 async function saveHighScores(scores: HighScore[]) {
-  if (typeof window !== undefined) {
+  try {
     window.localStorage.setItem(HS_KEY, JSON.stringify(scores));
     return new Promise<void>((resolve, _) => resolve());
+  } catch (e) {
+    console.log(`Error saving high scores - ${e}`);
   }
-  throw 'window undefined! - saveHighScores';
 }
 
 async function loadHighScores(): Promise<HighScore[]> {
-  if (typeof window !== undefined) {
-    const scores = window.localStorage.getItem(HS_KEY) || '[]';
+  try {
+    const scores = window.localStorage.getItem(HS_KEY) || "[]";
     return new Promise((resolve, _) => resolve(JSON.parse(scores)));
+  } catch (e) {
+    console.log(`Error loading high scores - ${e}`);
+    return [];
   }
-  throw 'window undefined! - loadHighScores';
 }
 
 export {

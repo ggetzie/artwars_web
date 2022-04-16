@@ -83,12 +83,21 @@ body a {
 .sh-right {
   width: 10%
 }
-.about-main {
+.vert-center {
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: auto 0 auto 0;
+}
+
+ul.score-list {
+  list-style: none;
+  text-align: left;
+}
+
+ul.score-list li {
+  margin-bottom: 0.7em;
 }
 
 .about-main h3 {

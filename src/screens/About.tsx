@@ -5,7 +5,7 @@ const About = () => {
   return (
     <>
       <ScreenHeader showBack={true} title="About" />
-      <div className="about-main">
+      <div className="vert-center">
         <h3>Concept and Content</h3>
         <p>
           <a href="https://msteinberg.art">Monica Steinberg</a>
