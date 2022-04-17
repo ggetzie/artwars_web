@@ -10,6 +10,7 @@ const Dropdown = ({
   labelText,
   labelClass,
   controlClass,
+  placeHolder,
 }: {
   onValueChange: Function;
   selectedValue: any;
@@ -18,6 +19,7 @@ const Dropdown = ({
   labelText: string;
   labelClass?: string;
   controlClass?: string;
+  placeHolder?: string;
 }) => {
   return (
     <>
@@ -29,6 +31,11 @@ const Dropdown = ({
         className={controlClass}
         onChange={onValueChange as ChangeEventHandler<HTMLSelectElement>}
       >
+        {placeHolder && (
+          <option key={-1} disabled={true} selected={true} value="">
+            {placeHolder}
+          </option>
+        )}
         {itemList.map(([v, l], i) => (
           <option key={i} selected={v === selectedValue}>
             {l}

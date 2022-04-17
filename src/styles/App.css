@@ -1,7 +1,8 @@
 /* 
-AW_RED = '#f57179';
-AW_BLUE = '#8f8798';
-AW_YELLOW = '#feedba';   
+AW_RED       = #f57179
+AW_BLUE      = #8f8798
+AW_YELLOW    = #feedba   
+AW_LIGHTBLUE = #e6e6e6
 */
 .App {
   max-width: 40rem;
@@ -47,7 +48,8 @@ body a {
 }
 
 .hot {
-  color: orangered;
+  color: #f57179;
+  font-weight: bold;
 }
 
 .card {
@@ -215,6 +217,47 @@ div#main-menu {
 
 .highlight {
   font-weight: bold;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.city-select {
+  background-color: #f57179;
+  color: white;
+  font-size: 1.2em;
+  border-radius: 0.2em;
+}
+
+.game-container {
+  height: 100%;
+  position: relative;
+}
+
+.game-tab {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px 0 5px 0;
+  border-radius: 0.2em;
+  background-color: #e6e6e6;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.game-tab img {
+  max-width: 50px;
+  max-height: 50px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
