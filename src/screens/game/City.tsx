@@ -34,6 +34,7 @@ const City = () => {
 
   return (
     <div className="city-main">
+      <h2 className="city-heading">{city}</h2>
       <p>Hello, {player}!</p>
       <p>Cash on hand: ${balance.toLocaleString()}</p>
       <p>Portfolio Value: ${totalValue.toLocaleString()}</p>
@@ -44,7 +45,7 @@ const City = () => {
       {turn < maxTurns && (
         <div className="form-row">
           <Dropdown
-            selectedValue={city}
+            selectedValue=""
             itemList={Object.values(Cities).map((v) => [v, v])}
             onValueChange={onValueChange}
             labelText="Change City:"
@@ -55,15 +56,16 @@ const City = () => {
           />
         </div>
       )}
-
-      <h2>Messages</h2>
-      <ul>
-        {messages.length > 0 ? (
-          messages.map((m, i) => <li key={i}>{m}</li>)
-        ) : (
-          <li>No new messages</li>
-        )}
-      </ul>
+      <div className="message-board">
+        <h3>Message Board</h3>
+        <ul className="message-list">
+          {messages.length > 0 ? (
+            messages.map((m, i) => <li key={i}>{m}</li>)
+          ) : (
+            <li>No new messages</li>
+          )}
+        </ul>
+      </div>
     </div>
   );
 };

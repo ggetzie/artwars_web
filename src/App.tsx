@@ -11,9 +11,6 @@ function App() {
     <Provider store={store}>
       <Router>
         <div className="App">
-          <header>
-            <h1>Art Wars</h1>
-          </header>
           <main>
             <Routes>
               <Route path="/" element={<Home />} />

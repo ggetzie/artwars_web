@@ -33,7 +33,7 @@ footer a {
 }
 
 main {
-  height: calc(-105px + 100vh);
+  height: calc(-25px + 100vh);
   padding: 0 1em 0 1em;
   display: flex;
   flex-direction: column;
@@ -66,6 +66,8 @@ body a {
   display: flex;
   flex-direction: row;
   height: 40px;
+  margin-top: 2em;
+  margin-bottom: 1em;
 }
 
 .sh-left {
@@ -118,6 +120,8 @@ ul.score-list li {
 
 .quit-button {
   font-size: 1.2em;
+  display: block;
+  margin: auto;
 }
 
 .form-row {
@@ -230,16 +234,54 @@ div#main-menu {
   border: 0;
 }
 
+.city-main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.city-heading {
+  text-align: center;
+  font-size: 2em;
+  color: #f57179;
+  margin: 0;
+}
+
 .city-select {
   background-color: #f57179;
   color: white;
   font-size: 1.2em;
   border-radius: 0.2em;
+  text-align: center;
+}
+
+.message-board {
+  background-color: #feedba;
+  text-align: center;
+  overflow-y: scroll;
+  flex-basis: 100%;
+  margin: 0 auto 1em auto;
+  width: 90%;
+}
+
+.message-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .game-container {
   height: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+}
+
+.game-main {
+  display: flex;
+  flex-direction: column;
+  height: calc(-95px + 100vh);
 }
 
 .game-tab {
@@ -248,11 +290,13 @@ div#main-menu {
   justify-content: space-around;
   align-items: center;
   padding: 5px 0 5px 0;
+  height: 60px;
   border-radius: 0.2em;
   background-color: #e6e6e6;
   position: absolute;
   bottom: 0;
   width: 100%;
+  flex-grow: 1;
 }
 
 .game-tab img {

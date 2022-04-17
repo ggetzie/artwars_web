@@ -20,6 +20,7 @@ import IconPortfolio from "../../res/images/icon-portfolio.png";
 import IconCollector from "../../res/images/icon-collector.png";
 import IconAuction from "../../res/images/icon-auction.png";
 import IconShop from "../../res/images/icon-shop.png";
+import {ScreenHeader, QuitButton} from "../../components";
 
 // const ACTIVE_COLOR = "dodgerblue";
 // const INACTIVE_COLOR = "gray";
@@ -41,6 +42,15 @@ const Game = () => {
   return (
     <div className="game-container">
       <div className="game-main">
+        <ScreenHeader
+          showBack={false}
+          title={`Art Wars ${turn} / ${maxTurns}`}
+          headerRight={
+            <Link to="/" className="quit-button" title="Quit">
+              <QuitButton />
+            </Link>
+          }
+        />
         <Outlet />
         {turn >= maxTurns && (
           <div>
