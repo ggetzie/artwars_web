@@ -5,6 +5,7 @@ import ScoreList from "./ScoreList";
 import NPCDialog from "./NPCDialog";
 import ScreenHeader from "./ScreenHeader";
 import Dropdown from "./Dropdown";
+import ArtList, {ArtListItem} from "./ArtList";
 
 export {
   ArtItem,
@@ -14,4 +15,6 @@ export {
   NPCDialog,
   ScreenHeader,
   Dropdown,
+  ArtList,
+  ArtListItem,
 };

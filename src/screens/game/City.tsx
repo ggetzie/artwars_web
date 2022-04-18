@@ -43,7 +43,7 @@ const City = () => {
       </p>
 
       {turn < maxTurns && (
-        <div className="form-row">
+        <div className="city-select-container">
           <Dropdown
             selectedValue=""
             itemList={Object.values(Cities).map((v) => [v, v])}

@@ -3,7 +3,10 @@ AW_RED       = #f57179
 AW_BLUE      = #8f8798
 AW_YELLOW    = #feedba   
 AW_LIGHTBLUE = #e6e6e6
+AW_GRAY      = #8c8a97
 */
+
+/* Main App styles */
 .App {
   max-width: 40rem;
   margin: auto;
@@ -56,72 +59,16 @@ body a {
   padding: 0 1em 1em 1em;
 }
 
-.screen-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-}
-
-.screen-header {
-  display: flex;
-  flex-direction: row;
-  height: 40px;
-  margin-top: 2em;
-  margin-bottom: 1em;
-}
-
-.sh-left {
-  width: 10%;
-  cursor: pointer;
-}
-
-.sh-main {
-  width: 80%
-}
-
-.sh-main h2 {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-.sh-right {
-  width: 10%
-}
-.vert-center {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: auto 0 auto 0;
-}
-
-ul.score-list {
-  list-style: none;
-  text-align: left;
-}
-
-ul.score-list li {
-  margin-bottom: 0.7em;
-}
-
-.about-main h3 {
-  margin: 0
-}
-
-.about-main p {
-  margin-top: 0.5em;
-  margin-bottom: 1em;
-}
-
-.back-arrow {
-  max-width: 100%;
-  max-height: 100%;
-}
-
 .quit-button {
   font-size: 1.2em;
   display: block;
   margin: auto;
+}
+
+.screen-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
 }
 
 .form-row {
@@ -143,31 +90,14 @@ ul.score-list li {
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.6em;
+  text-transform: uppercase;
   height: 2em;
   border-radius: 0.2em;
   background-color: #f57179;
   color: white;
   width: 80%;
   margin: 0.5em auto 0.5em auto;
-}
-
-div#main-menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-}
-
-.main-menu-button {
-  text-decoration: none;
-  text-align: center;
-  font-size: 1.5em;
-  max-width: 10em;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1em;
-  color: #f57179;
 }
 
 .pic-small {
@@ -214,15 +144,6 @@ div#main-menu {
   color: white
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.highlight {
-  font-weight: bold;
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -234,42 +155,92 @@ div#main-menu {
   border: 0;
 }
 
-.city-main {
-  height: 100%;
+/* Screen Header styles */
+.screen-header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  min-height: 40px;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  position: sticky;
+  top: 0;
+  background-color: white;
 }
 
-.city-heading {
-  text-align: center;
-  font-size: 2em;
-  color: #f57179;
-  margin: 0;
+.sh-left {
+  width: 10%;
+  cursor: pointer;
 }
 
-.city-select {
-  background-color: #f57179;
-  color: white;
-  font-size: 1.2em;
-  border-radius: 0.2em;
-  text-align: center;
+.sh-main {
+  width: 80%
 }
 
-.message-board {
-  background-color: #feedba;
-  text-align: center;
-  overflow-y: scroll;
-  flex-basis: 100%;
-  margin: 0 auto 1em auto;
-  width: 90%;
-}
-
-.message-list {
-  list-style: none;
+.sh-main h2 {
   margin: 0;
   padding: 0;
+  text-align: center;
+}
+.sh-right {
+  width: 10%
 }
 
+/* About and High Scores pages */
+.vert-center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto 0 auto 0;
+}
+
+ul.score-list {
+  list-style: none;
+  text-align: left;
+}
+
+ul.score-list li {
+  margin-bottom: 0.7em;
+}
+
+.about-main h3 {
+  margin: 0
+}
+
+.about-main p {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+.back-arrow {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Home page */
+div#main-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.main-menu-button {
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.5em;
+  max-width: 10em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1em;
+  color: #f57179;
+}
+
+.highlight {
+  font-weight: bold;
+}
+
+/* Game screen main */
 .game-container {
   height: 100%;
   position: relative;
@@ -304,32 +275,108 @@ div#main-menu {
   max-height: 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+/* City screen */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.city-main {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.city-heading {
+  text-align: center;
+  font-size: 2em;
+  color: #f57179;
+  margin: 0;
+}
+
+.city-select {
+  background-color: #f57179;
   color: white;
+  font-size: 1.2em;
+  border-radius: 0.2em;
+  text-align: center;
+  max-width: 12em;
 }
 
-.App-link {
-  color: #61dafb;
+.city-select-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.message-board {
+  background-color: #feedba;
+  text-align: center;
+  overflow-y: scroll;
+  flex-basis: 100%;
+  margin: 0 auto 1em auto;
+  width: 90%;
+}
+
+.message-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Art list */
+.art-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.art-list ul li {
+  margin-bottom: 0.5em;
+  
+}
+
+.art-list ul li:hover {
+  border:1px #f57179 solid;
+  padding: 0.3em;
+}
+
+.art-list ul li p {
+  margin: 0;
+  color: #8c8a97
+}
+
+.art-list a {
+  color: #222;
+}
+
+.art-list h3 {
+  text-transform: uppercase;
+  font-size: 1.6em;
+}
+
+
+/* Collector screen */
+.collector-main {
+  overflow-y: scroll;
+}
+.collector-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.npc-name {
+  font-size: 1.8em;
+  color: #8c8a97;
+  text-transform: uppercase;
+}
+
+.collector-bio {
+  display: flex;
+  flex-direction: row;
+  column-gap: 1em;
+  height: 40%;
+}
+
+.collector-list-container .art-list {
+  height: 50%
 }

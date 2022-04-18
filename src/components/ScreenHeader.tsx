@@ -6,10 +6,12 @@ const ScreenHeader = ({
   showBack,
   title,
   headerRight,
+  titleClasses,
 }: {
   showBack: boolean;
   title: string;
   headerRight?: JSX.Element;
+  titleClasses?: string;
 }) => {
   return (
     <div className="screen-header">
@@ -23,7 +25,7 @@ const ScreenHeader = ({
           />
         )}
       </div>
-      <div className="sh-main">
+      <div className={`sh-main ${titleClasses}`}>
         <h2>{title}</h2>
       </div>
       <div className="sh-right">{headerRight}</div>
