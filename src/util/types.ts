@@ -1,4 +1,4 @@
-import {Categories, Cities, NPCImages} from '.';
+import {Categories, Cities, NPCImages} from ".";
 
 // Category types
 export type CategoryName = typeof Categories[keyof typeof Categories];
@@ -14,7 +14,7 @@ export type ArtworkStatic = {
   id: number;
   artist: string;
   title: string;
-  urls: string[];
+  imageUrl: string;
   category: CategoryName;
   year: number;
   minValue: number;

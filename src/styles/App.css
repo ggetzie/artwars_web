@@ -144,6 +144,50 @@ body a {
   color: white
 }
 
+.m-0 {
+  margin: 0;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.br-2 {
+  border-radius: 0.2em;
+}
+
+.fs-12 {
+  font-size: 1.2em;
+}
+
+.fs-14 {
+  font-size: 1.4em;
+}
+
+.fs-16 {
+  font-size: 1.6em;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.col {
+  max-width: 100%;
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -359,8 +403,9 @@ div#main-menu {
 /* Collector screen */
 .collector-main {
   overflow-y: scroll;
+  margin-bottom: 1em;
 }
-.collector-list-container {
+.collector-container {
   display: flex;
   flex-direction: column;
 }
@@ -369,6 +414,21 @@ div#main-menu {
   font-size: 1.8em;
   color: #8c8a97;
   text-transform: uppercase;
+}
+
+.npc-dialog {
+  display: flex;
+  flex-direction: row;
+  column-gap: 0.5em;
+  margin-top: 1em;
+  height: 50px;
+}
+
+.npc-dialog > .dialog-text {
+  padding: 0.5em;
+  border: 1px #e6e6e6 solid;
+  border-radius: 0.2em;
+  flex-basis: 100%;
 }
 
 .collector-bio {
@@ -380,4 +440,24 @@ div#main-menu {
 
 .collector-list-container .art-list {
   height: 50%
+}
+
+.offer-input {
+  column-gap: 0.5em;
+}
+
+.offer-input input {
+  font-size: 1.2em;
+  padding: 0.5em;
+}
+
+.offer-input button {
+  background-color: #f57179;
+  color: white;
+  font-size: 1.2em;
+  margin: 0 auto 0 auto;
+  border: none;
+  box-shadow: none;
+  padding: 0.5em;
+  cursor: pointer;
 }

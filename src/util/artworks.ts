@@ -1,9 +1,14 @@
-import {ArtworkData, ArtworkStatic, CityName} from "./types";
+import {Artwork, ArtworkData, ArtworkStatic, CityName} from "./types";
 import {randomChoiceR, getNPCForCity, Cities} from ".";
 
 const MAX_OWNED_BY_NPC = 10;
 const MAX_ON_AUCTION = 20;
 const ARTWORKS: ArtworkStatic[] = require("../res/data/artworks.json");
+const BASE_IMG_URL = "https://d2yeg5r8m6ep0f.cloudfront.net/media/";
+
+function getArtworkImageUrl(artwork: Artwork): string {
+  return BASE_IMG_URL + artwork.static.imageUrl;
+}
 
 function setupArtworks(): ArtworkData[] {
   let res = [];
@@ -34,4 +39,4 @@ function setupArtworks(): ArtworkData[] {
   return res;
 }
 
-export {setupArtworks, ARTWORKS};
+export {setupArtworks, ARTWORKS, getArtworkImageUrl};

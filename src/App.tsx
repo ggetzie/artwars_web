@@ -5,7 +5,11 @@ import {store} from "./store";
 import "./styles/App.css";
 import {Home, About, NewGame, HighScores} from "./screens";
 import {Game, City} from "./screens/game";
-import {Collector, List as CollectorList} from "./screens/game/collector";
+import {
+  Collector,
+  List as CollectorList,
+  Buy as BuyFromCollector,
+} from "./screens/game/collector";
 
 function App() {
   return (
@@ -22,6 +26,7 @@ function App() {
                 <Route path="city" element={<City />} />
                 <Route path="collector" element={<Collector />}>
                   <Route path="" element={<CollectorList />} />
+                  <Route path="buy/:artworkId" element={<BuyFromCollector />} />
                 </Route>
                 {/* <Route path="portfolio" element={<Portfolio />}>
                   <Route path="list" element={<PortfolioList />} />

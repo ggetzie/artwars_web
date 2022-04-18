@@ -296,6 +296,9 @@ export const getArtworkData = (game: gameState, awId: number) =>
   game.artworksData[awId];
 
 export const getArtwork = (game: gameState, awId: number): Artwork => {
+  if (awId < 0 || awId >= ARTWORKS.length) {
+    throw new Error("Invalid Artwork Id");
+  }
   return {
     static: ARTWORKS[awId],
     data: game.artworksData[awId],

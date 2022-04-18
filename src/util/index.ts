@@ -14,13 +14,19 @@ import {
 import {Cities, setupDuties} from "./cities";
 
 // Artworks imports
-import {setupArtworks, ARTWORKS} from "./artworks";
+import {setupArtworks, ARTWORKS, getArtworkImageUrl} from "./artworks";
 
 // shop imports
 import {setupPowerUps} from "./shop";
+
+// npc exports
 export {setupNPCs, considerBuy, considerSell, getNPCForCity, NPCImages};
+
+// city exports
 export {Cities, setupDuties};
-export {setupArtworks, ARTWORKS};
+
+// artwork exports
+export {setupArtworks, ARTWORKS, getArtworkImageUrl};
 
 const Categories = {
   AncientAsia: "Ancient Arts of Asia",

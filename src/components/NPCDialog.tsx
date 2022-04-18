@@ -10,20 +10,10 @@ const NPCDialog = ({
   image: NPCImageName;
 }) => {
   return (
-    <div style={{flexDirection: "row", marginTop: 5}}>
-      <img src={NPCImages[image]} className="pic-small" alt="" />
-      <div
-        style={{
-          flex: 1,
-          marginLeft: 3,
-          borderStyle: "solid",
-          borderColor: "dodgerblue",
-          padding: 2,
-          borderRadius: 5,
-          borderWidth: 1,
-        }}
-      >
-        <p>{dialogue}</p>
+    <div className="npc-dialog">
+      <img src={NPCImages[image]} className="pic-small br-2" alt="" />
+      <div className="dialog-text">
+        <p className="p-0 m-0">{dialogue}</p>
       </div>
     </div>
   );

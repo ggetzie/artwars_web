@@ -1,4 +1,4 @@
-import ArtItem from "./ArtItem";
+import ArtDetail from "./ArtDetail";
 import IntegerInput from "./IntegerInput";
 import QuitButton from "./QuitButton";
 import ScoreList from "./ScoreList";
@@ -8,7 +8,7 @@ import Dropdown from "./Dropdown";
 import ArtList, {ArtListItem} from "./ArtList";
 
 export {
-  ArtItem,
+  ArtDetail,
   IntegerInput,
   ScoreList,
   QuitButton,

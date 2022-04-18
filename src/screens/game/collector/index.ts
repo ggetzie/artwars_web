@@ -1,5 +1,6 @@
 import Collector from "./Collector";
 import List from "./List";
+import Buy from "./Buy";
 
 // export type CollectorStackParamList = {
 //   List: undefined;
@@ -8,4 +9,4 @@ import List from "./List";
 //   Sell: {artworkId: number};
 // };
 
-export {Collector, List};
+export {Collector, List, Buy};
