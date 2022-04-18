@@ -1,6 +1,6 @@
 import React from "react";
 import {Provider} from "react-redux";
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Outlet} from "react-router-dom";
 import {store} from "./store";
 import "./styles/App.css";
 import {Home, About, NewGame, HighScores} from "./screens";
@@ -9,6 +9,8 @@ import {
   Collector,
   List as CollectorList,
   Buy as BuyFromCollector,
+  SellSelect as SelectSellToCollector,
+  Sell as SellToCollector,
 } from "./screens/game/collector";
 
 function App() {
@@ -25,8 +27,12 @@ function App() {
               <Route path="/game" element={<Game />}>
                 <Route path="city" element={<City />} />
                 <Route path="collector" element={<Collector />}>
-                  <Route path="" element={<CollectorList />} />
+                  <Route index element={<CollectorList />} />
                   <Route path="buy/:artworkId" element={<BuyFromCollector />} />
+                  <Route path="sell" element={<Outlet />}>
+                    <Route index element={<SelectSellToCollector />} />
+                    <Route path=":artworkId" element={<SellToCollector />} />
+                  </Route>
                 </Route>
                 {/* <Route path="portfolio" element={<Portfolio />}>
                   <Route path="list" element={<PortfolioList />} />

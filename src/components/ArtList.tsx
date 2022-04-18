@@ -35,25 +35,31 @@ const ArtList = ({
   artworks,
   urlBase,
   linkTitleBase,
+  emptyMessage,
 }: {
   title: string;
   artworks: Artwork[];
   urlBase: string;
   linkTitleBase: string;
+  emptyMessage: string;
 }) => {
   return (
     <div className="art-list">
       <h3>{title}</h3>
-      <ul>
-        {artworks.map((value) => (
-          <ArtListItem
-            key={value.static.id}
-            artwork={value}
-            urlBase={urlBase}
-            linkTitle={linkTitleBase}
-          />
-        ))}
-      </ul>
+      {artworks.length > 0 ? (
+        <ul>
+          {artworks.map((value) => (
+            <ArtListItem
+              key={value.static.id}
+              artwork={value}
+              urlBase={urlBase}
+              linkTitle={linkTitleBase}
+            />
+          ))}
+        </ul>
+      ) : (
+        <p className="text-center m-0">{emptyMessage}</p>
+      )}
     </div>
   );
 };

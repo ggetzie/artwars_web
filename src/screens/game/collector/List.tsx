@@ -39,6 +39,7 @@ const List = () => {
         title="Collection"
         urlBase="/game/collector/buy"
         linkTitleBase="Click to make an offer"
+        emptyMessage={`Oops! ${npc.character.name} ran out of art. How embarrassing!`}
       />
     </div>
   );

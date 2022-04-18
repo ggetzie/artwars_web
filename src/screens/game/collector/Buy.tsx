@@ -1,4 +1,4 @@
-import React, {SetStateAction, useState, Dispatch} from "react";
+import React, {useState} from "react";
 import {useParams} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../../../hooks";
@@ -14,39 +14,12 @@ import {considerSell} from "../../../util";
 import {Transaction, Artwork} from "../../../util/types";
 import {
   ArtDetail,
-  IntegerInput,
+  OfferRow,
+  OfferText,
   NPCDialog,
   ScreenHeader,
+  Congrats,
 } from "../../../components";
-
-const OfferRow = ({
-  setOffer,
-  offer,
-  submit,
-}: {
-  setOffer: Dispatch<SetStateAction<number>>;
-  offer: number;
-  submit: () => void;
-}) => {
-  return (
-    <div className="row offer-input">
-      <IntegerInput
-        placeholder="Enter an offer amount"
-        setNum={setOffer}
-        editable={true}
-      />
-      <button
-        title="Make Offer"
-        type="button"
-        className="br-2"
-        disabled={Number.isNaN(offer)}
-        onClick={submit}
-      >
-        Make Offer
-      </button>
-    </div>
-  );
-};
 
 const Buy = () => {
   const game = useAppSelector((state) => state.game);
@@ -60,12 +33,6 @@ const Buy = () => {
   const [sold, setSold] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const balance = selectBalance(game);
-  let offerText;
-  if (Number.isNaN(offer)) {
-    offerText = <p className="error m-0">Enter a valid number.</p>;
-  } else {
-    offerText = <p className="m-0">Offering ${offer.toLocaleString()}</p>;
-  }
 
   const submitOffer = (artwork: Artwork) => {
     if (offer > balance) {
@@ -97,20 +64,21 @@ const Buy = () => {
         <ArtDetail artwork={artwork} />
 
         {sold ? (
-          <div className="text-center mt-6">
-            <h4 className="m-0">Congratulations!</h4>
+          <Congrats>
             <p>
               You just purchased {artwork.static.title} for $
               {offer.toLocaleString()}
             </p>
-          </div>
+          </Congrats>
         ) : (
           <>
-            <p className="text-center text-bold fs-14">{offerText}</p>
+            <OfferText value={offer} prefix="Offering:" />
             <OfferRow
-              offer={offer}
-              setOffer={setOffer}
+              value={offer}
+              setOutput={setOffer}
               submit={() => submitOffer(artwork)}
+              placeholder="Enter an offer amount"
+              buttonTitle="Make Offer"
             />
           </>
         )}

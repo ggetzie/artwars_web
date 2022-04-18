@@ -6,6 +6,9 @@ import NPCDialog from "./NPCDialog";
 import ScreenHeader from "./ScreenHeader";
 import Dropdown from "./Dropdown";
 import ArtList, {ArtListItem} from "./ArtList";
+import OfferRow from "./OfferRow";
+import OfferText from "./OfferText";
+import Congrats from "./Congrats";
 
 export {
   ArtDetail,
@@ -17,4 +20,7 @@ export {
   Dropdown,
   ArtList,
   ArtListItem,
+  OfferRow,
+  OfferText,
+  Congrats,
 };
