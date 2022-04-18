@@ -286,8 +286,9 @@ div#main-menu {
 .city-heading {
   text-align: center;
   font-size: 2em;
-  color: #f57179;
-  margin: 0;
+  color: #8c8a97;
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
 }
 
 .city-select {

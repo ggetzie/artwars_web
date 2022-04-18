@@ -30,18 +30,12 @@ const City = () => {
   const onValueChange = (e: ChangeEvent<HTMLSelectElement>) => {
     dispatch(setCity(e.target.value as CityName));
     dispatch(processTurn());
+    e.target.value = "";
   };
 
   return (
     <div className="city-main">
       <h2 className="city-heading">{city}</h2>
-      <p>Hello, {player}!</p>
-      <p>Cash on hand: ${balance.toLocaleString()}</p>
-      <p>Portfolio Value: ${totalValue.toLocaleString()}</p>
-      <p>
-        <span className="hot">{hot}</span> is SO HOT right now!
-      </p>
-
       {turn < maxTurns && (
         <div className="city-select-container">
           <Dropdown
@@ -56,6 +50,13 @@ const City = () => {
           />
         </div>
       )}
+      <p>Hello, {player}!</p>
+      <p>Cash on hand: ${balance.toLocaleString()}</p>
+      <p>Portfolio Value: ${totalValue.toLocaleString()}</p>
+      <p>
+        <span className="hot">{hot}</span> is SO HOT right now!
+      </p>
+
       <div className="message-board">
         <h3>Message Board</h3>
         <ul className="message-list">
