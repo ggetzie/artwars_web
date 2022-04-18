@@ -148,6 +148,18 @@ body a {
   margin: 0;
 }
 
+.mt-2 {
+  margin-top: 0.2em;
+}
+
+.mt-4 {
+  margin-top: 0.4em;
+}
+
+.mt-6 {
+  margin-top: 0.6em;
+}
+
 .p-0 {
   padding: 0;
 }
@@ -176,10 +188,13 @@ body a {
   font-weight: bold;
 }
 
+.ml-2 {
+  margin-left: 0.2em;
+}
 .row {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .col {
@@ -342,6 +357,8 @@ div#main-menu {
   border-radius: 0.2em;
   text-align: center;
   max-width: 12em;
+  border: none;
+  padding: 0.5em;
 }
 
 .city-select-container {
@@ -448,7 +465,11 @@ div#main-menu {
 
 .offer-input input {
   font-size: 1.2em;
-  padding: 0.5em;
+  padding-left: 0.5em;
+  margin-left: 0.5em;
+  height: 100%;
+  border: 1px #e6e6e6 solid;
+  border-radius: 0.2em;
 }
 
 .offer-input button {

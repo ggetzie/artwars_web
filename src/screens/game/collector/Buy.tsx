@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {SetStateAction, useState, Dispatch} from "react";
 import {useParams} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../../../hooks";
@@ -11,13 +11,42 @@ import {
 } from "../../../reducers/game";
 
 import {considerSell} from "../../../util";
-import {Transaction} from "../../../util/types";
+import {Transaction, Artwork} from "../../../util/types";
 import {
   ArtDetail,
   IntegerInput,
   NPCDialog,
   ScreenHeader,
 } from "../../../components";
+
+const OfferRow = ({
+  setOffer,
+  offer,
+  submit,
+}: {
+  setOffer: Dispatch<SetStateAction<number>>;
+  offer: number;
+  submit: () => void;
+}) => {
+  return (
+    <div className="row offer-input">
+      <IntegerInput
+        placeholder="Enter an offer amount"
+        setNum={setOffer}
+        editable={true}
+      />
+      <button
+        title="Make Offer"
+        type="button"
+        className="br-2"
+        disabled={Number.isNaN(offer)}
+        onClick={submit}
+      >
+        Make Offer
+      </button>
+    </div>
+  );
+};
 
 const Buy = () => {
   const game = useAppSelector((state) => state.game);
@@ -33,10 +62,32 @@ const Buy = () => {
   const balance = selectBalance(game);
   let offerText;
   if (Number.isNaN(offer)) {
-    offerText = <p className="error">Enter a valid number.</p>;
+    offerText = <p className="error m-0">Enter a valid number.</p>;
   } else {
     offerText = <p className="m-0">Offering ${offer.toLocaleString()}</p>;
   }
+
+  const submitOffer = (artwork: Artwork) => {
+    if (offer > balance) {
+      setDialogue("You don't have that much money!");
+      return;
+    }
+    const response = considerSell(
+      artwork.data.currentValue,
+      offer,
+      artwork.static.category === npc.data.preference
+    );
+    setDialogue(npc.character.dialogue.selling[response]);
+    if (response === "accept" || response === "enthusiasm") {
+      const t: Transaction = {
+        id: artwork.data.id,
+        price: -1 * offer,
+        newOwner: player,
+      };
+      dispatch(transact(t));
+      setSold(true);
+    }
+  };
 
   try {
     const artwork = getArtwork(game, parseInt(artworkId, 10));
@@ -44,43 +95,26 @@ const Buy = () => {
       <div className="collector-container">
         <ScreenHeader showBack={true} title="Make an Offer" />
         <ArtDetail artwork={artwork} />
-        <p className="text-center text-bold fs-14">{offerText}</p>
-        <div className="row offer-input">
-          <IntegerInput
-            placeholder="Enter an offer amount"
-            setNum={setOffer}
-            editable={!sold}
-          />
-          <button
-            title="Make Offer"
-            type="button"
-            className="br-2"
-            disabled={Number.isNaN(offer) || sold}
-            onClick={() => {
-              if (offer > balance) {
-                setDialogue("You don't have that much money!");
-                return;
-              }
-              const response = considerSell(
-                artwork.data.currentValue,
-                offer,
-                artwork.static.category === npc.data.preference
-              );
-              setDialogue(npc.character.dialogue.selling[response]);
-              if (response === "accept" || response === "enthusiasm") {
-                const t: Transaction = {
-                  id: artwork.data.id,
-                  price: -1 * offer,
-                  newOwner: player,
-                };
-                dispatch(transact(t));
-                setSold(true);
-              }
-            }}
-          >
-            Make Offer
-          </button>
-        </div>
+
+        {sold ? (
+          <div className="text-center mt-6">
+            <h4 className="m-0">Congratulations!</h4>
+            <p>
+              You just purchased {artwork.static.title} for $
+              {offer.toLocaleString()}
+            </p>
+          </div>
+        ) : (
+          <>
+            <p className="text-center text-bold fs-14">{offerText}</p>
+            <OfferRow
+              offer={offer}
+              setOffer={setOffer}
+              submit={() => submitOffer(artwork)}
+            />
+          </>
+        )}
+
         <NPCDialog dialogue={dialogue} image={npc.character.image} />
       </div>
     );
