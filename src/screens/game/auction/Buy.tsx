@@ -95,33 +95,44 @@ const Buy = () => {
     <div className="tab-container">
       <ScreenHeader showBack={!bidStarted} title="Auction" />
       <ArtDetail artwork={artwork} />
-      <p className="m-0">Last Bid: ${lastBid.toLocaleString()}</p>
-      <p className="m-0">Asking: ${asking.toLocaleString()}</p>
       <div className="row">
-        {bidStarted && (
-          <button
-            title="Give Up"
-            type="button"
-            onClick={() => {
-              setMessage("Too rich for your blood, eh?");
-              loseAuction();
-              setCanBid(false);
-              setBidStarted(false);
-            }}
-          >
-            Give Up
-          </button>
-        )}
-        {canBid && (
-          <button
-            title="Place Bid"
-            type="button"
-            disabled={!canBid}
-            onClick={placeBid}
-          >
-            Place Bid
-          </button>
-        )}
+        <div className="col">
+          <p className="m-0 fs-12 text-bold text-center">
+            Asking: ${asking.toLocaleString()}
+          </p>
+        </div>
+        <div className="col">
+          <p className="m-0 fs-12 text-bold text-center">
+            Last Bid: ${lastBid.toLocaleString()}
+          </p>
+        </div>
+      </div>
+
+      <div className="button-row">
+        <button
+          title="Stop bidding and concede"
+          type="button"
+          className="button secondary"
+          disabled={!bidStarted}
+          onClick={() => {
+            setMessage("Too rich for your blood, eh?");
+            loseAuction();
+            setCanBid(false);
+            setBidStarted(false);
+          }}
+        >
+          Give Up
+        </button>
+
+        <button
+          title="Place Bid"
+          type="button"
+          className="button primary"
+          disabled={!canBid}
+          onClick={placeBid}
+        >
+          Place Bid
+        </button>
       </div>
       {message.length > 0 && <p>{message}</p>}
     </div>

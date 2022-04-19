@@ -128,8 +128,10 @@ body a {
 }
 
 .button {
-  min-width: 3em;
+  width: 10em;
+  border: none;
   border-radius: 0.2em;
+  height: 2em;
   font-weight: bold;
   text-align: center;
 }
@@ -142,6 +144,16 @@ body a {
 .success {
   background-color: green;
   color: white
+}
+
+.secondary {
+  background-color: #8f8798;
+  color: #feedba;
+}
+
+.primary {
+  background-color: #feedba;
+  color: #8f8798;
 }
 
 .m-0 {
@@ -158,6 +170,22 @@ body a {
 
 .mt-6 {
   margin-top: 0.6em;
+}
+
+.mb-2 {
+  margin-bottom: 0.2em;
+}
+
+.mb-4 {
+  margin-bottom: 0.4em;
+}
+
+.mb-6 {
+  margin-bottom: 0.6em;
+}
+
+.mb-8 {
+  margin-bottom: 0.8em;
 }
 
 .p-0 {
@@ -486,3 +514,4 @@ div#main-menu {
   padding: 0.5em;
   cursor: pointer;
 }
+
