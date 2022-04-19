@@ -29,7 +29,8 @@ const ArtDetail = ({
             {artwork.static.category}
           </span>
         </p>
-        {location && <p>Location: {artwork.data.city}</p>}
+        <p>Location: {artwork.data.city}</p>
+        <p>Owner: {artwork.data.owner || "Anon"}</p>
       </div>
       <div className="col">
         <img

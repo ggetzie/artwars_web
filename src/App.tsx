@@ -17,6 +17,8 @@ import {
   Auction,
   List as AuctionList,
   Buy as BuyFromAuction,
+  Sell as SellAtAuction,
+  SellSelect as SelectSellAtAuction,
 } from "./screens/game/auction";
 import {ErrorBoundary} from "./components";
 
@@ -48,6 +50,10 @@ function App() {
                   <Route path="auction" element={<Auction />}>
                     <Route index element={<AuctionList />} />
                     <Route path="buy/:artworkId" element={<BuyFromAuction />} />
+                    <Route path="sell" element={<Outlet />}>
+                      <Route index element={<SelectSellAtAuction />} />
+                      <Route path=":artworkId" element={<SellAtAuction />} />
+                    </Route>
                   </Route>
 
                   {/* <Route path="portfolio" element={<Portfolio />}>

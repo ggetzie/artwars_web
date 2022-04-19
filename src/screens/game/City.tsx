@@ -40,7 +40,9 @@ const City = () => {
         <div className="city-select-container">
           <Dropdown
             selectedValue=""
-            itemList={Object.values(Cities).map((v) => [v, v])}
+            itemList={Object.values(Cities)
+              .filter((c) => c !== city)
+              .map((v) => [v, v])}
             onValueChange={onValueChange}
             labelText="Change City:"
             name="city-select"

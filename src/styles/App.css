@@ -172,6 +172,14 @@ body a {
   margin-top: 0.6em;
 }
 
+.mt-8 {
+  margin-top: 0.8em;
+}
+
+.mt-10 {
+  margin-top: 1em;
+}
+
 .mb-2 {
   margin-bottom: 0.2em;
 }
@@ -515,3 +523,7 @@ div#main-menu {
   cursor: pointer;
 }
 
+.auction-messages {
+  list-style: none;
+  color: #8c8a97;
+}
