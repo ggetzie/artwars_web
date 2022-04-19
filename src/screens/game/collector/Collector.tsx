@@ -8,7 +8,7 @@ const Collector = () => {
   const game = useAppSelector((state) => state.game);
   const npc = currentNPC(game);
   return (
-    <div className="collector-main">
+    <div className="tab-main">
       <ScreenHeader
         showBack={false}
         title={npc.character.name}

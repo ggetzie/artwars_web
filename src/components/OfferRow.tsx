@@ -22,13 +22,13 @@ const OfferRow = ({
         editable={true}
       />
       <button
-        title="Make Offer"
+        title={buttonTitle}
         type="button"
         className="br-2"
         disabled={Number.isNaN(value)}
         onClick={submit}
       >
-        Make Offer
+        {buttonTitle}
       </button>
     </div>
   );

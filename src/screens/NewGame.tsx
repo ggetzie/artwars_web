@@ -31,8 +31,8 @@ const NewGame = () => {
           name="num-turns"
           selectedValue={turns}
           itemList={[5, 30, 50, 75, 100].map((i) => [i, i.toString()])}
-          onValueChange={(itemValue: number, _: number) => {
-            setTurns(itemValue);
+          onValueChange={(e) => {
+            setTurns(parseInt(e.target.value, 10));
           }}
           labelClass="horizontal-label"
           controlClass="horizontal-control"

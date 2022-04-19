@@ -9,6 +9,7 @@ import ArtList, {ArtListItem} from "./ArtList";
 import OfferRow from "./OfferRow";
 import OfferText from "./OfferText";
 import Congrats from "./Congrats";
+import ErrorBoundary from "./ErrorBoundary";
 
 export {
   ArtDetail,
@@ -23,4 +24,5 @@ export {
   OfferRow,
   OfferText,
   Congrats,
+  ErrorBoundary,
 };

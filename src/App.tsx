@@ -13,28 +13,44 @@ import {
   Sell as SellToCollector,
 } from "./screens/game/collector";
 
+import {
+  Auction,
+  List as AuctionList,
+  Buy as BuyFromAuction,
+} from "./screens/game/auction";
+import {ErrorBoundary} from "./components";
+
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <div className="App">
           <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/new-game" element={<NewGame />} />
-              <Route path="/high-scores" element={<HighScores />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/game" element={<Game />}>
-                <Route path="city" element={<City />} />
-                <Route path="collector" element={<Collector />}>
-                  <Route index element={<CollectorList />} />
-                  <Route path="buy/:artworkId" element={<BuyFromCollector />} />
-                  <Route path="sell" element={<Outlet />}>
-                    <Route index element={<SelectSellToCollector />} />
-                    <Route path=":artworkId" element={<SellToCollector />} />
+            <ErrorBoundary>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/new-game" element={<NewGame />} />
+                <Route path="/high-scores" element={<HighScores />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/game" element={<Game />}>
+                  <Route path="city" element={<City />} />
+                  <Route path="collector" element={<Collector />}>
+                    <Route index element={<CollectorList />} />
+                    <Route
+                      path="buy/:artworkId"
+                      element={<BuyFromCollector />}
+                    />
+                    <Route path="sell" element={<Outlet />}>
+                      <Route index element={<SelectSellToCollector />} />
+                      <Route path=":artworkId" element={<SellToCollector />} />
+                    </Route>
                   </Route>
-                </Route>
-                {/* <Route path="portfolio" element={<Portfolio />}>
+                  <Route path="auction" element={<Auction />}>
+                    <Route index element={<AuctionList />} />
+                    <Route path="buy/:artworkId" element={<BuyFromAuction />} />
+                  </Route>
+
+                  {/* <Route path="portfolio" element={<Portfolio />}>
                   <Route path="list" element={<PortfolioList />} />
                   <Route path=":artworkId" element={<PortfolioDetail />} />
                   <Route
@@ -42,15 +58,12 @@ function App() {
                     element={<PortfolioConfirm />}
                   />
                 </Route>
-                <Route path="collector" element={<Collector />}>
-                  <Route path="list" element={<CollectorList />} />
-                  <Route path="sell" element={<CollectorSellSelect />}>
-                    <Route path=":artworkId" element={<CollectorSell />} />
-                  </Route>
-                </Route> */}
-              </Route>
-              <Route path="*" element={<p>There's nothing here.</p>} />
-            </Routes>
+                
+                */}
+                </Route>
+                <Route path="*" element={<p>There's nothing here.</p>} />
+              </Routes>
+            </ErrorBoundary>
           </main>
           <footer>
             <p>

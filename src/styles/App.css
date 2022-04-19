@@ -416,16 +416,20 @@ div#main-menu {
   font-size: 1.6em;
 }
 
-
-/* Collector screen */
-.collector-main {
+/* Game screen Common */
+.tab-main {
   overflow-y: scroll;
   margin-bottom: 1em;
 }
-.collector-container {
+
+.tab-container {
   display: flex;
   flex-direction: column;
 }
+
+/* Collector screen */
+
+
 
 .npc-name {
   font-size: 1.8em;

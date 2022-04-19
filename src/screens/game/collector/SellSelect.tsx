@@ -28,7 +28,7 @@ const SellSelect = () => {
   }
   const forSale: Artwork[] = filterArtWorks(game, artFilter);
   return (
-    <div className="collector-container">
+    <div className="tab-container">
       <NPCDialog
         dialogue="Oh you want to sell me something? Let's see what you've got."
         image={npc.character.image}

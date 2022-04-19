@@ -12,7 +12,7 @@ const Dropdown = ({
   controlClass,
   placeHolder,
 }: {
-  onValueChange: Function;
+  onValueChange: ChangeEventHandler<HTMLSelectElement>;
   selectedValue: any;
   itemList: listItem[];
   name: string;
@@ -29,17 +29,16 @@ const Dropdown = ({
       <select
         name={name}
         className={controlClass}
-        onChange={onValueChange as ChangeEventHandler<HTMLSelectElement>}
+        onChange={onValueChange}
+        value={selectedValue}
       >
         {placeHolder && (
-          <option key={-1} disabled={true} selected={true} value="">
+          <option key={-1} disabled={true} value="">
             {placeHolder}
           </option>
         )}
         {itemList.map(([v, l], i) => (
-          <option key={i} selected={v === selectedValue}>
-            {l}
-          </option>
+          <option key={i}>{l}</option>
         ))}
       </select>
     </>

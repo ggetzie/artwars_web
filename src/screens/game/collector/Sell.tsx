@@ -1,7 +1,12 @@
 import React, {useState} from "react";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../hooks";
-import {currentNPC, getArtwork, transact} from "../../../reducers/game";
+import {
+  currentNPC,
+  getArtwork,
+  selectPlayer,
+  transact,
+} from "../../../reducers/game";
 
 import {considerBuy} from "../../../util";
 import {Artwork, Transaction} from "../../../util/types";
@@ -24,8 +29,6 @@ const Sell = () => {
   const [sold, setSold] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
-  const artwork = getArtwork(game, parseInt(artworkId as string, 10));
-
   const setPrice = (artwork: Artwork) => {
     const decision = considerBuy(
       artwork.data.currentValue,
@@ -43,31 +46,52 @@ const Sell = () => {
       setSold(true);
     }
   };
-  return (
-    <div className="collector-container">
-      <ScreenHeader showBack={true} title={`Selling ${artwork.static.title}`} />
-      <ArtDetail artwork={artwork} />
-      {sold ? (
-        <Congrats>
-          <p>
-            You just sold {artwork.static.title} for ${asking.toLocaleString()}
-          </p>
-        </Congrats>
-      ) : (
-        <>
-          <OfferText value={asking} prefix="Asking price:" />
-          <OfferRow
-            value={asking}
-            setOutput={setAsking}
-            submit={() => setPrice(artwork)}
-            placeholder="Enter an asking price"
-            buttonTitle="Set Price"
-          />
-        </>
-      )}
-      <NPCDialog dialogue={dialogue} image={npc.character.image} />
-    </div>
-  );
+  try {
+    const artwork = getArtwork(game, parseInt(artworkId as string, 10));
+    const player = selectPlayer(game);
+    if (artwork.data.owner !== player && !sold) {
+      throw new Error("That ain't your art!");
+    }
+    return (
+      <div className="tab-container">
+        <ScreenHeader
+          showBack={true}
+          title={`Selling ${artwork.static.title}`}
+        />
+        <ArtDetail artwork={artwork} />
+        {sold ? (
+          <Congrats>
+            <p>
+              You just sold {artwork.static.title} for $
+              {asking.toLocaleString()}
+            </p>
+          </Congrats>
+        ) : (
+          <>
+            <OfferText value={asking} prefix="Asking price:" />
+            <OfferRow
+              value={asking}
+              setOutput={setAsking}
+              submit={() => setPrice(artwork)}
+              placeholder="Enter an asking price"
+              buttonTitle="Set Price"
+            />
+          </>
+        )}
+        <NPCDialog dialogue={dialogue} image={npc.character.image} />
+      </div>
+    );
+  } catch (e) {
+    console.log(e);
+    return (
+      <div className="tab-container">
+        <NPCDialog
+          dialogue="Hmm, trouble finding your art? Poor thing."
+          image={npc.character.image}
+        />
+      </div>
+    );
+  }
 };
 
 export default Sell;

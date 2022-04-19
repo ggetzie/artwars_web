@@ -17,7 +17,7 @@ const List = () => {
     new ArtWorkFilter({owner: (o) => o === npc.character.name})
   );
   return (
-    <div className="collector-container">
+    <div className="tab-container">
       <div className="collector-bio">
         <div className="collector-bio-image">
           <img

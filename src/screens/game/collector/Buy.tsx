@@ -59,7 +59,7 @@ const Buy = () => {
   try {
     const artwork = getArtwork(game, parseInt(artworkId, 10));
     return (
-      <div className="collector-container">
+      <div className="tab-container">
         <ScreenHeader showBack={true} title="Make an Offer" />
         <ArtDetail artwork={artwork} />
 
