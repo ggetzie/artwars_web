@@ -27,6 +27,7 @@ import {
   Detail as PortfolioDetail,
   Confirm as ConfirmMove,
 } from "./screens/game/portfolio";
+import {Shop, List as ShopList, Buy as ShopBuy} from "./screens/game/shop";
 
 function App() {
   return (
@@ -67,6 +68,10 @@ function App() {
                       <Route index element={<PortfolioDetail />} />
                       <Route path=":destination" element={<ConfirmMove />} />
                     </Route>
+                  </Route>
+                  <Route path="shop" element={<Shop />}>
+                    <Route index element={<ShopList />} />
+                    <Route path="buy/:name" element={<ShopBuy />} />
                   </Route>
                 </Route>
                 <Route path="*" element={<p>There's nothing here.</p>} />

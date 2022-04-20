@@ -136,6 +136,14 @@ body a {
   cursor: pointer;
 }
 
+.button:disabled {
+  color: #666;
+  background-color: white;
+  border: 1px dotted #666;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
 .danger {
   background-color: red;
   color: white;
@@ -415,6 +423,7 @@ div#main-menu {
   max-width: 12em;
   border: none;
   padding: 0.5em;
+  cursor: pointer;
 }
 
 .city-select-container {
@@ -562,4 +571,10 @@ div#main-menu {
 
 .art-info p {
   text-align: right;
+}
+
+.shop-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
