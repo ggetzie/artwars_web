@@ -2,7 +2,6 @@ import React, {ChangeEvent} from "react";
 import {
   setCity,
   selectCity,
-  selectPlayer,
   selectBalance,
   currentHot,
   portfolioValue,
@@ -20,7 +19,6 @@ const City = () => {
   const game = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
   const city = selectCity(game);
-  const player = selectPlayer(game);
   const balance = selectBalance(game);
   const hot = currentHot(game);
   const totalValue = portfolioValue(game);
@@ -52,10 +50,17 @@ const City = () => {
           />
         </div>
       )}
-      <p>Hello, {player}!</p>
-      <p>Cash on hand: ${balance.toLocaleString()}</p>
-      <p>Portfolio Value: ${totalValue.toLocaleString()}</p>
-      <p>
+      <div className="row mt-0 mb-4">
+        <div className="col">
+          <p className="m-0 text-center">Cash: ${balance.toLocaleString()}</p>
+        </div>
+        <div className="col">
+          <p className="m-0 text-center">
+            Portfolio Value: ${totalValue.toLocaleString()}
+          </p>
+        </div>
+      </div>
+      <p className="mt-8 mb-8 text-center">
         <span className="hot">{hot}</span> is SO HOT right now!
       </p>
 

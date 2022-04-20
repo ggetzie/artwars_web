@@ -12,6 +12,7 @@ import {
   selectCity,
   currentTurn,
   getMaxTurns,
+  selectPlayer,
 } from "../../reducers/game";
 import {saveGame} from "../../util/persist";
 // import {QuitButton} from "../../components";
@@ -27,6 +28,7 @@ import {ScreenHeader, QuitButton} from "../../components";
 
 const Game = () => {
   const game = useAppSelector((state) => state.game);
+  const player = selectPlayer(game);
   const city = selectCity(game);
   const npc = currentNPC(game);
   const turn = currentTurn(game);
@@ -47,7 +49,7 @@ const Game = () => {
       <div className="game-main">
         <ScreenHeader
           showBack={false}
-          title={`Art Wars ${turn} / ${maxTurns}`}
+          title={`Art Wars ${player} ${turn} / ${maxTurns}`}
           headerRight={
             <Link to="/" className="quit-button" title="Quit">
               <QuitButton />

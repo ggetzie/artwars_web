@@ -8,15 +8,17 @@ const ArtListItem = ({
   artwork,
   urlBase,
   linkTitle,
+  className,
 }: {
   artwork: Artwork;
   urlBase: string;
   linkTitle: string;
+  className: string;
 }) => {
   const game = useAppSelector((state) => state.game);
   const isHot = artwork.static.category === currentHot(game);
   return (
-    <li key={artwork.static.id}>
+    <li className={className}>
       <Link to={`${urlBase}/${artwork.static.id}`} title={linkTitle}>
         <p>{artwork.static.title}</p>
         <p>by {artwork.static.artist}</p>
@@ -36,29 +38,40 @@ const ArtList = ({
   urlBase,
   linkTitleBase,
   emptyMessage,
+  divClass = "art-list",
+  headerClass = "art-list-h3",
+  ulClass = "art-list-ul",
+  liClass = "art-list-li",
+  emptyClass = "m-0",
 }: {
   title: string;
   artworks: Artwork[];
   urlBase: string;
   linkTitleBase: string;
   emptyMessage: string;
+  divClass?: string;
+  headerClass?: string;
+  ulClass?: string;
+  liClass?: string;
+  emptyClass?: string;
 }) => {
   return (
-    <div className="art-list">
-      <h3>{title}</h3>
+    <div className={divClass}>
+      <h3 className={headerClass}>{title}</h3>
       {artworks.length > 0 ? (
-        <ul>
+        <ul className={ulClass}>
           {artworks.map((value) => (
             <ArtListItem
               key={value.static.id}
               artwork={value}
               urlBase={urlBase}
               linkTitle={linkTitleBase}
+              className={liClass}
             />
           ))}
         </ul>
       ) : (
-        <p className="text-center m-0">{emptyMessage}</p>
+        <p className={emptyClass}>{emptyMessage}</p>
       )}
     </div>
   );

@@ -160,6 +160,10 @@ body a {
   margin: 0;
 }
 
+.mt-0 {
+  margin-top: 0;
+}
+
 .mt-2 {
   margin-top: 0.2em;
 }
@@ -178,6 +182,10 @@ body a {
 
 .mt-10 {
   margin-top: 1em;
+}
+
+.mb-0 {
+  margin-bottom: 0;
 }
 
 .mb-2 {
@@ -202,6 +210,18 @@ body a {
 
 .text-center {
   text-align: center;
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+.aw-red {
+  color:#f57179;
+}
+
+.aw-blue {
+  color: #8f8798;
 }
 
 .br-2 {
@@ -423,31 +443,36 @@ div#main-menu {
 }
 
 /* Art list */
-.art-list ul {
+.bare-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.art-list-ul {
   list-style: none;
   padding: 0;
 }
 
-.art-list ul li {
+.portfolio-ul {
+  list-style: none;
+}
+
+.art-list-li {
   margin-bottom: 0.5em;
   
 }
 
-.art-list ul li:hover {
+.art-list-li:hover {
   border:1px #f57179 solid;
   padding: 0.3em;
 }
 
-.art-list ul li p {
+.art-list-li p {
   margin: 0;
   color: #8c8a97
 }
 
-.art-list a {
-  color: #222;
-}
-
-.art-list h3 {
+.art-list-h3 {
   text-transform: uppercase;
   font-size: 1.6em;
 }
@@ -526,4 +551,15 @@ div#main-menu {
 .auction-messages {
   list-style: none;
   color: #8c8a97;
+}
+
+.art-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-right: 1em;
+}
+
+.art-info p {
+  text-align: right;
 }

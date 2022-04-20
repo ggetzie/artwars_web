@@ -19,18 +19,19 @@ const ArtDetail = ({
   const imgUrl = getArtworkImageUrl(artwork);
   return (
     <div className="row" onClick={onClick}>
-      <div className="col">
-        <p>{artwork.static.title}</p>
-        <p>by {artwork.static.artist}</p>
-        <p>Value: ${value}</p>
-        <p>
-          Category:{" "}
+      <div className="col art-info">
+        <p className="mt-0 mb-2 fs-12 text-bold">{artwork.static.title}</p>
+        <p className="m-0">
+          <em>{artwork.static.artist}</em>
+        </p>
+        <p className="mt-0 mb-6">
           <span className={hot === artwork.static.category ? "hot" : "normal"}>
             {artwork.static.category}
           </span>
         </p>
-        <p>Location: {artwork.data.city}</p>
-        <p>Owner: {artwork.data.owner || "Anon"}</p>
+        <p className="m-0">Location: {artwork.data.city}</p>
+        <p className="m-0">Owner: {artwork.data.owner || "Anon"}</p>
+        <p className="m-0">Value: ${value}</p>
       </div>
       <div className="col">
         <img

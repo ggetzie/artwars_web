@@ -21,6 +21,7 @@ import {
   SellSelect as SelectSellAtAuction,
 } from "./screens/game/auction";
 import {ErrorBoundary} from "./components";
+import {Portfolio, List as PortfolioList} from "./screens/game/portfolio";
 
 function App() {
   return (
@@ -54,6 +55,9 @@ function App() {
                       <Route index element={<SelectSellAtAuction />} />
                       <Route path=":artworkId" element={<SellAtAuction />} />
                     </Route>
+                  </Route>
+                  <Route path="portfolio" element={<Portfolio />}>
+                    <Route index element={<PortfolioList />} />
                   </Route>
 
                   {/* <Route path="portfolio" element={<Portfolio />}>

@@ -11,7 +11,7 @@ import {
 
 import {ArtWorkFilter} from "../../../util/awFilter";
 import {Artwork} from "../../../util/types";
-import {ArtList, NPCDialog} from "../../../components";
+import {ArtList, NPCDialog, ScreenHeader} from "../../../components";
 
 const SellSelect = () => {
   const game = useAppSelector((state) => state.game);
@@ -29,6 +29,7 @@ const SellSelect = () => {
   const forSale: Artwork[] = filterArtWorks(game, artFilter);
   return (
     <div className="tab-container">
+      <ScreenHeader showBack={true} title={`Sell to ${npc.character.name}`} />
       <NPCDialog
         dialogue="Oh you want to sell me something? Let's see what you've got."
         image={npc.character.image}
