@@ -26,6 +26,10 @@ async function deleteGame(gameId: string) {
   }
 }
 
+function deleteAllSavedGames() {
+  localStorage.removeItem(GAME_KEY);
+}
+
 async function loadGames(): Promise<gameState[]> {
   try {
     const games = localStorage.getItem(GAME_KEY);
@@ -37,19 +41,15 @@ async function loadGames(): Promise<gameState[]> {
   }
 }
 
-async function loadGame(gameId: string): Promise<gameState | undefined> {
-  try {
-    const gameStr = localStorage.getItem(GAME_KEY);
-    const games = gameStr ? JSON.parse(gameStr) : [];
-    for (const game of games) {
-      if (game.id === gameId) {
-        return new Promise((resolve, _) => resolve(game));
-      }
+async function loadGame(gameId: string): Promise<gameState> {
+  const gameStr = localStorage.getItem(GAME_KEY);
+  const games = gameStr ? JSON.parse(gameStr) : [];
+  for (const game of games) {
+    if (game.id === gameId) {
+      return new Promise((resolve, _) => resolve(game));
     }
-    throw new Error(`Game not found: ${gameId}`);
-  } catch (e) {
-    console.log(`Error loading game - ${gameId} - ${e}`);
   }
+  throw new Error(`Game not found: ${gameId}`);
 }
 
 async function saveHighScores(scores: HighScore[]) {
@@ -74,6 +74,7 @@ async function loadHighScores(): Promise<HighScore[]> {
 export {
   saveGame,
   deleteGame,
+  deleteAllSavedGames,
   loadGame,
   loadGames,
   saveHighScores,

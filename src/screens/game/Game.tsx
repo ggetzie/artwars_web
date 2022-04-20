@@ -33,9 +33,6 @@ const Game = () => {
   const npc = currentNPC(game);
   const turn = currentTurn(game);
   const maxTurns = getMaxTurns(game);
-  console.log(maxTurns);
-  console.log(npc);
-  console.log(game);
 
   // save whenever game state updated
   useEffect(() => {

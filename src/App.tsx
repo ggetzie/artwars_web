@@ -3,7 +3,14 @@ import {Provider} from "react-redux";
 import {BrowserRouter as Router, Routes, Route, Outlet} from "react-router-dom";
 import {store} from "./store";
 import "./styles/App.css";
-import {Home, About, NewGame, HighScores} from "./screens";
+import {
+  Home,
+  About,
+  NewGame,
+  HighScores,
+  Continue,
+  GameDetail,
+} from "./screens";
 import {Game, City} from "./screens/game";
 import {
   Collector,
@@ -73,6 +80,10 @@ function App() {
                     <Route index element={<ShopList />} />
                     <Route path="buy/:name" element={<ShopBuy />} />
                   </Route>
+                </Route>
+                <Route path="continue" element={<Outlet />}>
+                  <Route index element={<Continue />} />
+                  <Route path=":gameId" element={<GameDetail />} />
                 </Route>
                 <Route path="*" element={<p>There's nothing here.</p>} />
               </Routes>
