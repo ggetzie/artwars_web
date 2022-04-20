@@ -363,4 +363,15 @@ export const ownsPowerUp = (game: gameState, name: string): boolean => {
   throw new Error(`Unknown PowerUp: ${name}`);
 };
 
+export const artworkIdIsValid = (
+  game: gameState,
+  artworkId: number
+): boolean => {
+  return (
+    !Number.isNaN(artworkId) &&
+    artworkId >= 0 &&
+    artworkId < game.artworksData.length
+  );
+};
+
 export default gameSlice.reducer;

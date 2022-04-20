@@ -1,5 +1,4 @@
 import React from "react";
-
 import Arrow from "../res/images/arrow.png";
 
 const ScreenHeader = ({

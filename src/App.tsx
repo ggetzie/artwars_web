@@ -21,7 +21,12 @@ import {
   SellSelect as SelectSellAtAuction,
 } from "./screens/game/auction";
 import {ErrorBoundary} from "./components";
-import {Portfolio, List as PortfolioList} from "./screens/game/portfolio";
+import {
+  Portfolio,
+  List as PortfolioList,
+  Detail as PortfolioDetail,
+  Confirm as ConfirmMove,
+} from "./screens/game/portfolio";
 
 function App() {
   return (
@@ -58,18 +63,11 @@ function App() {
                   </Route>
                   <Route path="portfolio" element={<Portfolio />}>
                     <Route index element={<PortfolioList />} />
+                    <Route path=":artworkId" element={<Outlet />}>
+                      <Route index element={<PortfolioDetail />} />
+                      <Route path=":destination" element={<ConfirmMove />} />
+                    </Route>
                   </Route>
-
-                  {/* <Route path="portfolio" element={<Portfolio />}>
-                  <Route path="list" element={<PortfolioList />} />
-                  <Route path=":artworkId" element={<PortfolioDetail />} />
-                  <Route
-                    path=":artworkId/:destination"
-                    element={<PortfolioConfirm />}
-                  />
-                </Route>
-                
-                */}
                 </Route>
                 <Route path="*" element={<p>There's nothing here.</p>} />
               </Routes>

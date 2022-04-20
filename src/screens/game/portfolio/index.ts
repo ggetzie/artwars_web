@@ -1,5 +1,7 @@
 import Portfolio from "./Portfolio";
 import List from "./List";
+import Detail from "./Detail";
+import Confirm from "./Confirm";
 
 // export type PortfolioStackParamList = {
 //   List: undefined;
@@ -7,4 +9,4 @@ import List from "./List";
 //   Confirm: {artworkId: number; destination: CityName};
 // };
 
-export {Portfolio, List};
+export {Portfolio, List, Detail, Confirm};

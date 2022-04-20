@@ -5,7 +5,8 @@ import {filterArtWorks, selectCity, selectPlayer} from "../../../reducers/game";
 import {ArtWorkFilter} from "../../../util/awFilter";
 import {Cities} from "../../../util";
 import {ArtByCityItem, Artwork} from "../../../util/types";
-import {ArtList} from "../../../components";
+import {ArtList, ScreenHeader} from "../../../components";
+import {portfolioValue} from "../../../reducers/game";
 
 const List = () => {
   const game = useAppSelector((state) => state.game);
@@ -28,8 +29,14 @@ const List = () => {
     artByCity[index].data.push(aw);
   }
 
+  const totalValue = portfolioValue(game);
+
   return (
     <div className="tab-container">
+      <ScreenHeader
+        showBack={false}
+        title={`Your Portfolio - $${totalValue.toLocaleString()}`}
+      />
       {artByCity.map((v, i) => (
         <ArtList
           artworks={v.data}
