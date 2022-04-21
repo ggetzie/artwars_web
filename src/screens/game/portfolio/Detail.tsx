@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
 
-import {useAppSelector} from "../../../hooks";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {
   getArtwork,
   isUnderInvestigation,
@@ -12,7 +12,8 @@ import {
 
 import {Cities, NPCImages} from "../../../util";
 import {CityName} from "../../../util/types";
-import {ArtDetail, Dropdown, ScreenHeader} from "../../../components";
+import {ArtDetail, Dropdown} from "../../../components";
+import {setShowBack, setTitle} from "../../../reducers/header";
 
 const Investigation = () => {
   return (
@@ -73,6 +74,7 @@ const DestinationSelect = ({
 
 const Detail = () => {
   const game = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
   const investigated = isUnderInvestigation(game);
   const ownsYacht = ownsPowerUp(game, "Yacht");
 
@@ -95,9 +97,13 @@ const Detail = () => {
   if (artwork.data.owner !== selectPlayer(game)) {
     throw new Error("Invalid destination");
   }
+
+  useEffect(() => {
+    dispatch(setTitle("Portfolio"));
+    dispatch(setShowBack(true));
+  });
   return (
     <div className="tab-container">
-      <ScreenHeader showBack={true} title="Detail" />
       <ArtDetail artwork={artwork} />
       {investigated ? (
         <Investigation />

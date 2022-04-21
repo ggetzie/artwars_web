@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 
 import {useAppSelector, useAppDispatch} from "../../../hooks";
@@ -13,7 +13,7 @@ import {
   artworkIdIsValid,
 } from "../../../reducers/game";
 import {CityName} from "../../../util/types";
-import {ScreenHeader} from "../../../components";
+import {setShowBack, setTitle} from "../../../reducers/header";
 
 const DutyMsg = ({txt}: {txt: string}) => {
   return (
@@ -30,7 +30,6 @@ const DutyMsg = ({txt}: {txt: string}) => {
 const Confirm = () => {
   const params = useParams();
   const game = useAppSelector((state) => state.game);
-
   const dispatch = useAppDispatch();
   const balance = selectBalance(game);
   let taxBill = 0;
@@ -42,12 +41,13 @@ const Confirm = () => {
   const artworkIdStr = params.artworkId;
   const artworkId = parseInt(artworkIdStr as string, 10);
   if (!artworkIdIsValid(game, artworkId)) {
-    return <h1 className="Error">Invalid Artwork Id</h1>;
+    throw new Error("Invalid Artwork Id");
   }
   const artwork = getArtwork(game, artworkId);
   const destination = params.destination as CityName;
+
   if (!Object.values(Cities).includes(destination)) {
-    return <h1 className="error">Invalid Destination</h1>;
+    throw new Error("Invalid destination city");
   }
   if (ownsPowerUp(game, `Freeport: ${destination}`)) {
     taxMessage = `No import duties required, thanks to your freeport in ${destination}`;
@@ -70,14 +70,21 @@ const Confirm = () => {
     }
   }
 
+  useEffect(() => {
+    dispatch(setTitle("Portfolio"));
+    dispatch(setShowBack(true));
+  }, [dispatch]);
+
   return (
     <div className="tab-container">
-      <ScreenHeader showBack={true} title="Confirm Move" />
-      <p>
-        Confirm moving {artwork.static.title} from {artwork.data.city} to{" "}
-        {destination}.
-      </p>
-      <DutyMsg txt={taxMessage} />
+      <div className="text-center">
+        <h3>Confirm Move</h3>
+        <p>
+          Confirm moving {artwork.static.title} from {artwork.data.city} to{" "}
+          {destination}.
+        </p>
+        <DutyMsg txt={taxMessage} />
+      </div>
       {canMove && (
         <div className="button-row">
           <button

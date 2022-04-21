@@ -119,6 +119,7 @@ const Sell = () => {
           setStatus("firstBid");
         }}
         value={asking}
+        disabled={status === "finished"}
       />
       <ul className="auction-messages">
         {messages.length > 0 ? (

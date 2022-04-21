@@ -1,13 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
-import {ArtList, ScreenHeader} from "../../../components";
-import {useAppSelector} from "../../../hooks";
+import {ArtList} from "../../../components";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {filterArtWorks, selectCity} from "../../../reducers/game";
 import {Artwork} from "../../../util/types";
 import {ArtWorkFilter} from "../../../util/awFilter";
+import {setShowBack, setTitle} from "../../../reducers/header";
 
 const List = () => {
   const game = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
   const city = selectCity(game);
   const artworks: Artwork[] = filterArtWorks(
     game,
@@ -18,9 +20,13 @@ const List = () => {
     })
   );
 
+  useEffect(() => {
+    dispatch(setTitle("Auction"));
+    dispatch(setShowBack(false));
+  }, [dispatch]);
+
   return (
     <div className="tab-container">
-      <ScreenHeader showBack={false} title={`Works for auction in ${city}`} />
       <Link
         title="Sell one of your works at auction"
         className="nav-button"

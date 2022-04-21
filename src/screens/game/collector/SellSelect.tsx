@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 
-import {useAppSelector} from "../../../hooks";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {
   currentNPC,
   filterArtWorks,
@@ -11,10 +11,12 @@ import {
 
 import {ArtWorkFilter} from "../../../util/awFilter";
 import {Artwork} from "../../../util/types";
-import {ArtList, NPCDialog, ScreenHeader} from "../../../components";
+import {ArtList, NPCDialog} from "../../../components";
+import {setTitle, setShowBack} from "../../../reducers/header";
 
 const SellSelect = () => {
   const game = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
   const city = selectCity(game);
   const player = selectPlayer(game);
   const npc = currentNPC(game);
@@ -27,9 +29,12 @@ const SellSelect = () => {
     artFilter.city = (c) => c === city;
   }
   const forSale: Artwork[] = filterArtWorks(game, artFilter);
+  useEffect(() => {
+    dispatch(setTitle(npc.character.name));
+    dispatch(setShowBack(true));
+  }, [npc.character.name, dispatch]);
   return (
     <div className="tab-container">
-      <ScreenHeader showBack={true} title={`Sell to ${npc.character.name}`} />
       <NPCDialog
         dialogue="Oh you want to sell me something? Let's see what you've got."
         image={npc.character.image}

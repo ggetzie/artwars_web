@@ -1,18 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 
-import {ArtList, ScreenHeader} from "../../../components";
-import {useAppSelector} from "../../../hooks";
+import {ArtList} from "../../../components";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {
   filterArtWorks,
   ownsPowerUp,
   selectCity,
   selectPlayer,
 } from "../../../reducers/game";
+import {setShowBack, setTitle} from "../../../reducers/header";
 import {ArtWorkFilter} from "../../../util/awFilter";
 import {Artwork} from "../../../util/types";
 
 const SellSelect = () => {
   const game = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
   const city = selectCity(game);
   const player = selectPlayer(game);
   const ownsYacht = ownsPowerUp(game, "Yacht");
@@ -26,16 +28,17 @@ const SellSelect = () => {
 
   const couldAuction: Artwork[] = filterArtWorks(game, artFilter);
 
+  useEffect(() => {
+    dispatch(setTitle("Auction"));
+    dispatch(setShowBack(true));
+  }, [dispatch]);
+
   return (
     <div className="tab-container">
-      <ScreenHeader
-        showBack={true}
-        title="Select an artwork to sell at auction"
-      />
       <ArtList
         artworks={couldAuction}
         urlBase="/game/auction/sell"
-        title="Available"
+        title="Select a work to sell"
         linkTitleBase="Click to offer at auction"
         emptyMessage="You have no artworks available to sell in this city"
       />

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {useParams} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../../../hooks";
@@ -17,9 +17,9 @@ import {
   OfferRow,
   OfferText,
   NPCDialog,
-  ScreenHeader,
   Congrats,
 } from "../../../components";
+import {setShowBack, setTitle} from "../../../reducers/header";
 
 const Buy = () => {
   const game = useAppSelector((state) => state.game);
@@ -33,6 +33,11 @@ const Buy = () => {
   const [sold, setSold] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const balance = selectBalance(game);
+
+  useEffect(() => {
+    dispatch(setTitle(npc.character.name));
+    dispatch(setShowBack(true));
+  }, [npc.character.name, dispatch]);
 
   const submitOffer = (artwork: Artwork) => {
     if (offer > balance) {
@@ -60,7 +65,6 @@ const Buy = () => {
     const artwork = getArtwork(game, parseInt(artworkId, 10));
     return (
       <div className="tab-container">
-        <ScreenHeader showBack={true} title="Make an Offer" />
         <ArtDetail artwork={artwork} />
 
         {sold ? (

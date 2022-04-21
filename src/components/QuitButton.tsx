@@ -8,6 +8,7 @@ const QuitButton = () => (
     color={"red"}
     fixedWidth
     className="quit-button"
+    size={"lg"}
   />
 );
 

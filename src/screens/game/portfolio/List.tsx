@@ -1,19 +1,19 @@
-import React from "react";
+import React, {useEffect} from "react";
 
-import {useAppSelector} from "../../../hooks";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {filterArtWorks, selectCity, selectPlayer} from "../../../reducers/game";
 import {ArtWorkFilter} from "../../../util/awFilter";
 import {Cities} from "../../../util";
 import {ArtByCityItem, Artwork} from "../../../util/types";
-import {ArtList, ScreenHeader} from "../../../components";
-import {portfolioValue} from "../../../reducers/game";
+import {ArtList} from "../../../components";
+import {setShowBack, setTitle} from "../../../reducers/header";
 
 const List = () => {
   const game = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
   const city = selectCity(game);
   const player = selectPlayer(game);
   const ownedFilter = new ArtWorkFilter({owner: (o) => o === player});
-
   const otherCities = Object.values(Cities)
     .filter((c) => c !== city)
     .sort();
@@ -29,14 +29,13 @@ const List = () => {
     artByCity[index].data.push(aw);
   }
 
-  const totalValue = portfolioValue(game);
+  useEffect(() => {
+    dispatch(setTitle("Portfolio"));
+    dispatch(setShowBack(false));
+  }, [dispatch]);
 
   return (
     <div className="tab-container">
-      <ScreenHeader
-        showBack={false}
-        title={`Your Portfolio - $${totalValue.toLocaleString()}`}
-      />
       {artByCity.map((v, i) => (
         <ArtList
           artworks={v.data}

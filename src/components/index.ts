@@ -10,6 +10,7 @@ import OfferRow from "./OfferRow";
 import OfferText from "./OfferText";
 import Congrats from "./Congrats";
 import ErrorBoundary from "./ErrorBoundary";
+import GameHeader from "./GameHeader";
 
 export {
   ArtDetail,
@@ -25,4 +26,5 @@ export {
   OfferText,
   Congrats,
   ErrorBoundary,
+  GameHeader,
 };

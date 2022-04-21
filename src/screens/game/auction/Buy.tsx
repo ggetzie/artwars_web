@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {bidIncrement, otherBidders, initialAsking} from "../../../util";
 import {ArtworkData, Transaction} from "../../../util/types";
-import {ArtDetail, ScreenHeader} from "../../../components";
+import {ArtDetail} from "../../../components";
 import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {
   currentHot,
@@ -13,6 +13,7 @@ import {
   getArtwork,
   selectCity,
 } from "../../../reducers/game";
+import {setShowBack, setTitle} from "../../../reducers/header";
 
 const Buy = () => {
   // Auction Logic: Once a player has placed a bid they cannot leave the detail
@@ -42,6 +43,11 @@ const Buy = () => {
   const [message, setMessage] = useState(
     canBid ? "" : "You don't have enough money to bid"
   );
+
+  useEffect(() => {
+    dispatch(setTitle("Auction"));
+    dispatch(setShowBack(true));
+  }, [dispatch]);
 
   function loseAuction() {
     const updated: ArtworkData = {
@@ -93,9 +99,8 @@ const Buy = () => {
 
   return (
     <div className="tab-container">
-      <ScreenHeader showBack={!bidStarted} title="Auction" />
       <ArtDetail artwork={artwork} />
-      <div className="row">
+      <div className="row mt-10">
         <div className="col">
           <p className="m-0 fs-12 text-bold text-center">
             Asking: ${asking.toLocaleString()}
@@ -134,7 +139,7 @@ const Buy = () => {
           Place Bid
         </button>
       </div>
-      {message.length > 0 && <p>{message}</p>}
+      {message.length > 0 && <p className="text-center">{message}</p>}
     </div>
   );
 };

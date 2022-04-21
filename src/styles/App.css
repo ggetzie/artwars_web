@@ -593,3 +593,60 @@ div#main-menu {
   flex-direction: row;
   justify-content: space-between;
 }
+
+.game-header {
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+  margin-bottom: 1.5em;
+  position: relative;
+}
+
+.gh-center {
+  flex-basis: 100%;
+  color: #8c8a97;
+  font-size: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gh-right {
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.gh-right ul {
+  color: #8c8a97;
+}
+
+.gh-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+img#header-logo {
+  height: 50px;
+  width: 50px;
+}
+img#back-arrow {
+  width: 50px;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+#quit-button {
+  position: absolute;
+  top: 5px;
+  right: -14px;
+}
+
+#hot-category {
+  font-size: 0.5em;
+  white-space: nowrap;
+  text-align: center;
+}

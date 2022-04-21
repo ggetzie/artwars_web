@@ -1,19 +1,23 @@
-import React from "react";
-import {listPowerUps, selectBalance} from "../../../reducers/game";
-import {useAppSelector} from "../../../hooks";
-import {ScreenHeader} from "../../../components";
+import React, {useEffect} from "react";
+import {listPowerUps} from "../../../reducers/game";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {Link} from "react-router-dom";
+import {setShowBack, setTitle} from "../../../reducers/header";
 
 const List = () => {
   const game = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
   const powerUps = listPowerUps(game).filter((p) => !p.purchased);
   const purchased = listPowerUps(game).filter((p) => p.purchased);
-  const balance = selectBalance(game);
+
+  useEffect(() => {
+    dispatch(setTitle("Shop"));
+    dispatch(setShowBack(false));
+  }, [dispatch]);
 
   return (
     <div className="tab-container">
-      <ScreenHeader showBack={false} title="Power Ups for Sale" />
-      <p>Current Balance: ${balance.toLocaleString()}</p>
+      <h3 className="mt-0 mb-6">Select a Power Up to purchase</h3>
       {powerUps.length > 0 ? (
         <ul className="art-list-ul">
           {powerUps.map((pu, i) => (
@@ -28,7 +32,7 @@ const List = () => {
           ))}
         </ul>
       ) : (
-        <p>Looks like you bought everything, Moneybags.</p>
+        <p>Looks like you bought everything, MoneyBags.</p>
       )}
       {purchased.length > 0 && (
         <>

@@ -7,12 +7,14 @@ const OfferRow = ({
   setOutput,
   value,
   submit,
+  disabled = false,
 }: {
   placeholder: string;
   buttonTitle: string;
   setOutput: Dispatch<SetStateAction<number>>;
   value: number;
   submit: () => void;
+  disabled?: boolean;
 }) => {
   return (
     <div className="row offer-input">
@@ -24,8 +26,8 @@ const OfferRow = ({
       <button
         title={buttonTitle}
         type="button"
-        className="br-2"
-        disabled={Number.isNaN(value)}
+        className="button"
+        disabled={Number.isNaN(value) || disabled}
         onClick={submit}
       >
         {buttonTitle}

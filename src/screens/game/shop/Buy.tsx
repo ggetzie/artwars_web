@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {getPowerUp, buyPowerUp, selectBalance} from "../../../reducers/game";
 import {useAppSelector, useAppDispatch} from "../../../hooks";
 import {useParams} from "react-router-dom";
-import {ScreenHeader} from "../../../components";
+import {setShowBack, setTitle} from "../../../reducers/header";
 
 const Buy = () => {
   const game = useAppSelector((state) => state.game);
@@ -12,14 +12,24 @@ const Buy = () => {
   const tooExpensive = balance < powerUp.price;
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(setTitle("Shop"));
+    dispatch(setShowBack(true));
+  }, [dispatch]);
+
   return (
     <div className="tab-container">
-      <ScreenHeader showBack={true} title={powerUp.name} />
-      <p>{powerUp.description}</p>
-      {tooExpensive && !powerUp.purchased && (
-        <p>You don't have enough cash to buy this item. Try not being poor.</p>
-      )}
-      {powerUp.purchased && <p>You own this.</p>}
+      <div className="text-center">
+        <h3 className="fs-16 mt-0 mb-4">{powerUp.name}</h3>
+        <p className="text-bold m-0">${powerUp.price.toLocaleString()}</p>
+        <p className="text-center">{powerUp.description}</p>
+        {tooExpensive && !powerUp.purchased && (
+          <p>
+            You don't have enough cash to buy this item. Try not being poor.
+          </p>
+        )}
+        {powerUp.purchased && <p>You own this.</p>}
+      </div>
 
       <div className="button-row">
         <button
