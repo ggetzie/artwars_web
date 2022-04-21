@@ -147,10 +147,21 @@ function insertNewHS(
   scores: HighScore[],
   newScore: HighScore
 ): [HighScore[], number] {
+  console.log(
+    `inserting new high score ${newScore.id} into ${scores.map((s) => s.id)}`
+  );
   if (scores.length === 0) {
     return [[newScore], 0];
   }
   for (let i = 0; i < scores.length; i++) {
+    if (
+      newScore.score === scores[i].score &&
+      newScore.date === scores[i].date &&
+      newScore.player === scores[i].player
+    ) {
+      // don't insert a duplicate
+      return [scores, i];
+    }
     if (newScore.score > scores[i].score) {
       const res = scores
         .slice(0, i - 1)

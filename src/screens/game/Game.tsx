@@ -56,7 +56,7 @@ const Game = () => {
         <Outlet />
         {turn >= maxTurns && (
           <div>
-            <Link to="/game-over" title="End Game">
+            <Link to="/game-over" title="End Game" className="nav-button">
               End Game
             </Link>
           </div>

@@ -127,12 +127,15 @@ body a {
 }
 
 .button {
+  display: flex;
+  flex-direction: column;
   width: 10em;
   border: none;
   border-radius: 0.2em;
   height: 2em;
   font-weight: bold;
   text-align: center;
+  justify-content: center;
   cursor: pointer;
 }
 
@@ -168,6 +171,10 @@ body a {
   margin: 0;
 }
 
+.m-auto {
+  margin: auto;
+}
+
 .mt-0 {
   margin-top: 0;
 }
@@ -190,6 +197,14 @@ body a {
 
 .mt-10 {
   margin-top: 1em;
+}
+
+.mt-20 {
+  margin-top: 2em;
+}
+
+.mt-30 {
+  margin-top: 3em;
 }
 
 .mb-0 {

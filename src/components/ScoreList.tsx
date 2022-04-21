@@ -12,8 +12,8 @@ const ScoreList = ({
   let content;
   if (scores.length > 0) {
     content = scores.map((v, i) => (
-      <li key={i} className={i === highlight ? "highlight" : ""}>
-        {v.player} - {v.score} - {v.date}
+      <li key={v.id} className={i === highlight ? "highlight" : ""}>
+        {v.player} - {v.score} - {new Date(v.date).toLocaleString()}
       </li>
     ));
   } else {

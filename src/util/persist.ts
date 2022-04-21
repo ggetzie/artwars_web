@@ -14,31 +14,22 @@ async function saveGame(game: gameState) {
   }
 }
 
-async function deleteGame(gameId: string) {
-  try {
-    const games = await loadGames();
-    localStorage.setItem(
-      GAME_KEY,
-      JSON.stringify(games.filter((g) => g.id !== gameId))
-    );
-  } catch (e) {
-    console.log(`Error deleting game ${gameId} - ${e}`);
-  }
+function deleteGame(gameId: string) {
+  const games = loadGames();
+  localStorage.setItem(
+    GAME_KEY,
+    JSON.stringify(games.filter((g) => g.id !== gameId))
+  );
 }
 
 function deleteAllSavedGames() {
   localStorage.removeItem(GAME_KEY);
 }
 
-async function loadGames(): Promise<gameState[]> {
-  try {
-    const games = localStorage.getItem(GAME_KEY);
-    const res = games ? JSON.parse(games) : [];
-    return new Promise((resolve, _) => resolve(res));
-  } catch (e) {
-    console.log(`Error loading game list - ${e}`);
-    return [];
-  }
+function loadGames(): gameState[] {
+  const games = localStorage.getItem(GAME_KEY);
+  const res = games ? JSON.parse(games) : [];
+  return res;
 }
 
 async function loadGame(gameId: string): Promise<gameState> {
@@ -52,23 +43,17 @@ async function loadGame(gameId: string): Promise<gameState> {
   throw new Error(`Game not found: ${gameId}`);
 }
 
-async function saveHighScores(scores: HighScore[]) {
-  try {
-    localStorage.setItem(HS_KEY, JSON.stringify(scores));
-    return new Promise<void>((resolve, _) => resolve());
-  } catch (e) {
-    console.log(`Error saving high scores - ${e}`);
-  }
+function saveHighScores(scores: HighScore[]) {
+  localStorage.setItem(HS_KEY, JSON.stringify(scores));
 }
 
-async function loadHighScores(): Promise<HighScore[]> {
-  try {
-    const scores = localStorage.getItem(HS_KEY) || "[]";
-    return new Promise((resolve, _) => resolve(JSON.parse(scores)));
-  } catch (e) {
-    console.log(`Error loading high scores - ${e}`);
-    return [];
-  }
+function loadHighScores(): HighScore[] {
+  const scores = localStorage.getItem(HS_KEY) || "[]";
+  return JSON.parse(scores);
+}
+
+function deleteAllHighScores() {
+  localStorage.removeItem(HS_KEY);
 }
 
 export {
@@ -79,4 +64,5 @@ export {
   loadGames,
   saveHighScores,
   loadHighScores,
+  deleteAllHighScores,
 };

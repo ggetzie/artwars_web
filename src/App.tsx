@@ -10,6 +10,7 @@ import {
   HighScores,
   Continue,
   GameDetail,
+  GameOver,
 } from "./screens";
 import {Game, City} from "./screens/game";
 import {
@@ -85,6 +86,7 @@ function App() {
                   <Route index element={<Continue />} />
                   <Route path=":gameId" element={<GameDetail />} />
                 </Route>
+                <Route path="game-over" element={<GameOver />} />
                 <Route path="*" element={<p>There's nothing here.</p>} />
               </Routes>
             </ErrorBoundary>

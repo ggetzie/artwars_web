@@ -9,17 +9,19 @@ const GameList = ({games}: {games: gameState[]}) => {
     return <p>No saved games</p>;
   }
   return (
-    <ul className="bare-list">
-      {games.map((g) => (
-        <li key={g.id}>
-          <Link to={`/continue/${g.id}`}>
-            <p>
-              {g.player} - {new Date(g.started).toLocaleString()}
-            </p>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div className="mt-30">
+      <ul className="bare-list">
+        {games.map((g) => (
+          <li key={g.id} className="art-list-li mb-6 text-center">
+            <Link to={`/continue/${g.id}`}>
+              <p>
+                {g.player} - {new Date(g.started).toLocaleString()}
+              </p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
@@ -30,22 +32,25 @@ const Continue = () => {
 
   useEffect(() => {
     setLoading(true);
-    loadGames()
-      .then((gameList) => {
-        setGames(gameList);
-        console.log(`loading ${gameList.length} games`);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
+    const gameList = loadGames();
+    setGames(gameList);
+    setLoading(false);
   }, [updated]);
 
   return (
     <>
       <ScreenHeader showBack={true} title="Load Saved Game" />
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
         <button
           type="button"
           className="button danger"
+          title="Delete all saved games"
           onClick={() => {
             const confirmed = window.confirm(
               "This will delete all saved games. Are you sure?"
@@ -56,7 +61,7 @@ const Continue = () => {
             }
           }}
         >
-          Clear saved Games
+          Clear
         </button>
       </div>
       {loading ? <p>Loading</p> : <GameList games={games} />}

@@ -80,7 +80,8 @@ const GameDetail = () => {
             navigate("/game/city");
           }}
           onDelete={() => {
-            deleteGame(loadedGame?.id).then(() => navigate("/continue"));
+            deleteGame(loadedGame.id);
+            navigate("/continue");
           }}
         />
       )}
