@@ -39,7 +39,7 @@ const Continue = () => {
 
   return (
     <>
-      <ScreenHeader showBack={true} title="Load Saved Game" />
+      <ScreenHeader showBack={true} title="Load Saved Game" backTo="/" />
       <div
         style={{
           display: "flex",

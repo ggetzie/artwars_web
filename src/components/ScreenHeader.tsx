@@ -1,26 +1,33 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 import Arrow from "../res/images/arrow.png";
+import awLogo from "../res/images/aw-logo-square.png";
 
 const ScreenHeader = ({
   showBack,
   title,
   headerRight,
   titleClasses,
+  backTo,
 }: {
   showBack: boolean;
   title: string;
   headerRight?: JSX.Element;
   titleClasses?: string;
+  backTo?: string;
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="screen-header">
       <div className="sh-left">
+        <img src={awLogo} alt="Art Wars" width={50} height={50} />
         {showBack && (
           <img
+            id="back-arrow"
             src={Arrow}
             alt="Go Back"
-            onClick={() => window.history.back()}
-            height={20}
+            onClick={() => (backTo ? navigate(backTo) : window.history.back())}
+            width={50}
           />
         )}
       </div>
