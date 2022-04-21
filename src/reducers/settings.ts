@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-type DotComma = ',' | '.';
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+type DotComma = "," | ".";
 interface settingsState {
   startingBalance: number;
   thousandsSeparator: DotComma;
@@ -8,12 +8,12 @@ interface settingsState {
 
 const initialState: settingsState = {
   startingBalance: 2_000_000,
-  thousandsSeparator: ',',
-  decimalSeparator: '.',
+  thousandsSeparator: ",",
+  decimalSeparator: ".",
 };
 
 export const settingsSlice = createSlice({
-  name: 'settings',
+  name: "settings",
   initialState,
   reducers: {
     setStartingBalance: (state, action: PayloadAction<number>) => {
