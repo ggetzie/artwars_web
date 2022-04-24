@@ -10,33 +10,38 @@ const NewGame = () => {
   const [name, setName] = useState(newGame.player);
   const [turns, setTurns] = useState(newGame.maxTurns);
   return (
-    <div>
+    <div id="new-game-screen">
       <ScreenHeader showBack={true} title="New Game" />
-      <div className="form-row">
-        <label htmlFor="player-name" className="horizontal-label">
-          Name:
-        </label>
-        <input
-          name="player-name"
-          type="text"
-          value={name}
-          className="horizontal-control"
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
+      <div id="new-game-form">
+        <div className="form-row">
+          <label htmlFor="player-name" className="horizontal-label">
+            Name:
+          </label>
 
-      <div className="form-row">
-        <Dropdown
-          labelText="Turns:"
-          name="num-turns"
-          selectedValue={turns}
-          itemList={[5, 30, 50, 75, 100].map((i) => [i, i.toString()])}
-          onValueChange={(e) => {
-            setTurns(parseInt(e.target.value, 10));
-          }}
-          labelClass="horizontal-label"
-          controlClass="horizontal-control"
-        />
+          <input
+            name="player-name"
+            type="text"
+            value={name}
+            className="horizontal-control"
+            size={12}
+            maxLength={12}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+
+        <div className="form-row">
+          <Dropdown
+            labelText="Turns:"
+            name="num-turns"
+            selectedValue={turns}
+            itemList={[5, 30, 50, 75, 100].map((i) => [i, i.toString()])}
+            onValueChange={(e) => {
+              setTurns(parseInt(e.target.value, 10));
+            }}
+            labelClass="horizontal-label"
+            controlClass="horizontal-control turns"
+          />
+        </div>
       </div>
       <Link
         title="Start Game"

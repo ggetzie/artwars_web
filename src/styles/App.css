@@ -15,6 +15,8 @@ AW_GRAY      = #8c8a97
   justify-content: flex-start;
   background-color: white;
 }
+
+
 header {
   height: 80px;
   padding: 0 1em 0 1em;
@@ -72,17 +74,25 @@ body a {
 }
 
 .form-row {
+  display: flex;
+  flex-direction: row;
   margin-bottom: 0.5em;
 }
 
 .form-row label {
   margin-right: 10px;
   font-size: 1.2em;
+  min-width: 56px;
 }
 
 .horizontal-control {
   font-size: 1.2em;
   border-radius: 0.2em;
+  max-width: 100%;
+}
+
+.turns {
+  background-color: white;
 }
 
 .nav-button {
@@ -360,21 +370,61 @@ ul.score-list li {
 }
 
 /* Home page */
-div#main-menu {
+
+#home-header {
+  column-gap: 1em;
+  flex-basis: 1;
+}
+
+#hh-left {
+  text-align: right;
+}
+
+#hh-right {
+  text-align: left;
+}
+
+.hh-side {
+  color: #8f8798;
+  font-size: 3em;
+  text-transform: uppercase;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.hh-middle {
+  max-width: fit-content;
+}
+
+.hh-middle img {
+  max-width: 120px;
+}
+
+div#home-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   height: 100%;
 }
 
+#main-menu {
+  text-align: center;
+  flex-basis: 2;
+}
+
+#main-menu li {
+  margin-bottom: 2em;
+}
+
 .main-menu-button {
+  text-transform: uppercase;
   text-decoration: none;
   text-align: center;
-  font-size: 1.5em;
+  font-size: 2em;
   max-width: 10em;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 1em;
+  
   color: #f57179;
 }
 
@@ -653,4 +703,20 @@ img#back-arrow {
   font-size: 0.5em;
   white-space: nowrap;
   text-align: center;
+}
+
+#new-game-form {
+  width: 80%;
+  margin: 3em auto 3em auto;
+}
+
+@media screen and (max-width: 640px) {
+  .App {
+    width: 100%;
+    margin: 0;
+  }
+
+  main  {
+    padding: 0;
+  }
 }
