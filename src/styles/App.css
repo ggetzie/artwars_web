@@ -710,6 +710,12 @@ img#back-arrow {
   margin: 3em auto 3em auto;
 }
 
+.active {
+  background-color: #f57179;
+  border-radius: 10px;
+  padding: 5px;
+}
+
 @media screen and (max-width: 640px) {
   .App {
     width: 100%;

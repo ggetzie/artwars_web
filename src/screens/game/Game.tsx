@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useMatch, useResolvedPath} from "react-router-dom";
 import {useAppSelector} from "../../hooks";
 import {
   currentNPC,
@@ -17,6 +17,24 @@ import {GameHeader} from "../../components";
 
 // const ACTIVE_COLOR = "dodgerblue";
 // const INACTIVE_COLOR = "gray";
+
+const GameLink = ({
+  to,
+  title,
+  imgSrc,
+}: {
+  to: string;
+  title: string;
+  imgSrc: string;
+}) => {
+  const resolved = useResolvedPath(to);
+  const match = useMatch({path: resolved.pathname, end: false});
+  return (
+    <Link to={to} title="title" className={match ? "active" : ""}>
+      <img src={imgSrc} alt={title} />
+    </Link>
+  );
+};
 
 const Game = () => {
   const game = useAppSelector((state) => state.game);
@@ -46,21 +64,19 @@ const Game = () => {
         )}
       </div>
       <div className="game-tab">
-        <Link to="/game/city" title={`City - ${city}`}>
-          <img src={IconCity} alt={`City - ${city}`} />
-        </Link>
-        <Link to="/game/portfolio" title="Your Portfolio">
-          <img src={IconPortfolio} alt="Your Portfolio" />
-        </Link>
-        <Link to="/game/collector" title={`Collector - ${npc.character.name}`}>
-          <img src={IconCollector} alt={`Collector - ${npc.character.name}`} />
-        </Link>
-        <Link to="/game/auction" title="Auction">
-          <img src={IconAuction} alt="Auction" />
-        </Link>
-        <Link to="/game/shop" title="Power-Up Shop">
-          <img src={IconShop} alt="Power-Up Shop" />
-        </Link>
+        <GameLink to="/game/city" title={`City - ${city}`} imgSrc={IconCity} />
+        <GameLink
+          to="/game/portfolio"
+          title="Your Portfolio"
+          imgSrc={IconPortfolio}
+        />
+        <GameLink
+          to="/game/collector"
+          title={`Collector - ${npc.character.name}`}
+          imgSrc={IconCollector}
+        />
+        <GameLink to="/game/auction" title="Auction" imgSrc={IconAuction} />
+        <GameLink to="/game/shop" title="Power-Up Shop" imgSrc={IconShop} />
       </div>
     </div>
   );
