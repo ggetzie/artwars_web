@@ -17,7 +17,7 @@ const OfferRow = ({
   disabled?: boolean;
 }) => {
   return (
-    <div className="row offer-input">
+    <div className="offer-input">
       <IntegerInput
         placeholder={placeholder}
         setNum={setOutput}
@@ -26,7 +26,7 @@ const OfferRow = ({
       <button
         title={buttonTitle}
         type="button"
-        className="button"
+        className="br-2"
         disabled={Number.isNaN(value) || disabled}
         onClick={submit}
       >

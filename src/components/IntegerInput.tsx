@@ -14,20 +14,16 @@ const IntegerInput = ({
   const settings = useAppSelector((state) => state.settings);
   const decSep = selectDecimal(settings);
   return (
-    <div>
-      <input
-        placeholder={placeholder}
-        disabled={!editable}
-        inputMode="numeric"
-        onChange={(event) => {
-          const cleaned = event.target.value
-            .split(decSep)[0]
-            .replace(/\D+/g, "");
-          const num = parseInt(cleaned);
-          setNum(num);
-        }}
-      />
-    </div>
+    <input
+      placeholder={placeholder}
+      disabled={!editable}
+      inputMode="numeric"
+      onChange={(event) => {
+        const cleaned = event.target.value.split(decSep)[0].replace(/\D+/g, "");
+        const num = parseInt(cleaned);
+        setNum(num);
+      }}
+    />
   );
 };
 

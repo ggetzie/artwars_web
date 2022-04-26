@@ -41,52 +41,48 @@ const GameHeader = () => {
   const maxTurns = getMaxTurns(game);
   return (
     <div className="game-header">
-      <div className="gh-left">
-        <img id="header-logo" src={awLogo} alt="Art Wars Logo" />
-        {showBack && (
-          <img
-            id="back-arrow"
-            src={backArrow}
-            alt="Go Back"
-            onClick={() => window.history.back()}
-          />
-        )}
-      </div>
-      <div className="gh-center">
-        <h2 className="text-center text-upper m-0">{title}</h2>
-        <div id="hot-category" title={`${hot} is SO HOT right now!`}>
-          <FontAwesomeIcon icon={faFire} color="#f57179" />: {hot}
+      <div className="row">
+        <div className="gh-left">
+          <img id="header-logo" src={awLogo} alt="Art Wars Logo" />
+        </div>
+        <div className="gh-right">
+          <h2 className="text-center text-upper m-0">{title}</h2>
         </div>
       </div>
-      <div className="gh-right">
-        <ul className="bare-list">
-          <li
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            {player}{" "}
-          </li>
-          <li title="Your cash balance">
+      <div className="row">
+        <div className="gh-left">
+          {showBack && (
+            <img
+              id="back-arrow"
+              src={backArrow}
+              alt="Go Back"
+              onClick={() => window.history.back()}
+            />
+          )}
+        </div>
+        <div className="gh-right game-info">
+          <div>{player}</div>
+          <div title="Your cash balance">
             <FontAwesomeIcon icon={faMoneyBill1Wave} color="#5c554b" />: $
             {balance.toLocaleString()}
-          </li>
-          <li title="Total value of art in your portfolio.">
+          </div>
+          <div title="Total value of art in your portfolio.">
             <FontAwesomeIcon icon={faImage} color="#f57179" />: $
             {artValue.toLocaleString()}
-          </li>
-          <li title={`${maxTurns - turn} turns remaining`}>
+          </div>
+          <div title={`${maxTurns - turn} turns remaining`}>
             <FontAwesomeIcon icon={faArrowsSpin} />: {turn} of {maxTurns}
-          </li>
+          </div>
+          <div id="hot-category" title={`${hot} is SO HOT right now!`}>
+            <FontAwesomeIcon icon={faFire} color="#f57179" />: {hot}
+          </div>
           {showCity && (
-            <li title="Current City">
+            <div title="Current City">
               <img src={CityIcon} alt="City Icon" height={16} width={16} />:{" "}
               {city}
-            </li>
+            </div>
           )}
-        </ul>
+        </div>
       </div>
       <Link id="quit-button" to="/">
         <QuitButton />

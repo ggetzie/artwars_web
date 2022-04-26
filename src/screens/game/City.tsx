@@ -28,7 +28,7 @@ const City = () => {
 
   useEffect(() => {
     dispatch(setTitle(city));
-    dispatch(setShowBack(true));
+    dispatch(setShowBack(false));
   }, [city, dispatch]);
 
   return (

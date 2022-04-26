@@ -30,7 +30,7 @@ const GameLink = ({
   const resolved = useResolvedPath(to);
   const match = useMatch({path: resolved.pathname, end: false});
   return (
-    <Link to={to} title="title" className={match ? "active" : ""}>
+    <Link to={to} title={title} className={match ? "active" : ""}>
       <img src={imgSrc} alt={title} />
     </Link>
   );

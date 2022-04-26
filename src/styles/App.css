@@ -603,27 +603,34 @@ div#home-screen {
 }
 
 .offer-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: stretch;
   column-gap: 0.5em;
+  height: 2em;
 }
 
 .offer-input input {
   font-size: 1.2em;
   padding-left: 0.5em;
-  margin-left: 0.5em;
   height: 100%;
   border: 1px #e6e6e6 solid;
   border-radius: 0.2em;
+  min-width: 0;
 }
 
 .offer-input button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: #f57179;
   color: white;
   font-size: 1.2em;
-  margin: 0 auto 0 auto;
   border: none;
-  box-shadow: none;
-  padding: 0.5em;
   cursor: pointer;
+  min-width: fit-content;
+  height: 100%;
 }
 
 .auction-messages {
@@ -650,37 +657,42 @@ div#home-screen {
 
 .game-header {
   height: fit-content;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   padding-top: 10px;
   margin-bottom: 1.5em;
   position: relative;
 }
 
-.gh-center {
-  flex-basis: 100%;
+.gh-right h2 {
   color: #8c8a97;
   font-size: 2em;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .gh-right {
-  width: fit-content;
+  flex-basis: 100%;
   white-space: nowrap;
 }
 
-.gh-right ul {
-  color: #8c8a97;
+.game-info {
+  margin: 0em 1em;
+  font-size: 0.8em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
+.game-info div {
+  margin-right: 1em;
+  margin-bottom: 0.2em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .gh-left {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  width: 50px;
 }
 
 img#header-logo {
@@ -699,12 +711,6 @@ img#back-arrow {
   right: -14px;
 }
 
-#hot-category {
-  font-size: 0.5em;
-  white-space: nowrap;
-  text-align: center;
-}
-
 #new-game-form {
   width: 80%;
   margin: 3em auto 3em auto;
@@ -716,6 +722,12 @@ img#back-arrow {
   padding: 5px;
 }
 
+.game-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 @media screen and (max-width: 640px) {
   .App {
     width: 100%;
@@ -723,6 +735,12 @@ img#back-arrow {
   }
 
   main  {
-    padding: 0;
+    padding: 0 0.5em;
+  }
+
+  #quit-button {
+  position: absolute;
+  top: 0.1em;
+  right: -0.5em;
   }
 }
