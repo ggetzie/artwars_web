@@ -61,12 +61,14 @@ export type NPC = {
     selling: {
       insulted: string;
       reject: string;
+      repeatReject: string;
       accept: string;
       enthusiasm: string;
     };
     buying: {
       insulted: string;
       reject: string;
+      repeatReject: string;
       accept: string;
       enthusiasm: string;
     };

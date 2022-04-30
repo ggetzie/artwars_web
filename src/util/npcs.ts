@@ -1,7 +1,12 @@
 import {Categories, randomChoiceNR} from ".";
 import {CityName, NPCData} from "./types";
 
-export type OfferResponse = "insulted" | "reject" | "accept" | "enthusiasm";
+export type OfferResponse =
+  | "insulted"
+  | "reject"
+  | "accept"
+  | "enthusiasm"
+  | "repeatReject";
 
 const NPCs = require("../res/data/npcs.json");
 
@@ -27,8 +32,15 @@ function getNPCForCity(city: CityName) {
 function considerSell(
   value: number,
   offer: number,
-  preferred: boolean
+  preferred: boolean,
+  limit: number = 0
 ): OfferResponse {
+  // NPC is considering to sell to the player
+  if (offer <= limit) {
+    // Once NPC has refused to sell at a price
+    // they will not consider a lower price
+    return "repeatReject";
+  }
   const ratio = offer / value;
   const minRatio = preferred ? 0.915 : 0.7;
   const maxRatio = preferred ? 1.25 : 1.1;
@@ -45,8 +57,15 @@ function considerSell(
 function considerBuy(
   value: number,
   asking: number,
-  preferred: boolean
+  preferred: boolean,
+  limit: number = Number.MAX_VALUE
 ): OfferResponse {
+  // NPC is considering to buy from the player
+  if (asking >= limit) {
+    // Once NPC has refused to buy at a price
+    // they will not consider a higher price
+    return "repeatReject";
+  }
   const ratio = asking / value;
   const base = 100;
   const minRatio = preferred ? 1.1 : 0.9;

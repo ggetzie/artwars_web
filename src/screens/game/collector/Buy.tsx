@@ -21,17 +21,21 @@ import {
 } from "../../../components";
 import {setShowBack, setTitle} from "../../../reducers/header";
 
+// player is buying from NPC
+// NPC is selling to player
 const Buy = () => {
   const game = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
   const player = selectPlayer(game);
   const npc = currentNPC(game);
   const params = useParams();
   const artworkId: string = params.artworkId as string;
 
   const [offer, setOffer] = useState<number>(0);
-  const [dialogue, setDialogue] = useState("Give me your best offer.");
+  const [dialogue, setDialogue] = useState<string>("Give me your best offer.");
   const [sold, setSold] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
+  const [limit, setLimit] = useState<number>(0);
+
   const balance = selectBalance(game);
 
   useEffect(() => {
@@ -47,7 +51,8 @@ const Buy = () => {
     const response = considerSell(
       artwork.data.currentValue,
       offer,
-      artwork.static.category === npc.data.preference
+      artwork.static.category === npc.data.preference,
+      limit
     );
     setDialogue(npc.character.dialogue.selling[response]);
     if (response === "accept" || response === "enthusiasm") {
@@ -58,6 +63,8 @@ const Buy = () => {
       };
       dispatch(transact(t));
       setSold(true);
+    } else {
+      setLimit(offer);
     }
   };
 

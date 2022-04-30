@@ -9,12 +9,14 @@
       "selling": {
         "insulted": "Oh darling, don't be gauche",
         "reject": "Hmm...nah",
+        "repeatReject": "You're a little slow, aren't you?",
         "accept": "Well, all right. I guess I can buy another poodle.",
         "enthusiasm": "Oh, you've made me so happy. So very happy!"
       },
       "buying": {
         "insulted": "Do you think I'm dumb just because I'm blonde?",
         "reject": "It's lovely, but it clashes with my curtains",
+        "repeatReject": "Darling, take a hint.",
         "accept": "There is a bare corner in the butler's pantry where it might fit.",
         "enthusiasm": "Oh, I just adore it! I'll put it on the ceiling above my bed!"
       }
@@ -30,12 +32,14 @@
       "selling": {
         "insulted": "Come now, old boy, there's no need to be rude",
         "reject": "Not today, chap",
+        "repeatReject": "How about this weather we're having?",
         "accept": "Very well",
         "enthusiasm": "Surely you're taking the piss, eh? What? You're serious?"
       },
       "buying": {
         "insulted": "Do you take me for some simple-minded colonial?",
         "reject": "Just not up to snuff, I'm afraid. High standards around here and all.",
+        "repeatReject": "Like a broken record, it's the damnedest thing.",
         "accept": "I suppose there is a spot in the East Wing it might fit.",
         "enthusiasm": "Jolly good show! This will make a cracking addition to the collection!"
       }
@@ -51,12 +55,14 @@
       "selling": {
         "insulted": "You make me another offer like that I will break your legs.",
         "reject": "Nyet",
+        "repeatReject": "You're starting to get on my nerves.",
         "accept": "Da",
         "enthusiasm": "Very generous! I include free bottle of vodka."
       },
       "buying": {
-        "insulted": "A man in Kiev made me offer like that once. He is now goo.",
+        "insulted": "A man in Irkutsk made me offer like that once. He is now goo.",
         "reject": "Don't waste my time.",
+        "repeatReject": "We have name in Moscow for people like you: Dumbass",
         "accept": "I can work with this.",
         "enthusiasm": "This work, it reminds me of my dear babushka. I will remember it always."
       }
@@ -72,12 +78,14 @@
       "selling": {
         "insulted": "Don't waste my time.",
         "reject": "Oooo, you were so close.",
+        "repeatReject": "I appreciate the hustle, but it's still a no.",
         "accept": "I grudgingly accept.",
         "enthusiasm": "You got it! No backsies!"
       },
       "buying": {
         "insulted": "I'm looking for Amazon here, not Pets.com. Get out of my face.",
         "reject": "I'll think about it. Check back in a couple months.",
+        "repeatReject": "You can put all the lipstick you want on it kid, it's still a pig.",
         "accept": "What the hell. You miss 100% of the shots you don't take, right?",
         "enthusiasm": "I gotta get in on this."
       }
@@ -93,12 +101,14 @@
       "selling": {
         "insulted": "May the fleas of a thousand camels infest your crotch.",
         "reject": "You know we like to haggle, right?",
+        "repeatReject": "You are a silly person.",
         "accept": "Fine! I'll allow it! You can rob me this one time!",
         "enthusiasm": "A thousand blessings on your house."
       },
       "buying": {
         "insulted": "Are you kidding me? I would not display this in YOUR house!",
         "reject": "A lovely work, but perhaps if you lower the price...",
+        "repeatReject": "I have bought some silly things for silly prices in my time, but today, no.",
         "accept": "I suppose I can find a place for it.",
         "enthusiasm": "Praise Allah! This work is glorious!"
       }
@@ -114,12 +124,14 @@
       "selling": {
         "insulted": "Come on now, I get more than that for cutting the ribbon a Walgreens.",
         "reject": "Let me think about it and get back to you.",
+        "repeatReject": "This is not a duck season / rabbit season situation. I'm not falling for that again!",
         "accept": "All right. I was getting bored of that piece anyway.",
         "enthusiasm": "Hachi Machi, with that I can finally make my dream film: 'Fartin in Tallahassee!'"
       },
       "buying": {
         "insulted": "Oh, god no. Do you think I live in the Valley or something?",
         "reject": "Don't get me wrong, it's good. But it just doesn't POP, you know? I want something that POPs",
+        "repeatReject": "Kid you don't have the cachet in this town to pull a move like that.",
         "accept": "Oh, Bruce Willis has one? Well, in that case...",
         "enthusiasm": "I love it! Green light!"
       }
@@ -135,12 +147,14 @@
       "selling": {
         "insulted": "In finance that would be what we call 'getting screwed'.",
         "reject": "Ehh, the juice ain't worth the squeeze.",
+        "repeatReject": "Your negotiating tactics are illogical.",
         "accept": "That is an acceptable profit.",
         "enthusiasm": "Looks like bonus season came early this year."
       },
       "buying": {
         "insulted": "Come on now. I know a dog when I see a dog.",
         "reject": "That's not going to move me to the front office",
+        "repeatReject": "I'm becoming less interested by the minute",
         "accept": "Seems like a viable play",
         "enthusiasm": "Holey Moley, that'll make me look good come bonus season."
       }
