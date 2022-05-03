@@ -11,6 +11,7 @@ import OfferText from "./OfferText";
 import Congrats from "./Congrats";
 import ErrorBoundary from "./ErrorBoundary";
 import GameHeader from "./GameHeader";
+import Skyline from "./Skyline";
 
 export {
   ArtDetail,
@@ -27,4 +28,5 @@ export {
   Congrats,
   ErrorBoundary,
   GameHeader,
+  Skyline,
 };

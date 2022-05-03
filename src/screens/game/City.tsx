@@ -7,7 +7,7 @@ import {
   currentTurn,
   getMaxTurns,
 } from "../../reducers/game";
-import {Dropdown} from "../../components";
+import {Dropdown, Skyline} from "../../components";
 import {Cities} from "../../util";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {CityName} from "../../util/types";
@@ -33,6 +33,7 @@ const City = () => {
 
   return (
     <div className="city-main">
+      <Skyline city={city} />
       {turn < maxTurns && (
         <div className="city-select-container">
           <Dropdown

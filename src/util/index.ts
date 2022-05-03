@@ -11,7 +11,7 @@ import {
 } from "./npcs";
 
 // Cities imports
-import {Cities, setupDuties} from "./cities";
+import {Cities, setupDuties, SkylineImages} from "./cities";
 
 // Artworks imports
 import {setupArtworks, ARTWORKS, getArtworkImageUrl} from "./artworks";
@@ -19,11 +19,11 @@ import {setupArtworks, ARTWORKS, getArtworkImageUrl} from "./artworks";
 // shop imports
 import {setupPowerUps} from "./shop";
 
-// npc exports
+// NPC exports
 export {setupNPCs, considerBuy, considerSell, getNPCForCity, NPCImages};
 
 // city exports
-export {Cities, setupDuties};
+export {Cities, setupDuties, SkylineImages};
 
 // artwork exports
 export {setupArtworks, ARTWORKS, getArtworkImageUrl};
