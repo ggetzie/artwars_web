@@ -61,6 +61,25 @@ const NewGame = () => {
       >
         Start
       </Link>
+      <div className="intro">
+        <h3 className="text-center">Welcome to Art Wars!</h3>
+        <p>
+          Art Wars is a turn-based market simulation game based on the classic{" "}
+          <a href="https://en.wikipedia.org/wiki/Drug_Wars_(video_game)">
+            Drug Wars
+          </a>
+          .
+        </p>
+        <p>
+          You play as a globe-trotting art dealer trying to buy art low and sell
+          it high while dodging the IRS, looking out for forgeries, stolen or
+          looted art, and other hazards of the art market.
+        </p>
+        <p>
+          Enter your name above and choose the number of turns you'd like to
+          play, then click Start to begin!
+        </p>
+      </div>
     </div>
   );
 };

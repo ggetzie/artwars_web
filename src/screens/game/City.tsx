@@ -7,7 +7,7 @@ import {
   currentTurn,
   getMaxTurns,
 } from "../../reducers/game";
-import {Dropdown, Skyline} from "../../components";
+import {Dropdown, MessageBoard, Skyline} from "../../components";
 import {Cities} from "../../util";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {CityName} from "../../util/types";
@@ -25,7 +25,6 @@ const City = () => {
     dispatch(processTurn());
     e.target.value = "";
   };
-
   useEffect(() => {
     dispatch(setTitle(city));
     dispatch(setShowBack(false));
@@ -50,16 +49,7 @@ const City = () => {
           />
         </div>
       )}
-      <div className="message-board">
-        <h3>Message Board</h3>
-        <ul className="message-list">
-          {messages.length > 0 ? (
-            messages.map((m, i) => <li key={i}>{m}</li>)
-          ) : (
-            <li>No new messages</li>
-          )}
-        </ul>
-      </div>
+      <MessageBoard messages={messages} />
     </div>
   );
 };

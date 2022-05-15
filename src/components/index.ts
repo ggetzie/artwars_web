@@ -12,6 +12,7 @@ import Congrats from "./Congrats";
 import ErrorBoundary from "./ErrorBoundary";
 import GameHeader from "./GameHeader";
 import Skyline from "./Skyline";
+import MessageBoard from "./MessageBoard";
 
 export {
   ArtDetail,
@@ -29,4 +30,5 @@ export {
   ErrorBoundary,
   GameHeader,
   Skyline,
+  MessageBoard,
 };
