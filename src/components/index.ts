@@ -13,7 +13,9 @@ import ErrorBoundary from "./ErrorBoundary";
 import GameHeader from "./GameHeader";
 import Skyline from "./Skyline";
 import MessageBoard from "./MessageBoard";
-
+import TourModal from "./TourModal";
+import TourTip from "./TourTip";
+import Help from "./Help";
 export {
   ArtDetail,
   IntegerInput,
@@ -31,4 +33,7 @@ export {
   GameHeader,
   Skyline,
   MessageBoard,
+  TourModal,
+  TourTip,
+  Help,
 };

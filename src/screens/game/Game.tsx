@@ -13,7 +13,7 @@ import IconPortfolio from "../../res/images/icon-portfolio.png";
 import IconCollector from "../../res/images/icon-collector.png";
 import IconAuction from "../../res/images/icon-auction.png";
 import IconShop from "../../res/images/icon-shop.png";
-import {GameHeader} from "../../components";
+import {GameHeader, Help} from "../../components";
 
 // const ACTIVE_COLOR = "dodgerblue";
 // const INACTIVE_COLOR = "gray";
@@ -77,6 +77,7 @@ const Game = () => {
         />
         <GameLink to="/game/auction" title="Auction" imgSrc={IconAuction} />
         <GameLink to="/game/shop" title="Power-Up Shop" imgSrc={IconShop} />
+        <Help />
       </div>
     </div>
   );

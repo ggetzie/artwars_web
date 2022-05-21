@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-interface tourState {
+export interface tourState {
   city: number;
   portfolioList: number;
   portfolioDetail: number;

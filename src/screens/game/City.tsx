@@ -6,12 +6,17 @@ import {
   getMessages,
   currentTurn,
   getMaxTurns,
+  setTour,
 } from "../../reducers/game";
-import {Dropdown, MessageBoard, Skyline} from "../../components";
+import {Dropdown, MessageBoard, Skyline, TourModal} from "../../components";
 import {Cities} from "../../util";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {CityName} from "../../util/types";
 import {setTitle, setShowBack} from "../../reducers/header";
+
+const IntroModal = () => {
+  return <TourModal section="city" index={0}></TourModal>;
+};
 
 const City = () => {
   const game = useAppSelector((state) => state.game);
@@ -28,10 +33,12 @@ const City = () => {
   useEffect(() => {
     dispatch(setTitle(city));
     dispatch(setShowBack(false));
+    dispatch(setTour("city"));
   }, [city, dispatch]);
 
   return (
     <div className="city-main">
+      <IntroModal />
       <Skyline city={city} />
       {turn < maxTurns && (
         <div className="city-select-container">

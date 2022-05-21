@@ -26,6 +26,7 @@ import {
   PowerUp,
 } from "../util/types";
 import {ArtWorkFilter} from "../util/awFilter";
+import {TourSection} from "./tour";
 
 export interface gameState {
   readonly id: string;
@@ -42,6 +43,7 @@ export interface gameState {
   messages: string[];
   duties: DutyMap;
   powerUps: PowerUp[];
+  tour: TourSection;
 }
 
 export function defaultGame(): gameState {
@@ -60,6 +62,7 @@ export function defaultGame(): gameState {
     messages: [],
     duties: setupDuties(),
     powerUps: setupPowerUps(),
+    tour: "city",
   };
 }
 
@@ -130,6 +133,9 @@ export const gameSlice = createSlice({
           return p;
         }
       });
+    },
+    setTour: (state, action: PayloadAction<TourSection>) => {
+      state.tour = action.payload;
     },
     processTurn: (state) => {
       // randomly select new hot category
@@ -282,6 +288,7 @@ export const {
   setInvestigation,
   processTurn,
   buyPowerUp,
+  setTour,
 } = gameSlice.actions;
 
 export const selectPlayer = (game: gameState) => game.player;
@@ -372,6 +379,10 @@ export const artworkIdIsValid = (
     artworkId >= 0 &&
     artworkId < game.artworksData.length
   );
+};
+
+export const getTour = (game: gameState): TourSection => {
+  return game.tour;
 };
 
 export default gameSlice.reducer;
