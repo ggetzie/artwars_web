@@ -11,15 +11,20 @@ const TourTip = ({
   section,
   index,
   location,
+  targetId,
 }: {
   section: TourSection;
   index: number;
   location: TipLocation;
+  targetId: string;
 }) => {
   const tour = useAppSelector((state) => state.tour);
   const currentIndex = getIndex(tour, section);
   const visibility = index === currentIndex ? "visible" : "hidden";
   const content = TourSteps[section][index];
+  const target = document.getElementById(targetId);
+  const coords = target?.getBoundingClientRect();
+  console.log(coords)
   return (
     <div className={`tour-tip tt-${location}`} style={{visibility: visibility}}>
       <TourControls section={section}>

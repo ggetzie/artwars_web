@@ -25,6 +25,7 @@ import CityIcon from "../res/images/icon-city.png";
 import QuitButton from "./QuitButton";
 import {Cities} from "../util";
 import {CityName} from "../util/types";
+import TourTip from "./TourTip";
 
 const GameHeader = () => {
   const game = useAppSelector((state) => state.game);
@@ -60,11 +61,21 @@ const GameHeader = () => {
             />
           )}
         </div>
-        <div className="gh-right game-info">
+        <div className="gh-right game-info tour-tip-container" id="status-bar">
           <div>{player}</div>
-          <div title="Your cash balance">
+          <div
+            title="Your cash balance"
+            className="tour-tip-container"
+            id="currentBalance"
+          >
             <FontAwesomeIcon icon={faMoneyBill1Wave} color="#5c554b" />: $
             {balance.toLocaleString()}
+            <TourTip
+              section="city"
+              index={2}
+              location="bottom"
+              targetId="currentBalance"
+            />
           </div>
           <div title="Total value of art in your portfolio.">
             <FontAwesomeIcon icon={faImage} color="#f57179" />: $
@@ -83,6 +94,12 @@ const GameHeader = () => {
             </div>
           )}
         </div>
+        <TourTip
+          location="bottom"
+          index={1}
+          section="city"
+          targetId="status-bar"
+        />
       </div>
       <Link id="quit-button" to="/">
         <QuitButton />
