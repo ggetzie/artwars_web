@@ -18,7 +18,6 @@ export function dedent(text: string): string {
 
 const TourSteps: StepMap = {
   city: [
-    // 0
     {
       type: "modal",
       targetId: "",
@@ -34,31 +33,26 @@ const TourSteps: StepMap = {
     controls and information that are used throughout the game.
     `,
     },
-    // 1
     {
       type: "tip",
       targetId: "statusBar",
       content: `This is the status bar. Important information about the state of your game is displayed here.`,
     },
-    // 2
     {
       type: "tip",
       targetId: "cashBalance",
       content: `Your current cash balance. This can be used to buy artworks, pay taxes, etc.`,
     },
-    // 3
     {
       type: "tip",
       targetId: "portfolioValue",
       content: `The current total value of all the artworks in your portfolio.`,
     },
-    // 4
     {
       type: "tip",
       targetId: "gameTurns",
       content: `The current turn and total number of turns in the game`,
     },
-    // 5
     {
       type: "tip",
       targetId: "hotCategory",
@@ -66,13 +60,11 @@ const TourSteps: StepMap = {
     
               A new hot category will be randomly chosen each turn.`,
     },
-    // 6
     {
       type: "tip",
       targetId: "gameNav",
       content: `This is the navigation bar. Click on the icons to view different game screens`,
     },
-    // 7
     {
       type: "tip",
       targetId: "cityLink",
@@ -80,7 +72,6 @@ const TourSteps: StepMap = {
       
       The red background indicates this is the current screen`,
     },
-    // 8
     {
       type: "tip",
       targetId: "portfolioLink",
@@ -88,7 +79,6 @@ const TourSteps: StepMap = {
       
       There you can view all the art you currently own and move it between cities.`,
     },
-    // 9
     {
       type: "tip",
       targetId: "collectorLink",
@@ -96,7 +86,6 @@ const TourSteps: StepMap = {
       
       There you can buy and sell art from the Art Collector that lives in the current city.`,
     },
-    // 10
     {
       type: "tip",
       targetId: "auctionLink",
@@ -104,7 +93,6 @@ const TourSteps: StepMap = {
       
       There you can buy and sell art at the Auction house in the current city.`,
     },
-    // 11
     {
       type: "tip",
       targetId: "shopLink",
@@ -112,7 +100,6 @@ const TourSteps: StepMap = {
       
       There you can buy power-ups to better avoid taxes and safeguard your collection.`,
     },
-    // 12
     {
       type: "modal",
       targetId: "",
@@ -120,7 +107,6 @@ const TourSteps: StepMap = {
       
       Let's go over some of the elements specific to this screen.`,
     },
-    // 13
     {
       type: "tip",
       targetId: "cityDropdown",
@@ -128,7 +114,6 @@ const TourSteps: StepMap = {
       
       This advances the game to the next turn, so make sure you've bought and sold everything wanted in the current city first!`,
     },
-    // 14
     {
       type: "tip",
       targetId: "messageBoard",
@@ -136,7 +121,13 @@ const TourSteps: StepMap = {
 
     Each turn any game events will be reported here.`,
     },
-    // 15
+    {
+      type: "tip",
+      targetId: "quitButton",
+      content: `Click here to quit the game and return the the main menu at any time.
+      
+      Your progress is automatically saved and can be reloaded by selecting "Continue" from the main menu.`,
+    },
     {
       type: "tip",
       targetId: "helpButton",

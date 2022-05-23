@@ -11,6 +11,7 @@ const Dropdown = ({
   labelClass,
   controlClass,
   placeHolder,
+  id,
 }: {
   onValueChange: ChangeEventHandler<HTMLSelectElement>;
   selectedValue: any;
@@ -20,6 +21,7 @@ const Dropdown = ({
   labelClass?: string;
   controlClass?: string;
   placeHolder?: string;
+  id?: string;
 }) => {
   return (
     <>
@@ -31,6 +33,7 @@ const Dropdown = ({
         className={controlClass}
         onChange={onValueChange}
         value={selectedValue}
+        id={id}
       >
         {placeHolder && (
           <option key={-1} disabled={true} value="">

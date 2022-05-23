@@ -912,7 +912,7 @@ img#back-arrow {
     padding: 0 0.5em;
   }
 
-  #quit-button {
+  #quitButton {
   position: absolute;
   top: 0.1em;
   right: -0.5em;

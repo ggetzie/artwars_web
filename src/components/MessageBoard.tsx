@@ -5,7 +5,7 @@ const MessageBoard = ({messages}: {messages: string[]}) => {
     <div
       className="message-board"
       style={{overflowY: "auto"}}
-      id="message-board"
+      id="messageBoard"
     >
       <h3>Message Board</h3>
 

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect} from "react";
+import React, {ChangeEvent, useEffect, useState, useLayoutEffect} from "react";
 import {
   setCity,
   selectCity,
@@ -8,19 +8,16 @@ import {
   getMaxTurns,
   setTour,
 } from "../../reducers/game";
-import {Dropdown, MessageBoard, Skyline, TourModal} from "../../components";
+import {Dropdown, MessageBoard, Skyline, Tour} from "../../components";
 import {Cities} from "../../util";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {CityName} from "../../util/types";
 import {setTitle, setShowBack} from "../../reducers/header";
 
-const IntroModal = () => {
-  return <TourModal section="city" index={0}></TourModal>;
-};
-
 const City = () => {
   const game = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
+  const [renderTour, setRenderTour] = useState(false);
   const city = selectCity(game);
   const messages = getMessages(game);
   const turn = currentTurn(game);
@@ -36,9 +33,10 @@ const City = () => {
     dispatch(setTour("city"));
   }, [city, dispatch]);
 
+  useLayoutEffect(() => setRenderTour(true), []);
+
   return (
     <div className="city-main">
-      <IntroModal />
       <Skyline city={city} />
       {turn < maxTurns && (
         <div className="city-select-container">
@@ -53,10 +51,12 @@ const City = () => {
             labelClass="sr-only"
             controlClass="city-select"
             placeHolder="Change City"
+            id="cityDropdown"
           />
         </div>
       )}
       <MessageBoard messages={messages} />
+      {renderTour && <Tour section="city" />}
     </div>
   );
 };

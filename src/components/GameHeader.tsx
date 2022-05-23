@@ -25,7 +25,6 @@ import CityIcon from "../res/images/icon-city.png";
 import QuitButton from "./QuitButton";
 import {Cities} from "../util";
 import {CityName} from "../util/types";
-import TourTip from "./TourTip";
 
 const GameHeader = () => {
   const game = useAppSelector((state) => state.game);
@@ -61,30 +60,23 @@ const GameHeader = () => {
             />
           )}
         </div>
-        <div className="gh-right game-info tour-tip-container" id="status-bar">
+        <div className="gh-right game-info" id="statusBar">
           <div>{player}</div>
-          <div
-            title="Your cash balance"
-            className="tour-tip-container"
-            id="currentBalance"
-          >
+          <div title="Your cash balance" id="cashBalance">
             <FontAwesomeIcon icon={faMoneyBill1Wave} color="#5c554b" />: $
             {balance.toLocaleString()}
-            <TourTip
-              section="city"
-              index={2}
-              location="bottom"
-              targetId="currentBalance"
-            />
           </div>
-          <div title="Total value of art in your portfolio.">
+          <div
+            title="Total value of art in your portfolio."
+            id="portfolioValue"
+          >
             <FontAwesomeIcon icon={faImage} color="#f57179" />: $
             {artValue.toLocaleString()}
           </div>
-          <div title={`${maxTurns - turn} turns remaining`}>
+          <div title={`${maxTurns - turn} turns remaining`} id="gameTurns">
             <FontAwesomeIcon icon={faArrowsSpin} />: {turn} of {maxTurns}
           </div>
-          <div id="hot-category" title={`${hot} is SO HOT right now!`}>
+          <div title={`${hot} is SO HOT right now!`} id="hotCategory">
             <FontAwesomeIcon icon={faFire} color="#f57179" />: {hot}
           </div>
           {showCity && (
@@ -94,14 +86,8 @@ const GameHeader = () => {
             </div>
           )}
         </div>
-        <TourTip
-          location="bottom"
-          index={1}
-          section="city"
-          targetId="status-bar"
-        />
       </div>
-      <Link id="quit-button" to="/">
+      <Link id="quitButton" to="/">
         <QuitButton />
       </Link>
     </div>
