@@ -9,8 +9,7 @@ const TourModal = ({section, index}: {section: TourSection; index: number}) => {
   const tour = useAppSelector((state) => state.tour);
   const currentIndex = getIndex(tour, section);
   const display = index === currentIndex ? "block" : "none";
-  const content = TourSteps[section][index];
-  console.log(content);
+  const {content} = TourSteps[section][index];
   return (
     <div className="modal-background" style={{display: display}}>
       <div className="modal-content">

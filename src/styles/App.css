@@ -849,42 +849,6 @@ img#back-arrow {
   flex-direction: row;
 }
 
-.tour-tip-container {
-  position: relative;
-}
-
-.tour-tip {
-  background-color: #555;
-  color: white;
-  border-radius: 0.4em;
-  padding: 0.5em;
-  width: fit-content;
-  min-height: 4em;
-  position: absolute;
-  z-index: 1;
-  
-}
-
-.tt-top {
-  bottom: calc(100% + 10px);
-  left: 0;
-}
-
-.tt-top::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 10px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-.tt-bottom {
-  top: calc(100% + 10px);
-  left: 0;
-}
 
 .tt-bottom::after {
   content: "";
