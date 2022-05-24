@@ -76,7 +76,7 @@ function getTipPos(
       return {top: coords.y + coords.height / 2 + 20 - tipDims.height};
     } else {
       // more space on bottom
-      // align top of tip 10px above center of target
+      // align top of tip 20px above center of target
       return {top: coords.y + coords.height / 2 - 20};
     }
   }
@@ -86,9 +86,9 @@ function getTipPos(
     case "bottom":
       return {top: coords.y + coords.height + 20, ...LeftOrRight()};
     case "left":
-      return {left: coords.x - tipDims.width - 20, ...TopOrBottom()};
+      return {left: coords.x - tipDims.width - 9, ...TopOrBottom()};
     case "right":
-      return {left: coords.x + coords.width + 20, ...TopOrBottom()};
+      return {left: coords.x + coords.width + 10, ...TopOrBottom()};
     default:
       return {top: 0, left: 0};
   }
@@ -127,7 +127,7 @@ const TipArrow = ({
     case "left":
       // center arrow on left side of target
       pos.top = coords.y + (coords.height / 2 - 5);
-      pos.left = coords.x + coords.width;
+      pos.left = coords.x - 10;
       pos.borderColor = "transparent transparent transparent #555";
       pos.marginRight = "-5px";
       break;
