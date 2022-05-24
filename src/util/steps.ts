@@ -56,7 +56,7 @@ const TourSteps: StepMap = {
     {
       type: "tip",
       targetId: "hotCategory",
-      content: `The current **HOT** category of art. Art in this category will be more valuable this turn.
+      content: `The current **HOT** category. Art in this category will be more valuable this turn.
     
               A new hot category will be randomly chosen each turn.`,
     },
@@ -101,6 +101,13 @@ const TourSteps: StepMap = {
       There you can buy power-ups to better avoid taxes and safeguard your collection.`,
     },
     {
+      type: "tip",
+      targetId: "quitButton",
+      content: `Click here to quit the game and return the the main menu at any time.
+      
+      Your progress is automatically saved and can be reloaded by selecting "Continue" from the main menu.`,
+    },
+    {
       type: "modal",
       targetId: "",
       content: `That covers all of the general controls.
@@ -121,13 +128,7 @@ const TourSteps: StepMap = {
 
     Each turn any game events will be reported here.`,
     },
-    {
-      type: "tip",
-      targetId: "quitButton",
-      content: `Click here to quit the game and return the the main menu at any time.
-      
-      Your progress is automatically saved and can be reloaded by selecting "Continue" from the main menu.`,
-    },
+
     {
       type: "tip",
       targetId: "helpButton",

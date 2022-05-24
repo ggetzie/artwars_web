@@ -39,6 +39,7 @@ const GameHeader = () => {
   const showCity = !Object.values(Cities).includes(title as CityName);
   const turn = currentTurn(game);
   const maxTurns = getMaxTurns(game);
+
   return (
     <div className="game-header">
       <div className="row">

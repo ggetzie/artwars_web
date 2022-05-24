@@ -15,6 +15,7 @@ const Help = () => {
       title="Help"
       onClick={() => dispatch(setIndex([section, 0]))}
       className="help-button"
+      id="helpButton"
     ></FontAwesomeIcon>
   );
 };

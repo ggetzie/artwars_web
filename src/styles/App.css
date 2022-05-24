@@ -61,10 +61,13 @@ body a {
   padding: 0 1em 1em 1em;
 }
 
-.quit-button {
+#quitButton {
   font-size: 1.2em;
   display: block;
   margin: auto;
+  position: absolute;
+  top: 0.1em;
+  right: -0.5em;
 }
 
 .screen-container {

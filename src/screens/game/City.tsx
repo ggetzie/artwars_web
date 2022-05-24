@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState, useLayoutEffect} from "react";
+import React, {ChangeEvent, useEffect} from "react";
 import {
   setCity,
   selectCity,
@@ -17,7 +17,6 @@ import {setTitle, setShowBack} from "../../reducers/header";
 const City = () => {
   const game = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
-  const [renderTour, setRenderTour] = useState(false);
   const city = selectCity(game);
   const messages = getMessages(game);
   const turn = currentTurn(game);
@@ -32,8 +31,6 @@ const City = () => {
     dispatch(setShowBack(false));
     dispatch(setTour("city"));
   }, [city, dispatch]);
-
-  useLayoutEffect(() => setRenderTour(true), []);
 
   return (
     <div className="city-main">
@@ -56,7 +53,7 @@ const City = () => {
         </div>
       )}
       <MessageBoard messages={messages} />
-      {renderTour && <Tour section="city" />}
+      <Tour section="city" />
     </div>
   );
 };

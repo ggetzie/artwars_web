@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useLayoutEffect, useState, useRef} from "react";
 import {ReactMarkdown} from "react-markdown/lib/react-markdown";
 import {TourSection, getIndex} from "../reducers/tour";
 import {useAppSelector} from "../hooks";
@@ -14,21 +14,13 @@ type AreaSet = {
   right: number;
 };
 type TTPos = {
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+  top: number;
+  left: number;
 };
 
-const BaseStyle: React.CSSProperties = {
-  backgroundColor: "#555",
-  color: "white",
-  borderRadius: "0.4em",
-  padding: "0.5em",
-  width: "fit-content",
-  minHeight: "4em",
-  position: "fixed",
-  zIndex: 1,
+type Dimensions = {
+  width: number;
+  height: number;
 };
 
 function getBestLocation(target: HTMLElement): TipLocation {
@@ -51,48 +43,52 @@ function getBestLocation(target: HTMLElement): TipLocation {
   return best;
 }
 
-function getTipPos(target: HTMLElement, location: TipLocation): TTPos {
+function getTipPos(
+  target: HTMLElement,
+  location: TipLocation,
+  tipDims: Dimensions
+): TTPos {
   // calculate coordinates for the fixed position of the tip
   const vp = window.visualViewport;
   const coords = target.getBoundingClientRect();
 
   function LeftOrRight() {
     // choose horizontal position of tip when it is on top or bottom of target
-    const xLeft = vp.width - coords.x;
+    const xLeft = coords.x;
     const xRight = vp.width - (coords.x + coords.width);
     if (xLeft > xRight) {
       // more space on the left
       // align right edge of tip 10px to right of center of target
-      return {right: coords.x + coords.width / 2 + 10};
+      return {left: coords.x + coords.width / 2 + 20 - tipDims.width};
     } else {
       // more space on right
       // align left edge of tip 10px to left of center of target
-      return {left: coords.x + coords.width / 2 - 10};
+      return {left: coords.x + coords.width / 2 - 20};
     }
   }
   function TopOrBottom() {
     // choose vertical position of tip when it is on left or right of target
-    const yTop = vp.height - coords.y;
+    const yTop = coords.y;
     const yBottom = vp.height - (coords.y + coords.height);
     if (yTop > yBottom) {
       // more space on top
       // align bottom of tip 10px below center of target
-      return {bottom: coords.y + coords.height / 2 + 10};
+      return {top: coords.y + coords.height / 2 + 20 - tipDims.height};
     } else {
       // more space on bottom
       // align top of tip 10px above center of target
-      return {top: coords.y + coords.height / 2 - 10};
+      return {top: coords.y + coords.height / 2 - 20};
     }
   }
   switch (location) {
     case "top":
-      return {bottom: coords.y + 10, ...LeftOrRight()};
+      return {top: coords.y - tipDims.height - 10, ...LeftOrRight()};
     case "bottom":
-      return {top: coords.y + coords.height + 10, ...LeftOrRight()};
+      return {top: coords.y + coords.height + 20, ...LeftOrRight()};
     case "left":
-      return {right: coords.x - 10, ...TopOrBottom()};
+      return {left: coords.x - tipDims.width - 20, ...TopOrBottom()};
     case "right":
-      return {left: coords.x + coords.width + 10, ...TopOrBottom()};
+      return {left: coords.x + coords.width + 20, ...TopOrBottom()};
     default:
       return {top: 0, left: 0};
   }
@@ -116,7 +112,7 @@ const TipArrow = ({
   switch (location) {
     case "top":
       // center arrow in top of target
-      pos.bottom = coords.y;
+      pos.top = coords.y - 10;
       pos.left = coords.x + (coords.width / 2 - 5);
       pos.borderColor = "#555 transparent transparent transparent";
       pos.marginLeft = "-5px";
@@ -131,7 +127,7 @@ const TipArrow = ({
     case "left":
       // center arrow on left side of target
       pos.top = coords.y + (coords.height / 2 - 5);
-      pos.right = coords.x;
+      pos.left = coords.x + coords.width;
       pos.borderColor = "transparent transparent transparent #555";
       pos.marginRight = "-5px";
       break;
@@ -146,7 +142,12 @@ const TipArrow = ({
       throw new Error("Invalid value for location in TipArrow");
   }
 
-  return <div style={{...ArrowBase, ...pos}} />;
+  return (
+    <div
+      style={{...ArrowBase, ...pos}}
+      id={`${target.getAttribute("id")}-tip-arrow`}
+    />
+  );
 };
 
 const TourTip = ({
@@ -162,15 +163,40 @@ const TourTip = ({
   const currentIndex = getIndex(tour, section);
   const visibility = index === currentIndex ? "visible" : "hidden";
   const {content} = TourSteps[section][index];
-  const target = document.getElementById(targetId);
-  const tipDiv = useRef(null);
+  const [target, setTarget] = useState<HTMLElement | null>(null);
+  const tipRef = useRef<HTMLDivElement>(null);
+  const [tipDims, setTipDims] = useState<Dimensions>({width: 200, height: 40});
+
+  const BaseStyle: React.CSSProperties = {
+    backgroundColor: "#555",
+    color: "white",
+    borderRadius: "0.2em",
+    padding: "0.5em",
+    position: "fixed",
+    width: "fit-content",
+    maxWidth: "40%",
+    maxHeight: "40%",
+    zIndex: 1,
+  };
+
+  useLayoutEffect(() => {
+    if (visibility) {
+      setTarget(document.getElementById(targetId));
+    }
+    if (tipRef && tipRef.current) {
+      setTipDims({
+        width: tipRef.current.offsetWidth,
+        height: tipRef.current.offsetHeight,
+      });
+    }
+  }, [targetId, visibility]);
+
   if (!target) {
-    throw new Error(
-      `Target ${targetId} not found for TourTip section: ${section} index: ${index}!`
-    );
+    return <></>;
   }
+
   const location = getBestLocation(target!);
-  const pos = getTipPos(target!, location);
+  const pos = getTipPos(target!, location, tipDims);
 
   const style: React.CSSProperties = {
     visibility: visibility,
@@ -179,16 +205,14 @@ const TourTip = ({
   };
 
   return (
-    <>
-      <div ref={tipDiv} style={style}>
-        <TourControls section={section}>
-          <div className="tour-content">
-            <ReactMarkdown>{dedent(content)}</ReactMarkdown>
-          </div>
-        </TourControls>
-      </div>
+    <div style={style} id={`${targetId}-tip`} ref={tipRef}>
+      <TourControls section={section}>
+        <div className="tour-content">
+          <ReactMarkdown>{dedent(content)}</ReactMarkdown>
+        </div>
+      </TourControls>
       <TipArrow target={target} location={location} />
-    </>
+    </div>
   );
 };
 
