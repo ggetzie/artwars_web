@@ -13,10 +13,6 @@ type AreaSet = {
   left: number;
   right: number;
 };
-type TTPos = {
-  top: number;
-  left: number;
-};
 
 type Dimensions = {
   width: number;
@@ -47,51 +43,51 @@ function getTipPos(
   target: HTMLElement,
   location: TipLocation,
   tipDims: Dimensions
-): TTPos {
+): React.CSSProperties {
   // calculate coordinates for the fixed position of the tip
   const vp = window.visualViewport;
   const coords = target.getBoundingClientRect();
 
-  function LeftOrRight() {
-    // choose horizontal position of tip when it is on top or bottom of target
-    const xLeft = coords.x;
-    const xRight = vp.width - (coords.x + coords.width);
-    if (xLeft > xRight) {
-      // more space on the left
-      // align right edge of tip 10px to right of center of target
-      return {left: coords.x + coords.width / 2 + 20 - tipDims.width};
-    } else {
-      // more space on right
-      // align left edge of tip 10px to left of center of target
-      return {left: coords.x + coords.width / 2 - 20};
+  function minorAxis() {
+    // Align the tip horizontally (if on top or bottom)
+    // or vertically (if on left or right)
+    const horizontal = location === "top" || location === "bottom";
+    const available = horizontal ? vp.width : vp.height;
+    const midTarget = horizontal
+      ? coords.x + coords.width / 2
+      : coords.y + coords.height / 2;
+    const tipSize = horizontal ? tipDims.width : tipDims.height;
+
+    // attempt to align middle of tip with middle of target
+    let pos = midTarget - tipSize / 2;
+
+    // adjust if tip goes off either end of screen
+    if (pos < 0) {
+      pos = 5;
+    } else if (pos + tipSize > available) {
+      pos = available - tipSize - 2;
     }
+
+    return horizontal ? {left: pos} : {top: pos};
   }
-  function TopOrBottom() {
-    // choose vertical position of tip when it is on left or right of target
-    const yTop = coords.y;
-    const yBottom = vp.height - (coords.y + coords.height);
-    if (yTop > yBottom) {
-      // more space on top
-      // align bottom of tip 10px below center of target
-      return {top: coords.y + coords.height / 2 + 20 - tipDims.height};
-    } else {
-      // more space on bottom
-      // align top of tip 10px above center of target
-      return {top: coords.y + coords.height / 2 - 20};
-    }
-  }
+  let res: React.CSSProperties = {};
   switch (location) {
     case "top":
-      return {top: coords.y - tipDims.height - 10, ...LeftOrRight()};
+      res = {top: coords.y - tipDims.height - 9, ...minorAxis()};
+      break;
     case "bottom":
-      return {top: coords.y + coords.height + 20, ...LeftOrRight()};
+      res = {top: coords.y + coords.height + 20, ...minorAxis()};
+      break;
     case "left":
-      return {left: coords.x - tipDims.width - 20, ...TopOrBottom()};
+      res = {left: coords.x - tipDims.width - 9, ...minorAxis()};
+      break;
     case "right":
-      return {left: coords.x + coords.width + 20, ...TopOrBottom()};
+      res = {left: coords.x + coords.width + 20, ...minorAxis()};
+      break;
     default:
       return {top: 0, left: 0};
   }
+  return res;
 }
 
 const TipArrow = ({
@@ -127,7 +123,7 @@ const TipArrow = ({
     case "left":
       // center arrow on left side of target
       pos.top = coords.y + (coords.height / 2 - 5);
-      pos.left = coords.x + coords.width;
+      pos.left = coords.x - 10;
       pos.borderColor = "transparent transparent transparent #555";
       pos.marginRight = "-5px";
       break;
@@ -166,6 +162,7 @@ const TourTip = ({
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const tipRef = useRef<HTMLDivElement>(null);
   const [tipDims, setTipDims] = useState<Dimensions>({width: 200, height: 40});
+  const vpWidth = window.visualViewport.width;
 
   const BaseStyle: React.CSSProperties = {
     backgroundColor: "#555",
@@ -173,15 +170,17 @@ const TourTip = ({
     borderRadius: "0.2em",
     padding: "0.5em",
     position: "fixed",
-    width: "fit-content",
-    maxWidth: "40%",
-    maxHeight: "40%",
+    maxWidth: vpWidth <= 640 ? "80%" : "40%",
+    maxHeight: vpWidth <= 640 ? "80%" : "40%",
     zIndex: 1,
   };
 
   useLayoutEffect(() => {
-    if (visibility) {
-      setTarget(document.getElementById(targetId));
+    setTarget(document.getElementById(targetId));
+    if (visibility === "visible") {
+      target?.classList.add("tour-highlight");
+    } else {
+      target?.classList.remove("tour-highlight");
     }
     if (tipRef && tipRef.current) {
       setTipDims({
@@ -189,7 +188,7 @@ const TourTip = ({
         height: tipRef.current.offsetHeight,
       });
     }
-  }, [targetId, visibility]);
+  }, [targetId, visibility, target]);
 
   if (!target) {
     return <></>;

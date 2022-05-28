@@ -62,7 +62,6 @@ body a {
 }
 
 #quitButton {
-  font-size: 1.2em;
   display: block;
   margin: auto;
   position: absolute;
@@ -896,12 +895,16 @@ img#back-arrow {
   border-color:  transparent  #555 transparent transparent;
 }
 
-
-
 .tour-button-col {
   display: flex;
   flex-direction: column-reverse;
   min-height: 4em;
+}
+
+.tour-highlight {
+  /* border: 2px solid #f57179; */
+  border: 2px solid yellow;
+  border-radius: 0.2em;
 }
 
 /* Small Screen styles */
@@ -917,7 +920,7 @@ img#back-arrow {
 
   #quitButton {
   position: absolute;
-  top: 0.1em;
+  top: 0.2em;
   right: -0.5em;
   }
 }

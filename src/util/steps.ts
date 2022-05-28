@@ -82,7 +82,7 @@ const TourSteps: StepMap = {
     {
       type: "tip",
       targetId: "collectorLink",
-      content: `This button goes to the collector.
+      content: `This button goes to the collector screen.
       
       There you can buy and sell art from the Art Collector that lives in the current city.`,
     },
