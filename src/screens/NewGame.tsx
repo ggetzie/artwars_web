@@ -1,8 +1,15 @@
 import React, {useState} from "react";
-import {setGame, defaultGame} from "../reducers/game";
+import {
+  setGame,
+  defaultGame,
+  filterArtWorks,
+  updateArtwork,
+} from "../reducers/game";
 import {useAppDispatch} from "../hooks";
 import {Dropdown, ScreenHeader} from "../components";
 import {Link} from "react-router-dom";
+import {ArtWorkFilter} from "../util/awFilter";
+import {randInt} from "../util";
 
 const NewGame = () => {
   const dispatch = useAppDispatch();
@@ -57,6 +64,22 @@ const NewGame = () => {
           newGame.player = name;
           newGame.maxTurns = turns;
           dispatch(setGame(newGame));
+          // select a random artwork under 200k for the player to start with
+          const under200k = filterArtWorks(
+            newGame,
+            new ArtWorkFilter({
+              owner: (o) => o === "",
+              value: (v) => v <= 200_000,
+            })
+          );
+          const freebie = under200k[randInt(0, under200k.length)];
+          dispatch(
+            updateArtwork({
+              ...freebie.data,
+              owner: newGame.player,
+              city: "London",
+            })
+          );
         }}
       >
         Start

@@ -1,5 +1,5 @@
 import {ArtworkData, CityName} from "./types";
-export type FilterFunc<Type> = (a?: Type) => boolean;
+export type FilterFunc<Type> = (a: Type) => boolean;
 
 const alwaysTrue: FilterFunc<any> = (_: any): boolean => true;
 const alwaysFalse: FilterFunc<any> = (_: any): boolean => false;
@@ -9,6 +9,7 @@ export type awFilterArgs = {
   owner?: FilterFunc<string>;
   auction?: FilterFunc<boolean>;
   destroyed?: FilterFunc<boolean>;
+  value?: FilterFunc<number>;
 };
 
 export class ArtWorkFilter {
@@ -16,6 +17,7 @@ export class ArtWorkFilter {
   owner: FilterFunc<string>;
   auction: FilterFunc<boolean>;
   destroyed: FilterFunc<boolean>;
+  value: FilterFunc<number>;
   method: "and" | "or";
 
   constructor(args: awFilterArgs, method: "and" | "or" = "and") {
@@ -51,6 +53,13 @@ export class ArtWorkFilter {
     } else {
       this.destroyed = args.destroyed;
     }
+    if (typeof args.value === "undefined") {
+      this.method === "and"
+        ? (this.value = alwaysTrue)
+        : (this.value = alwaysFalse);
+    } else {
+      this.value = args.value;
+    }
   }
 
   match(aw: ArtworkData): boolean {
@@ -60,6 +69,7 @@ export class ArtWorkFilter {
     res.push(this.owner(aw.owner));
     res.push(this.auction(aw.auction));
     res.push(this.destroyed(aw.destroyed));
+    res.push(this.value(aw.currentValue));
     if (this.method === "and") {
       return res.every((p) => p);
     } else {
