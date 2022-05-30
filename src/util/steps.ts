@@ -139,7 +139,23 @@ const TourSteps: StepMap = {
   ],
   portfolioDetail: [],
   portfolioConfirm: [],
-  portfolioList: [],
+  portfolioList: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `This is the portfolio screen. Here you can view all the artworks you currently own.`,
+    },
+    {
+      type: "tip",
+      targetId: "portfolioList",
+      content: `Artworks are arranged by city. Artworks can only be bought or sold in the city where they reside.`,
+    },
+    {
+      type: "tip",
+      targetId: "exampleArt",
+      content: `Click on any artwork in the list to view more details.`,
+    },
+  ],
   collectorList: [],
   collectorBuy: [],
   collectorSell: [],
