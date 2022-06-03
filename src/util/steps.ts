@@ -137,7 +137,25 @@ const TourSteps: StepMap = {
       You can review this tutorial again or get help on any screen by clicking this help button.`,
     },
   ],
-  portfolioDetail: [],
+  portfolioDetail: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Welcome to the portfolio detail screen. Here you can view all the information about your artwork.`,
+    },
+    {
+      type: "tip",
+      targetId: "cityMoveSelect",
+      content: `To sell artwork in a different city, you need to move it there. 
+      
+      Select the city you want to move the artwork to from this list.`,
+    },
+    {
+      type: "tip",
+      targetId: "moveConfirm",
+      content: `then click this button to proceed.`,
+    },
+  ],
   portfolioConfirm: [],
   portfolioList: [
     {
