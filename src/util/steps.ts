@@ -258,7 +258,35 @@ const TourSteps: StepMap = {
       content: `The collector will respond to your offer here.`,
     },
   ],
-  collectorSell: [],
+  collectorSell: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Here you can set a price for the artwork you want to sell and offer it to the collector.`,
+    },
+    {
+      type: "tip",
+      targetId: "artValue",
+      content: `Check the current value before you set a price.
+      
+      Don't sell yourself short!`,
+    },
+    {
+      type: "tip",
+      targetId: "askingInput",
+      content: `Enter your asking price here.`,
+    },
+    {
+      type: "tip",
+      targetId: "askingButton",
+      content: `When you're comfortable with the asking price, click this button to offer your artwork for sale.`,
+    },
+    {
+      type: "tip",
+      targetId: "npcDialogue",
+      content: `The collector will respond to your offer here.`,
+    },
+  ],
   collectorSellSelect: [
     {
       type: "modal",
