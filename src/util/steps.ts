@@ -259,7 +259,25 @@ const TourSteps: StepMap = {
     },
   ],
   collectorSell: [],
-  collectorSellSelect: [],
+  collectorSellSelect: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Here you can select one of the artworks from your portfolio and offer it for sale to the collector.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorSellList",
+      content: `The artworks available to sell are listed here. 
+      
+      Only artworks in the same city are eligible unless you own a yacht.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorSellListItem",
+      content: `Click on any of the available artworks to set a price and offer it for sale.`,
+    },
+  ],
   auctionList: [],
   auctionBuy: [],
   auctionSell: [],
