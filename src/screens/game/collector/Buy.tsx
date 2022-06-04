@@ -10,6 +10,8 @@ import {
   transact,
 } from "../../../reducers/game";
 
+import {setTour} from "../../../reducers/game";
+
 import {considerSell} from "../../../util";
 import {Transaction, Artwork} from "../../../util/types";
 import {
@@ -18,6 +20,7 @@ import {
   OfferText,
   NPCDialog,
   Congrats,
+  Tour,
 } from "../../../components";
 import {setShowBack, setTitle} from "../../../reducers/header";
 
@@ -41,6 +44,7 @@ const Buy = () => {
   useEffect(() => {
     dispatch(setTitle(npc.character.name));
     dispatch(setShowBack(true));
+    dispatch(setTour("collectorBuy"));
   }, [npc.character.name, dispatch]);
 
   const submitOffer = (artwork: Artwork) => {
@@ -90,11 +94,18 @@ const Buy = () => {
               submit={() => submitOffer(artwork)}
               placeholder="Enter an offer amount"
               buttonTitle="Make Offer"
+              inputId="offerInput"
+              buttonId="offerButton"
             />
           </>
         )}
 
-        <NPCDialog dialogue={dialogue} image={npc.character.image} />
+        <NPCDialog
+          dialogue={dialogue}
+          image={npc.character.image}
+          id="collectorDialogue"
+        />
+        <Tour section="collectorBuy" />
       </div>
     );
   } catch (e) {

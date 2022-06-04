@@ -31,7 +31,9 @@ const ArtDetail = ({
         </p>
         <p className="m-0">Location: {artwork.data.city}</p>
         <p className="m-0">Owner: {artwork.data.owner || "Anon"}</p>
-        <p className="m-0">Value: ${value}</p>
+        <p className="m-0" id="artValue">
+          Value: ${value}
+        </p>
       </div>
       <div className="col">
         <img

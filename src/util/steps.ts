@@ -229,7 +229,35 @@ const TourSteps: StepMap = {
       content: `Click on the Sell button to select one of your artworks to offer for sale to the collector.`,
     },
   ],
-  collectorBuy: [],
+  collectorBuy: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Here you can view details about a piece of art owned by this collector and make an offer to buy it.`,
+    },
+    {
+      type: "tip",
+      targetId: "artValue",
+      content: `Check the current value of the artwork before making an offer. 
+      
+      Savvy collectors are unlikely to sell at a big discount.`,
+    },
+    {
+      type: "tip",
+      targetId: "offerInput",
+      content: "Enter the amount you're willing to pay for the artwork here.",
+    },
+    {
+      type: "tip",
+      targetId: "offerButton",
+      content: `Click this button when you're ready to make your offer.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorDialogue",
+      content: `The collector will respond to your offer here.`,
+    },
+  ],
   collectorSell: [],
   collectorSellSelect: [],
   auctionList: [],
