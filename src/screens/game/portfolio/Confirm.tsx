@@ -69,9 +69,9 @@ const Confirm = () => {
       ).toFixed(2)}% of the value of the artwork.
       $${taxBill.toLocaleString()} will be deducted from your cash balance. Proceed?`;
     } else {
-      taxMessage = `${
-        duty * 100
-      }% import duty at ${destination} amounts to a tax bill of $${taxBill.toLocaleString()}
+      taxMessage = `${(duty * 100).toFixed(
+        2
+      )}% import duty at ${destination} amounts to a tax bill of $${taxBill.toLocaleString()}
       You don't have enough cash to pay the tax man! Try selling some artworks to raise capital.`;
     }
   }
@@ -84,8 +84,8 @@ const Confirm = () => {
 
   return (
     <div className="tab-container">
-      <div className="text-center">
-        <h3>Confirm Move</h3>
+      <div className="mb-8">
+        <h3 className="text-center">Confirm Move</h3>
         <p>
           Confirm moving {artwork.static.title} from {artwork.data.city} to{" "}
           {destination}.

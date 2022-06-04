@@ -41,7 +41,7 @@ const List = () => {
   }, [dispatch]);
 
   return (
-    <div id="portfolioList" className="tab-container">
+    <div className="tab-container">
       {artByCity.map((v, i) => (
         <ArtList
           artworks={v.data}
@@ -55,6 +55,7 @@ const List = () => {
           ulClass="bare-list"
           emptyClass="mt-2 mb-0"
           targetId={i === 0 ? "exampleArt" : ""}
+          listTargetId="portfolioList"
         />
       ))}
       <Tour section="portfolioList" />

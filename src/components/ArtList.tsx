@@ -46,6 +46,7 @@ const ArtList = ({
   liClass = "art-list-li",
   emptyClass = "m-0",
   targetId,
+  listTargetId,
 }: {
   title: string;
   artworks: Artwork[];
@@ -58,9 +59,10 @@ const ArtList = ({
   liClass?: string;
   emptyClass?: string;
   targetId?: string;
+  listTargetId?: string;
 }) => {
   return (
-    <div className={divClass}>
+    <div className={divClass} id={listTargetId}>
       <h3 className={headerClass}>{title}</h3>
       {artworks.length > 0 ? (
         <ul className={ulClass}>

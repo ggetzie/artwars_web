@@ -198,7 +198,37 @@ const TourSteps: StepMap = {
       content: `Click on any artwork in the list to view more details.`,
     },
   ],
-  collectorList: [],
+  collectorList: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Welcome to the Collector screen. Every city is home to a resident art collector. 
+      
+      You can buy and sell artworks from them on the private market.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorLikes",
+      content: `Every collector has a favorite category of artwork. Keep an eye out for it!
+      
+      Collectors will pay more when buying art in their favorite category, but they'll also demand a higher price when selling.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorArtList",
+      content: `All the artworks owned by this collector are listed here.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorArtListItem",
+      content: `Click on any artwork in the list to view it and make an offer to buy it.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorSellButton",
+      content: `Click on the Sell button to select one of your artworks to offer for sale to the collector.`,
+    },
+  ],
   collectorBuy: [],
   collectorSell: [],
   collectorSellSelect: [],
