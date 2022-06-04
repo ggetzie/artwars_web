@@ -156,7 +156,31 @@ const TourSteps: StepMap = {
       content: `then click this button to proceed.`,
     },
   ],
-  portfolioConfirm: [],
+  portfolioConfirm: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Moving an artwork to a new city will incur an import duty
+      unless you have a freeport in that city or a yacht.`,
+    },
+    {
+      type: "tip",
+      targetId: "dutyMsg",
+      content: `Check the amount of the import duty here. 
+      
+      If you don't have enough cash available, you'll need to sell some other artworks to raise funds.`,
+    },
+    {
+      type: "tip",
+      targetId: "cancelMove",
+      content: `If you don't want to move, click Cancel to return to the detail screen.`,
+    },
+    {
+      type: "tip",
+      targetId: "confirmMove",
+      content: `Otherwise, click Confirm to proceed with the move.`,
+    },
+  ],
   portfolioList: [
     {
       type: "modal",
