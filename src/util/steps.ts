@@ -306,7 +306,28 @@ const TourSteps: StepMap = {
       content: `Click on any of the available artworks to set a price and offer it for sale.`,
     },
   ],
-  auctionList: [],
+  auctionList: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Every city has an auction house where you can buy and sell artworks on the public market.`,
+    },
+    {
+      type: "tip",
+      targetId: "auctionListTarget",
+      content: `The artworks up for auction are listed here.`,
+    },
+    {
+      type: "tip",
+      targetId: "auctionListItem",
+      content: `Click on any artwork to view more details and make a bid at the auction.`,
+    },
+    {
+      type: "tip",
+      targetId: "auctionSellButton",
+      content: `Click here to select on of your own works to offer for sale at auction.`,
+    },
+  ],
   auctionBuy: [],
   auctionSell: [],
   auctionSellSelect: [],

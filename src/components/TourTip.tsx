@@ -7,55 +7,62 @@ import TourSteps, {dedent} from "../util/steps";
 
 type TipLocation = "top" | "bottom" | "left" | "right";
 
-type AreaSet = {
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-};
-
 type Dimensions = {
   width: number;
   height: number;
 };
 
-function getBestLocation(target: HTMLElement): TipLocation {
+type AreaSet = {
+  top: Dimensions;
+  bottom: Dimensions;
+  left: Dimensions;
+  right: Dimensions;
+};
+
+type Position = {
+  top: number;
+  left: number;
+};
+
+function getArea(d: Dimensions): number {
+  return d.height * d.width;
+}
+
+function getBestLocation(target: HTMLElement): [TipLocation, Dimensions] {
   // find biggest area to left, right, top or bottom of target element
   // to place TourTip
   const coords = target.getBoundingClientRect();
   const vp = window.visualViewport;
   const areas: AreaSet = {
-    left: vp.height * coords.x,
-    right: vp.height * (vp.width - (coords.x + coords.width)),
-    bottom: vp.width * (vp.height - (coords.y + coords.height)),
-    top: vp.width * coords.y,
+    left: {height: vp.height, width: coords.x},
+    right: {height: vp.height, width: vp.width - (coords.x + coords.width)},
+    bottom: {height: vp.height - (coords.y + coords.height), width: vp.width},
+    top: {height: coords.y, width: vp.width},
   };
   let best: TipLocation = "top";
   for (const key in areas) {
-    if (areas[key as keyof AreaSet] > areas[best]) {
+    if (getArea(areas[key as keyof AreaSet]) > getArea(areas[best])) {
       best = key as TipLocation;
     }
   }
-  return best;
+  return [best, areas[best]];
 }
 
 function getTipPos(
-  target: HTMLElement,
   location: TipLocation,
-  tipDims: Dimensions
+  tipDims: Dimensions,
+  arrowPos: Position
 ): React.CSSProperties {
   // calculate coordinates for the fixed position of the tip
   const vp = window.visualViewport;
-  const coords = target.getBoundingClientRect();
 
   function minorAxis() {
     // Align the tip horizontally (if on top or bottom)
     // or vertically (if on left or right)
+
     const horizontal = location === "top" || location === "bottom";
     const available = horizontal ? vp.width : vp.height;
-    const midTarget = horizontal
-      ? coords.x + coords.width / 2
-      : coords.y + coords.height / 2;
+    const midTarget = horizontal ? arrowPos.left : arrowPos.top;
     const tipSize = horizontal ? tipDims.width : tipDims.height;
 
     // attempt to align middle of tip with middle of target
@@ -68,21 +75,21 @@ function getTipPos(
       pos = available - tipSize - 2;
     }
 
-    return horizontal ? {left: pos} : {top: pos};
+    return pos;
   }
   let res: React.CSSProperties = {};
   switch (location) {
     case "top":
-      res = {top: coords.y - tipDims.height - 9, ...minorAxis()};
+      res = {top: arrowPos.top - tipDims.height, left: minorAxis()};
       break;
     case "bottom":
-      res = {top: coords.y + coords.height + 20, ...minorAxis()};
+      res = {top: arrowPos.top + 20, left: minorAxis()};
       break;
     case "left":
-      res = {left: coords.x - tipDims.width - 9, ...minorAxis()};
+      res = {left: arrowPos.left - tipDims.width - 5, top: minorAxis()};
       break;
     case "right":
-      res = {left: coords.x + coords.width + 20, ...minorAxis()};
+      res = {left: arrowPos.left + 9, top: minorAxis()};
       break;
     default:
       return {top: 0, left: 0};
@@ -90,53 +97,92 @@ function getTipPos(
   return res;
 }
 
+function getArrowPos(
+  location: TipLocation,
+  target: HTMLElement
+): [Position, React.CSSProperties] {
+  const coords = target.getBoundingClientRect();
+  const vp = window.visualViewport;
+  function minorAxis() {
+    const horizontal = location === "top" || location === "bottom";
+    const oversize = horizontal
+      ? coords.x + coords.width > vp.width
+      : coords.y + coords.height > vp.height;
+    if (horizontal) {
+      return oversize ? coords.x + 10 : coords.x + (coords.width / 2 - 5);
+    } else {
+      return oversize ? coords.y + 10 : coords.y + (coords.height / 2 - 5);
+    }
+  }
+
+  switch (location) {
+    case "top":
+      // center arrow in top of target
+      return [
+        {
+          top: coords.y - 10,
+          left: minorAxis(),
+        },
+        {
+          borderColor: "#555 transparent transparent transparent",
+          marginLeft: "-5px",
+        },
+      ];
+    case "bottom":
+      // center arrow in bottom of target
+      return [
+        {
+          top: coords.y + coords.height - 10,
+          left: minorAxis(),
+        },
+        {
+          borderColor: "transparent transparent #555 transparent",
+          marginLeft: "-5px",
+        },
+      ];
+    case "left":
+      // center arrow on left side of target
+      return [
+        {
+          top: minorAxis(),
+          left: coords.x - 10,
+        },
+        {
+          borderColor: "transparent transparent transparent #555 ",
+          marginLeft: "-5px",
+        },
+      ];
+
+    case "right":
+      // center arrow on right side of target
+      return [
+        {
+          top: minorAxis(),
+          left: coords.x + coords.width,
+        },
+        {
+          borderColor: "transparent #555 transparent transparent  ",
+          marginLeft: "10px",
+        },
+      ];
+
+    default:
+      throw new Error("Invalid value for location in TipArrow");
+  }
+}
+
 const TipArrow = ({
   target,
-  location,
+  pos,
 }: {
   target: HTMLElement;
-  location: TipLocation;
+  pos: React.CSSProperties;
 }) => {
   const ArrowBase: React.CSSProperties = {
     position: "fixed",
     borderWidth: "10px",
     borderStyle: "solid",
-    borderColor: "#555 transparent transparent transparent",
   };
-  const coords = target.getBoundingClientRect();
-  let pos: React.CSSProperties = {};
-  switch (location) {
-    case "top":
-      // center arrow in top of target
-      pos.top = coords.y - 10;
-      pos.left = coords.x + (coords.width / 2 - 5);
-      pos.borderColor = "#555 transparent transparent transparent";
-      pos.marginLeft = "-5px";
-      break;
-    case "bottom":
-      // center arrow in bottom of target
-      pos.top = coords.y + coords.height;
-      pos.left = coords.x + (coords.width / 2 - 5);
-      pos.borderColor = "transparent transparent #555 transparent";
-      pos.marginLeft = "-5px";
-      break;
-    case "left":
-      // center arrow on left side of target
-      pos.top = coords.y + (coords.height / 2 - 5);
-      pos.left = coords.x - 10;
-      pos.borderColor = "transparent transparent transparent #555";
-      pos.marginRight = "-5px";
-      break;
-    case "right":
-      // center arrow on right side of target
-      pos.top = coords.y + (coords.height / 2 - 5);
-      pos.left = coords.x + coords.width;
-      pos.borderColor = "transparent #555 transparent transparent";
-      pos.marginLeft = "10px";
-      break;
-    default:
-      throw new Error("Invalid value for location in TipArrow");
-  }
 
   return (
     <div
@@ -194,12 +240,18 @@ const TourTip = ({
     return <></>;
   }
 
-  const location = getBestLocation(target!);
-  const pos = getTipPos(target!, location, tipDims);
+  const [location, availableArea] = getBestLocation(target!);
+  const tipMax: React.CSSProperties = {
+    maxWidth: availableArea.width - 15,
+    maxHeight: availableArea.height - 15,
+  };
+  const [arrowPos, arrowCSS] = getArrowPos(location, target);
+  const pos = getTipPos(location, tipDims, arrowPos);
 
   const style: React.CSSProperties = {
     visibility: visibility,
     ...BaseStyle,
+    ...tipMax,
     ...pos,
   };
 
@@ -210,7 +262,7 @@ const TourTip = ({
           <ReactMarkdown>{dedent(content)}</ReactMarkdown>
         </div>
       </TourControls>
-      <TipArrow target={target} location={location} />
+      <TipArrow target={target} pos={{...arrowPos, ...arrowCSS}} />
     </div>
   );
 };
