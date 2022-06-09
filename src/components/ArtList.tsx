@@ -9,16 +9,18 @@ const ArtListItem = ({
   urlBase,
   linkTitle,
   className,
+  id,
 }: {
   artwork: Artwork;
   urlBase: string;
   linkTitle: string;
   className: string;
+  id?: string;
 }) => {
   const game = useAppSelector((state) => state.game);
   const isHot = artwork.static.category === currentHot(game);
   return (
-    <li className={className}>
+    <li className={className} id={id}>
       <Link to={`${urlBase}/${artwork.static.id}`} title={linkTitle}>
         <p>{artwork.static.title}</p>
         <p>by {artwork.static.artist}</p>
@@ -43,6 +45,8 @@ const ArtList = ({
   ulClass = "art-list-ul",
   liClass = "art-list-li",
   emptyClass = "m-0",
+  targetId,
+  listTargetId,
 }: {
   title: string;
   artworks: Artwork[];
@@ -54,19 +58,22 @@ const ArtList = ({
   ulClass?: string;
   liClass?: string;
   emptyClass?: string;
+  targetId?: string;
+  listTargetId?: string;
 }) => {
   return (
-    <div className={divClass}>
+    <div className={divClass} id={listTargetId}>
       <h3 className={headerClass}>{title}</h3>
       {artworks.length > 0 ? (
         <ul className={ulClass}>
-          {artworks.map((value) => (
+          {artworks.map((value, i) => (
             <ArtListItem
               key={value.static.id}
               artwork={value}
               urlBase={urlBase}
               linkTitle={linkTitleBase}
               className={liClass}
+              id={i === 0 ? targetId : ""}
             />
           ))}
         </ul>

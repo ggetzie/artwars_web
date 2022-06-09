@@ -1,11 +1,16 @@
 import React, {useEffect} from "react";
 
 import {useAppDispatch, useAppSelector} from "../../../hooks";
-import {filterArtWorks, selectCity, selectPlayer} from "../../../reducers/game";
+import {
+  filterArtWorks,
+  selectCity,
+  selectPlayer,
+  setTour,
+} from "../../../reducers/game";
 import {ArtWorkFilter} from "../../../util/awFilter";
 import {Cities} from "../../../util";
 import {ArtByCityItem, Artwork} from "../../../util/types";
-import {ArtList} from "../../../components";
+import {ArtList, Tour} from "../../../components";
 import {setShowBack, setTitle} from "../../../reducers/header";
 
 const List = () => {
@@ -32,6 +37,7 @@ const List = () => {
   useEffect(() => {
     dispatch(setTitle("Portfolio"));
     dispatch(setShowBack(false));
+    dispatch(setTour("portfolioList"));
   }, [dispatch]);
 
   return (
@@ -48,8 +54,11 @@ const List = () => {
           headerClass={`m-0 text-upper ${i % 2 === 0 ? "aw-red" : "aw-blue"}`}
           ulClass="bare-list"
           emptyClass="mt-2 mb-0"
+          targetId={i === 0 ? "exampleArt" : ""}
+          listTargetId="portfolioList"
         />
       ))}
+      <Tour section="portfolioList" />
     </div>
   );
 };

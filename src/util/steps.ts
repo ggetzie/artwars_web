@@ -82,7 +82,7 @@ const TourSteps: StepMap = {
     {
       type: "tip",
       targetId: "collectorLink",
-      content: `This button goes to the collector.
+      content: `This button goes to the collector screen.
       
       There you can buy and sell art from the Art Collector that lives in the current city.`,
     },
@@ -137,14 +137,197 @@ const TourSteps: StepMap = {
       You can review this tutorial again or get help on any screen by clicking this help button.`,
     },
   ],
-  portfolioDetail: [],
-  portfolioConfirm: [],
-  portfolioList: [],
-  collectorList: [],
-  collectorBuy: [],
-  collectorSell: [],
-  collectorSellSelect: [],
-  auctionList: [],
+  portfolioDetail: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Welcome to the portfolio detail screen. Here you can view all the information about your artwork.`,
+    },
+    {
+      type: "tip",
+      targetId: "cityMoveSelect",
+      content: `To sell artwork in a different city, you need to move it there. 
+      
+      Select the city you want to move the artwork to from this list.`,
+    },
+    {
+      type: "tip",
+      targetId: "moveConfirm",
+      content: `then click this button to proceed.`,
+    },
+  ],
+  portfolioConfirm: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Moving an artwork to a new city will incur an import duty
+      unless you have a freeport in that city or a yacht.`,
+    },
+    {
+      type: "tip",
+      targetId: "dutyMsg",
+      content: `Check the amount of the import duty here. 
+      
+      If you don't have enough cash available, you'll need to sell some other artworks to raise funds.`,
+    },
+    {
+      type: "tip",
+      targetId: "cancelMove",
+      content: `If you don't want to move, click Cancel to return to the detail screen.`,
+    },
+    {
+      type: "tip",
+      targetId: "confirmMove",
+      content: `Otherwise, click Confirm to proceed with the move.`,
+    },
+  ],
+  portfolioList: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `This is the portfolio screen. Here you can view all the artworks you currently own.`,
+    },
+    {
+      type: "tip",
+      targetId: "portfolioList",
+      content: `Artworks are arranged by city. Artworks can only be bought or sold in the city where they reside.`,
+    },
+    {
+      type: "tip",
+      targetId: "exampleArt",
+      content: `Click on any artwork in the list to view more details.`,
+    },
+  ],
+  collectorList: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Welcome to the Collector screen. Every city is home to a resident art collector. 
+      
+      You can buy and sell artworks from them on the private market.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorLikes",
+      content: `Every collector has a favorite category of artwork. Keep an eye out for it!
+      
+      Collectors will pay more when buying art in their favorite category, but they'll also demand a higher price when selling.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorArtList",
+      content: `All the artworks owned by this collector are listed here.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorArtListItem",
+      content: `Click on any artwork in the list to view it and make an offer to buy it.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorSellButton",
+      content: `Click on the Sell button to select one of your artworks to offer for sale to the collector.`,
+    },
+  ],
+  collectorBuy: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Here you can view details about a piece of art owned by this collector and make an offer to buy it.`,
+    },
+    {
+      type: "tip",
+      targetId: "artValue",
+      content: `Check the current value of the artwork before making an offer. 
+      
+      Savvy collectors are unlikely to sell at a big discount.`,
+    },
+    {
+      type: "tip",
+      targetId: "offerInput",
+      content: "Enter the amount you're willing to pay for the artwork here.",
+    },
+    {
+      type: "tip",
+      targetId: "offerButton",
+      content: `Click this button when you're ready to make your offer.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorDialogue",
+      content: `The collector will respond to your offer here.`,
+    },
+  ],
+  collectorSell: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Here you can set a price for the artwork you want to sell and offer it to the collector.`,
+    },
+    {
+      type: "tip",
+      targetId: "artValue",
+      content: `Check the current value before you set a price.
+      
+      Don't sell yourself short!`,
+    },
+    {
+      type: "tip",
+      targetId: "askingInput",
+      content: `Enter your asking price here.`,
+    },
+    {
+      type: "tip",
+      targetId: "askingButton",
+      content: `When you're comfortable with the asking price, click this button to offer your artwork for sale.`,
+    },
+    {
+      type: "tip",
+      targetId: "npcDialogue",
+      content: `The collector will respond to your offer here.`,
+    },
+  ],
+  collectorSellSelect: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Here you can select one of the artworks from your portfolio and offer it for sale to the collector.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorSellList",
+      content: `The artworks available to sell are listed here. 
+      
+      Only artworks in the same city are eligible unless you own a yacht.`,
+    },
+    {
+      type: "tip",
+      targetId: "collectorSellListItem",
+      content: `Click on any of the available artworks to set a price and offer it for sale.`,
+    },
+  ],
+  auctionList: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Every city has an auction house where you can buy and sell artworks on the public market.`,
+    },
+    {
+      type: "tip",
+      targetId: "auctionListTarget",
+      content: `The artworks up for auction are listed here.`,
+    },
+    {
+      type: "tip",
+      targetId: "auctionListItem",
+      content: `Click on any artwork to view more details and make a bid at the auction.`,
+    },
+    {
+      type: "tip",
+      targetId: "auctionSellButton",
+      content: `Click here to select on of your own works to offer for sale at auction.`,
+    },
+  ],
   auctionBuy: [],
   auctionSell: [],
   auctionSellSelect: [],

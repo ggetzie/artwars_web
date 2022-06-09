@@ -7,6 +7,8 @@ const OfferRow = ({
   setOutput,
   value,
   submit,
+  inputId,
+  buttonId,
   disabled = false,
 }: {
   placeholder: string;
@@ -14,16 +16,20 @@ const OfferRow = ({
   setOutput: Dispatch<SetStateAction<number>>;
   value: number;
   submit: () => void;
+  inputId?: string;
+  buttonId?: string;
   disabled?: boolean;
 }) => {
   return (
     <div className="offer-input">
       <IntegerInput
+        id={inputId}
         placeholder={placeholder}
         setNum={setOutput}
         editable={true}
       />
       <button
+        id={buttonId}
         title={buttonTitle}
         type="button"
         className="br-2"
