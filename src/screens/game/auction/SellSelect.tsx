@@ -8,9 +8,11 @@ import {
   selectCity,
   selectPlayer,
 } from "../../../reducers/game";
+import {setTour} from "../../../reducers/game";
 import {setShowBack, setTitle} from "../../../reducers/header";
 import {ArtWorkFilter} from "../../../util/awFilter";
 import {Artwork} from "../../../util/types";
+import {Tour} from "../../../components";
 
 const SellSelect = () => {
   const game = useAppSelector((state) => state.game);
@@ -31,6 +33,7 @@ const SellSelect = () => {
   useEffect(() => {
     dispatch(setTitle("Auction"));
     dispatch(setShowBack(true));
+    dispatch(setTour("auctionSellSelect"));
   }, [dispatch]);
 
   return (
@@ -41,7 +44,10 @@ const SellSelect = () => {
         title="Select a work to sell"
         linkTitleBase="Click to offer at auction"
         emptyMessage="You have no artworks available to sell in this city"
+        targetId="auctionSellListItem"
+        listTargetId="auctionSellList"
       />
+      <Tour section="auctionSellSelect" />
     </div>
   );
 };

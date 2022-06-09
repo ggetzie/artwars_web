@@ -298,7 +298,7 @@ const TourSteps: StepMap = {
       targetId: "collectorSellList",
       content: `The artworks available to sell are listed here. 
       
-      Only artworks in the same city are eligible unless you own a yacht.`,
+      Only artworks in the current city are eligible unless you own a yacht.`,
     },
     {
       type: "tip",
@@ -328,9 +328,102 @@ const TourSteps: StepMap = {
       content: `Click here to select on of your own works to offer for sale at auction.`,
     },
   ],
-  auctionBuy: [],
-  auctionSell: [],
-  auctionSellSelect: [],
+  auctionBuy: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Here you can bid on works at auction.`,
+    },
+    {
+      type: "tip",
+      targetId: "artValue",
+      content: `Check the value of the artwork to make sure you're getting a good deal`,
+    },
+
+    {
+      type: "tip",
+      targetId: "currentAsking",
+      content: `The current asking price is shown here. This will be the amount you bid if you choose to place a bid.`,
+    },
+
+    {
+      type: "tip",
+      targetId: "placeBid",
+      content: `If the current asking price seems like a good deal, click this button to bid that amount.`,
+    },
+    {
+      type: "tip",
+      targetId: "auctionMessages",
+      content: `The results of your bid will be displayed here.
+      
+      If there are no higher bids, you win the auction and will own the artwork. It will be automatically stored in your portfolio in the current city.
+      
+      If someone else bids higher, you will be given a chance to bid again at a new, higher asking price.`,
+    },
+    {
+      type: "tip",
+      targetId: "giveUp",
+      content: `If the price gets too high, click this button to concede the auction. The artwork will go into private ownership by the last highest (anonymous) bidder.`,
+    },
+  ],
+  auctionSell: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Here you can sell your selected artwork at auction.`,
+    },
+    {
+      type: "tip",
+      targetId: "artValue",
+      content: `Check the current value of the artwork before setting an asking price.`,
+    },
+    {
+      type: "tip",
+      targetId: "currentAsking",
+      content: `A default value for the asking price is suggested at a slight discount 
+      to the current value in order to encourage bids.`,
+    },
+
+    {
+      type: "tip",
+      targetId: "askingInput",
+      content: `Enter a different value for the asking price here if you'd like to change it.
+      This will be the minimum price to start the bidding.
+      
+      If you set it too high, you might find that nobody is interested in bidding.`,
+    },
+
+    {
+      type: "tip",
+      targetId: "startAuction",
+      content: `When you're satisfied with the asking price, click here to start the auction.`,
+    },
+
+    {
+      type: "tip",
+      targetId: "auctionMessages",
+      content: `The results of the auction will be displayed here.`,
+    },
+  ],
+  auctionSellSelect: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Here you can select one of the artworks from your portfolio and offer it for sale at public auction.`,
+    },
+    {
+      type: "tip",
+      targetId: "auctionSellList",
+      content: `The artworks available to sell are listed here.
+      
+      Only artworks in the current city are eligible unless you own a yacht.`,
+    },
+    {
+      type: "tip",
+      targetId: "auctionSellListItem",
+      content: `Click on any of the available artworks to set a price and offer it for sale.`,
+    },
+  ],
   shopList: [],
   shopBuy: [],
 };

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {bidIncrement, otherBidders, initialAsking} from "../../../util";
 import {ArtworkData, Transaction} from "../../../util/types";
-import {ArtDetail} from "../../../components";
+import {ArtDetail, Tour} from "../../../components";
 import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {
   currentHot,
@@ -13,6 +13,8 @@ import {
   getArtwork,
   selectCity,
 } from "../../../reducers/game";
+
+import {setTour} from "../../../reducers/game";
 import {setShowBack, setTitle} from "../../../reducers/header";
 
 const Buy = () => {
@@ -41,12 +43,15 @@ const Buy = () => {
   const [lastBid, setLastBid] = useState(0);
   const [canBid, setCanBid] = useState(asking < balance);
   const [message, setMessage] = useState(
-    canBid ? "" : "You don't have enough money to bid"
+    canBid
+      ? "Think you've got the stones to bid, eh?"
+      : "You don't have enough money to bid"
   );
 
   useEffect(() => {
     dispatch(setTitle("Auction"));
     dispatch(setShowBack(true));
+    dispatch(setTour("auctionBuy"));
   }, [dispatch]);
 
   function loseAuction() {
@@ -102,7 +107,7 @@ const Buy = () => {
       <ArtDetail artwork={artwork} />
       <div className="row mt-10">
         <div className="col">
-          <p className="m-0 fs-12 text-bold text-center">
+          <p className="m-0 fs-12 text-bold text-center" id="currentAsking">
             Asking: ${asking.toLocaleString()}
           </p>
         </div>
@@ -115,6 +120,7 @@ const Buy = () => {
 
       <div className="button-row">
         <button
+          id="giveUp"
           title="Stop bidding and concede"
           type="button"
           className="button secondary"
@@ -130,6 +136,7 @@ const Buy = () => {
         </button>
 
         <button
+          id="placeBid"
           title="Place Bid"
           type="button"
           className="button primary"
@@ -139,7 +146,10 @@ const Buy = () => {
           Place Bid
         </button>
       </div>
-      {message.length > 0 && <p className="text-center">{message}</p>}
+      <div id="auctionMessages" className="mt-4">
+        {message.length > 0 && <p className="text-center">{message}</p>}
+      </div>
+      <Tour section="auctionBuy" />
     </div>
   );
 };

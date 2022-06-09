@@ -624,7 +624,7 @@ div#home-screen {
 
 /* Game screen Common */
 .tab-main {
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-bottom: 1em;
 }
 
