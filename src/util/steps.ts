@@ -424,8 +424,41 @@ const TourSteps: StepMap = {
       content: `Click on any of the available artworks to set a price and offer it for sale.`,
     },
   ],
-  shopList: [],
-  shopBuy: [],
+  shopList: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Welcome to the power-up store! Here you can buy items that will help you avoid
+      taxes and protect your portfolio`,
+    },
+    {
+      type: "tip",
+      targetId: "shopList",
+      content: "Items for sale are listed here.",
+    },
+    {
+      type: "tip",
+      targetId: "shopListItem0",
+      content: "Click on an item to view more details and make a purchase.",
+    },
+  ],
+  shopBuy: [
+    {
+      type: "modal",
+      targetId: "",
+      content: `Here you can review the benefits of this power-up and decide to buy or not.`,
+    },
+    {
+      type: "tip",
+      targetId: "buyButton",
+      content: `Click here to purchase.`,
+    },
+    {
+      type: "tip",
+      targetId: "cancelButton",
+      content: "Click here to return to the shop without purchasing.",
+    },
+  ],
 };
 
 export default TourSteps;

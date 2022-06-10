@@ -242,7 +242,7 @@ const TourTip = ({
 
   const [location, availableArea] = getBestLocation(target!);
   const tipMax: React.CSSProperties = {
-    maxWidth: availableArea.width - 15,
+    maxWidth: Math.min(availableArea.width - 15, 620),
     maxHeight: availableArea.height - 15,
   };
   const [arrowPos, arrowCSS] = getArrowPos(location, target);

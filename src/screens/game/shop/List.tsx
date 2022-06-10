@@ -1,8 +1,9 @@
 import React, {useEffect} from "react";
-import {listPowerUps} from "../../../reducers/game";
-import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {Link} from "react-router-dom";
+import {listPowerUps, setTour} from "../../../reducers/game";
+import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {setShowBack, setTitle} from "../../../reducers/header";
+import {Tour} from "../../../components";
 
 const List = () => {
   const game = useAppSelector((state) => state.game);
@@ -13,15 +14,16 @@ const List = () => {
   useEffect(() => {
     dispatch(setTitle("Shop"));
     dispatch(setShowBack(false));
+    dispatch(setTour("shopList"));
   }, [dispatch]);
 
   return (
     <div className="tab-container">
       <h3 className="mt-0 mb-6">Select a Power Up to purchase</h3>
       {powerUps.length > 0 ? (
-        <ul className="art-list-ul">
+        <ul className="art-list-ul" id="shopList">
           {powerUps.map((pu, i) => (
-            <li key={i} className="art-list-li">
+            <li key={i} className="art-list-li" id={`shopListItem${i}`}>
               <Link to={`/game/shop/buy/${pu.name}`}>
                 <div className="shop-row mb-6">
                   <p>{pu.name}</p>
@@ -46,6 +48,7 @@ const List = () => {
           </ul>
         </>
       )}
+      <Tour section="shopList" />
     </div>
   );
 };
