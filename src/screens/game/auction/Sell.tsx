@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 import {bidIncrement, otherBidders} from "../../../util";
 import {Transaction} from "../../../util/types";
 
-import {ArtDetail, OfferRow, OfferText} from "../../../components";
+import {ArtDetail, OfferRow, OfferText, Tour} from "../../../components";
 import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {
   currentHot,
@@ -14,7 +14,9 @@ import {
   transact,
   ownsPowerUp,
 } from "../../../reducers/game";
+import {setTour} from "../../../reducers/game";
 import {initialAsking} from "../../../util";
+import {setShowBack, setTitle} from "../../../reducers/header";
 
 type AuctionStatus =
   | "notStarted"
@@ -90,6 +92,15 @@ const Sell = () => {
   }
 
   useEffect(() => {
+    dispatch(setShowBack(status === "notStarted" || status === "finished"));
+  }, [dispatch, status]);
+
+  useEffect(() => {
+    dispatch(setTitle("Auction"));
+    dispatch(setTour("auctionSell"));
+  });
+
+  useEffect(() => {
     switch (status) {
       case "firstBid":
       case "calledForBid":
@@ -105,7 +116,7 @@ const Sell = () => {
   return (
     <div className="tab-container">
       <ArtDetail artwork={artwork} />
-      <OfferText value={asking} prefix="Asking price:" />
+      <OfferText value={asking} prefix="Asking price:" id="currentAsking" />
       <OfferRow
         placeholder="Enter an asking price."
         setOutput={setAsking}
@@ -120,14 +131,17 @@ const Sell = () => {
         }}
         value={asking}
         disabled={status === "finished"}
+        inputId="askingInput"
+        buttonId="startAuction"
       />
-      <ul className="auction-messages">
+      <ul className="auction-messages" id="auctionMessages">
         {messages.length > 0 ? (
           messages.map((m, i) => <li key={i}>{m}</li>)
         ) : (
           <li>Enter an initial asking price and press "Start Auction"</li>
         )}
       </ul>
+      <Tour section="auctionSell" />
     </div>
   );
 };

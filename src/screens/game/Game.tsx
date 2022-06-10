@@ -13,24 +13,23 @@ import IconPortfolio from "../../res/images/icon-portfolio.png";
 import IconCollector from "../../res/images/icon-collector.png";
 import IconAuction from "../../res/images/icon-auction.png";
 import IconShop from "../../res/images/icon-shop.png";
-import {GameHeader} from "../../components";
-
-// const ACTIVE_COLOR = "dodgerblue";
-// const INACTIVE_COLOR = "gray";
+import {GameHeader, Help} from "../../components";
 
 const GameLink = ({
   to,
   title,
   imgSrc,
+  id,
 }: {
   to: string;
   title: string;
   imgSrc: string;
+  id: string;
 }) => {
   const resolved = useResolvedPath(to);
   const match = useMatch({path: resolved.pathname, end: false});
   return (
-    <Link to={to} title={title} className={match ? "active" : ""}>
+    <Link to={to} title={title} className={match ? "active" : ""} id={id}>
       <img src={imgSrc} alt={title} />
     </Link>
   );
@@ -63,20 +62,38 @@ const Game = () => {
           </div>
         )}
       </div>
-      <div className="game-tab">
-        <GameLink to="/game/city" title={`City - ${city}`} imgSrc={IconCity} />
+      <div className="game-tab" id="gameNav">
+        <GameLink
+          to="/game/city"
+          title={`City - ${city}`}
+          imgSrc={IconCity}
+          id="cityLink"
+        />
         <GameLink
           to="/game/portfolio"
           title="Your Portfolio"
           imgSrc={IconPortfolio}
+          id="portfolioLink"
         />
         <GameLink
           to="/game/collector"
           title={`Collector - ${npc.character.name}`}
           imgSrc={IconCollector}
+          id="collectorLink"
         />
-        <GameLink to="/game/auction" title="Auction" imgSrc={IconAuction} />
-        <GameLink to="/game/shop" title="Power-Up Shop" imgSrc={IconShop} />
+        <GameLink
+          to="/game/auction"
+          title="Auction"
+          imgSrc={IconAuction}
+          id="auctionLink"
+        />
+        <GameLink
+          to="/game/shop"
+          title="Power-Up Shop"
+          imgSrc={IconShop}
+          id="shopLink"
+        />
+        <Help />
       </div>
     </div>
   );

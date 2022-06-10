@@ -6,8 +6,9 @@ import {
   getMessages,
   currentTurn,
   getMaxTurns,
+  setTour,
 } from "../../reducers/game";
-import {Dropdown, MessageBoard, Skyline} from "../../components";
+import {Dropdown, MessageBoard, Skyline, Tour} from "../../components";
 import {Cities} from "../../util";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {CityName} from "../../util/types";
@@ -28,6 +29,7 @@ const City = () => {
   useEffect(() => {
     dispatch(setTitle(city));
     dispatch(setShowBack(false));
+    dispatch(setTour("city"));
   }, [city, dispatch]);
 
   return (
@@ -46,10 +48,12 @@ const City = () => {
             labelClass="sr-only"
             controlClass="city-select"
             placeHolder="Change City"
+            id="cityDropdown"
           />
         </div>
       )}
       <MessageBoard messages={messages} />
+      <Tour section="city" />
     </div>
   );
 };

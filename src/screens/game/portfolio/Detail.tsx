@@ -8,11 +8,12 @@ import {
   artworkIdIsValid,
   ownsPowerUp,
   selectPlayer,
+  setTour,
 } from "../../../reducers/game";
 
 import {Cities, NPCImages} from "../../../util";
 import {CityName} from "../../../util/types";
-import {ArtDetail, Dropdown} from "../../../components";
+import {ArtDetail, Dropdown, Tour} from "../../../components";
 import {setShowBack, setTitle} from "../../../reducers/header";
 
 const Investigation = () => {
@@ -54,6 +55,7 @@ const DestinationSelect = ({
         labelClass="sr-only"
         placeHolder="Select a City"
         controlClass="city-select"
+        id="cityMoveSelect"
       />
       <Link
         className="primary"
@@ -65,6 +67,7 @@ const DestinationSelect = ({
         }}
         title="Move"
         to={to}
+        id="moveConfirm"
       >
         Move
       </Link>
@@ -101,6 +104,7 @@ const Detail = () => {
   useEffect(() => {
     dispatch(setTitle("Portfolio"));
     dispatch(setShowBack(true));
+    dispatch(setTour("portfolioDetail"));
   });
   return (
     <div className="tab-container">
@@ -129,6 +133,7 @@ const Detail = () => {
           )}
         </>
       )}
+      <Tour section="portfolioDetail" />
     </div>
   );
 };

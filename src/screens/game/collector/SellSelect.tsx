@@ -8,10 +8,11 @@ import {
   selectCity,
   selectPlayer,
 } from "../../../reducers/game";
+import {setTour} from "../../../reducers/game";
 
 import {ArtWorkFilter} from "../../../util/awFilter";
 import {Artwork} from "../../../util/types";
-import {ArtList, NPCDialog} from "../../../components";
+import {ArtList, NPCDialog, Tour} from "../../../components";
 import {setTitle, setShowBack} from "../../../reducers/header";
 
 const SellSelect = () => {
@@ -32,6 +33,7 @@ const SellSelect = () => {
   useEffect(() => {
     dispatch(setTitle(npc.character.name));
     dispatch(setShowBack(true));
+    dispatch(setTour("collectorSellSelect"));
   }, [npc.character.name, dispatch]);
   return (
     <div className="tab-container">
@@ -45,7 +47,10 @@ const SellSelect = () => {
         urlBase="/game/collector/sell"
         linkTitleBase="Offer to sell this work"
         emptyMessage="You don't have any artwork available to sell."
+        listTargetId="collectorSellList"
+        targetId="collectorSellListItem"
       />
+      <Tour section="collectorSellSelect" />
     </div>
   );
 };

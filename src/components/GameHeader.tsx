@@ -39,6 +39,7 @@ const GameHeader = () => {
   const showCity = !Object.values(Cities).includes(title as CityName);
   const turn = currentTurn(game);
   const maxTurns = getMaxTurns(game);
+
   return (
     <div className="game-header">
       <div className="row">
@@ -60,20 +61,23 @@ const GameHeader = () => {
             />
           )}
         </div>
-        <div className="gh-right game-info">
+        <div className="gh-right game-info" id="statusBar">
           <div>{player}</div>
-          <div title="Your cash balance">
+          <div title="Your cash balance" id="cashBalance">
             <FontAwesomeIcon icon={faMoneyBill1Wave} color="#5c554b" />: $
             {balance.toLocaleString()}
           </div>
-          <div title="Total value of art in your portfolio.">
+          <div
+            title="Total value of art in your portfolio."
+            id="portfolioValue"
+          >
             <FontAwesomeIcon icon={faImage} color="#f57179" />: $
             {artValue.toLocaleString()}
           </div>
-          <div title={`${maxTurns - turn} turns remaining`}>
+          <div title={`${maxTurns - turn} turns remaining`} id="gameTurns">
             <FontAwesomeIcon icon={faArrowsSpin} />: {turn} of {maxTurns}
           </div>
-          <div id="hot-category" title={`${hot} is SO HOT right now!`}>
+          <div title={`${hot} is SO HOT right now!`} id="hotCategory">
             <FontAwesomeIcon icon={faFire} color="#f57179" />: {hot}
           </div>
           {showCity && (
@@ -84,7 +88,7 @@ const GameHeader = () => {
           )}
         </div>
       </div>
-      <Link id="quit-button" to="/">
+      <Link id="quitButton" to="/">
         <QuitButton />
       </Link>
     </div>

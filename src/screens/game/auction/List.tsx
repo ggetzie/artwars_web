@@ -1,8 +1,9 @@
 import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
-import {ArtList} from "../../../components";
+import {ArtList, Tour} from "../../../components";
 import {useAppDispatch, useAppSelector} from "../../../hooks";
 import {filterArtWorks, selectCity} from "../../../reducers/game";
+import {setTour} from "../../../reducers/game";
 import {Artwork} from "../../../util/types";
 import {ArtWorkFilter} from "../../../util/awFilter";
 import {setShowBack, setTitle} from "../../../reducers/header";
@@ -23,6 +24,7 @@ const List = () => {
   useEffect(() => {
     dispatch(setTitle("Auction"));
     dispatch(setShowBack(false));
+    dispatch(setTour("auctionList"));
   }, [dispatch]);
 
   return (
@@ -31,6 +33,7 @@ const List = () => {
         title="Sell one of your works at auction"
         className="nav-button"
         to="/game/auction/sell/"
+        id="auctionSellButton"
       >
         Sell
       </Link>
@@ -40,7 +43,10 @@ const List = () => {
         urlBase="/game/auction/buy"
         linkTitleBase="Click to join the auction"
         emptyMessage="Oops! Looks like no art for auction here"
+        targetId="auctionListItem"
+        listTargetId="auctionListTarget"
       />
+      <Tour section="auctionList" />
     </div>
   );
 };

@@ -1,8 +1,10 @@
 import React, {useEffect} from "react";
+import {useParams} from "react-router-dom";
 import {getPowerUp, buyPowerUp, selectBalance} from "../../../reducers/game";
 import {useAppSelector, useAppDispatch} from "../../../hooks";
-import {useParams} from "react-router-dom";
 import {setShowBack, setTitle} from "../../../reducers/header";
+import {setTour} from "../../../reducers/game";
+import {Tour} from "../../../components";
 
 const Buy = () => {
   const game = useAppSelector((state) => state.game);
@@ -15,6 +17,7 @@ const Buy = () => {
   useEffect(() => {
     dispatch(setTitle("Shop"));
     dispatch(setShowBack(true));
+    dispatch(setTour("shopBuy"));
   }, [dispatch]);
 
   return (
@@ -33,6 +36,7 @@ const Buy = () => {
 
       <div className="button-row">
         <button
+          id="cancelButton"
           className="button secondary"
           title="Cancel"
           onClick={() => window.history.back()}
@@ -40,6 +44,7 @@ const Buy = () => {
           Cancel
         </button>
         <button
+          id="buyButton"
           title="Buy"
           className="button primary"
           disabled={tooExpensive || powerUp.purchased}
@@ -50,6 +55,7 @@ const Buy = () => {
           Buy
         </button>
       </div>
+      <Tour section="shopBuy" />
     </div>
   );
 };

@@ -2,8 +2,13 @@ import React from "react";
 
 const MessageBoard = ({messages}: {messages: string[]}) => {
   return (
-    <div className="message-board">
+    <div
+      className="message-board"
+      style={{overflowY: "auto"}}
+      id="messageBoard"
+    >
       <h3>Message Board</h3>
+
       <ul className="message-list">
         {messages.length > 0 ? (
           messages.map((m, i) => <li key={i}>{m}</li>)

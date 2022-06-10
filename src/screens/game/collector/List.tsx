@@ -2,10 +2,10 @@ import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "../../../hooks";
-import {currentNPC, filterArtWorks} from "../../../reducers/game";
+import {currentNPC, filterArtWorks, setTour} from "../../../reducers/game";
 
 import {ArtWorkFilter} from "../../../util/awFilter";
-import {ArtList} from "../../../components";
+import {ArtList, Tour} from "../../../components";
 import {Artwork} from "../../../util/types";
 import {NPCImages} from "../../../util";
 import {setShowBack, setTitle} from "../../../reducers/header";
@@ -22,6 +22,7 @@ const List = () => {
   useEffect(() => {
     dispatch(setTitle(npc.character.name));
     dispatch(setShowBack(false));
+    dispatch(setTour("collectorList"));
   }, [npc.character.name, dispatch]);
 
   return (
@@ -36,19 +37,28 @@ const List = () => {
         </div>
         <div className="collector-bio-text">
           <p>{npc.character.bio}</p>
-          <p>Likes: {npc.data.preference}</p>
+          <p id="collectorLikes">Likes: {npc.data.preference}</p>
         </div>
       </div>
-      <Link title="Sell" className="nav-button" to="/game/collector/sell/">
+      <Link
+        title="Sell"
+        className="nav-button"
+        to="/game/collector/sell/"
+        id="collectorSellButton"
+      >
         Sell
       </Link>
+
       <ArtList
         artworks={artworks}
         title="Collection"
         urlBase="/game/collector/buy"
         linkTitleBase="Click to make an offer"
         emptyMessage={`Oops! ${npc.character.name} ran out of art. How embarrassing!`}
+        targetId="collectorArtListItem"
+        listTargetId="collectorArtList"
       />
+      <Tour section="collectorList" />
     </div>
   );
 };
