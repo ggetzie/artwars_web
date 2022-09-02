@@ -28,6 +28,11 @@ const About = () => {
         <p className="m-0">
           <a href="http://www.onlinewebfonts.com">oNline Web Fonts</a>
         </p>
+        <h3 className="mb-4 mt-10">Acknowledgements</h3>
+        <p className="m-0">
+          Many thanks to Anya Adair, whose insights into data visualization
+          inspired this project and several others.
+        </p>
       </div>
     </>
   );
