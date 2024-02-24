@@ -1,1 +1,3 @@
 # Art Wars
+
+Art Wars is an art market simulation game in the style of the classic [Drug Wars](https://en.wikipedia.org/wiki/Drug_Wars_\(video_game\)) Players play as an art dealer, traveling the globe from city to city trying to buy low and sell high. They can buy and sell art from private collectors and public auctions. They have to look out for forgeries, pay or avoid import duties and protect their works from fire and theft.

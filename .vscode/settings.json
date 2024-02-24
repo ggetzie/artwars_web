@@ -24,5 +24,6 @@
     "reduxjs",
     "uuidv"
   ],
-  "cSpell.words": ["artwars"]
+  "cSpell.words": ["artwars"],
+  "cmake.configureOnOpen": false
 }
