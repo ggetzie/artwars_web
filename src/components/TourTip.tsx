@@ -32,7 +32,7 @@ function getBestLocation(target: HTMLElement): [TipLocation, Dimensions] {
   // find biggest area to left, right, top or bottom of target element
   // to place TourTip
   const coords = target.getBoundingClientRect();
-  const vp = window.visualViewport;
+  const vp = window.visualViewport!;
   const areas: AreaSet = {
     left: {height: vp.height, width: coords.x},
     right: {height: vp.height, width: vp.width - (coords.x + coords.width)},
@@ -54,7 +54,7 @@ function getTipPos(
   arrowPos: Position
 ): React.CSSProperties {
   // calculate coordinates for the fixed position of the tip
-  const vp = window.visualViewport;
+  const vp = window.visualViewport!;
 
   function minorAxis() {
     // Align the tip horizontally (if on top or bottom)
@@ -102,7 +102,7 @@ function getArrowPos(
   target: HTMLElement
 ): [Position, React.CSSProperties] {
   const coords = target.getBoundingClientRect();
-  const vp = window.visualViewport;
+  const vp = window.visualViewport!;
   function minorAxis() {
     const horizontal = location === "top" || location === "bottom";
     const oversize = horizontal
@@ -208,7 +208,7 @@ const TourTip = ({
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const tipRef = useRef<HTMLDivElement>(null);
   const [tipDims, setTipDims] = useState<Dimensions>({width: 200, height: 40});
-  const vpWidth = window.visualViewport.width;
+  const vpWidth = window.visualViewport!.width;
 
   const BaseStyle: React.CSSProperties = {
     backgroundColor: "#555",
