@@ -18,20 +18,20 @@ export interface tourState {
 }
 
 const initialState: tourState = {
-  city: 0,
-  portfolioList: 0,
-  portfolioDetail: 0,
-  portfolioConfirm: 0,
-  collectorList: 0,
-  collectorSellSelect: 0,
-  collectorSell: 0,
-  collectorBuy: 0,
-  auctionList: 0,
-  auctionSellSelect: 0,
-  auctionSell: 0,
-  auctionBuy: 0,
-  shopList: 0,
-  shopBuy: 0,
+  city: -1,
+  portfolioList: -1,
+  portfolioDetail: -1,
+  portfolioConfirm: -1,
+  collectorList: -1,
+  collectorSellSelect: -1,
+  collectorSell: -1,
+  collectorBuy: -1,
+  auctionList: -1,
+  auctionSellSelect: -1,
+  auctionSell: -1,
+  auctionBuy: -1,
+  shopList: -1,
+  shopBuy: -1,
 };
 export type TourSection = keyof typeof initialState;
 type TourIndex = [TourSection, number];
