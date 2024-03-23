@@ -1,10 +1,10 @@
 import {Categories, Cities, NPCImages} from ".";
 
 // Category types
-export type CategoryName = typeof Categories[keyof typeof Categories];
+export type CategoryName = (typeof Categories)[keyof typeof Categories];
 
 // City types
-export type CityName = typeof Cities[keyof typeof Cities];
+export type CityName = (typeof Cities)[keyof typeof Cities];
 export type DutyMap = {
   [key in CityName]: number;
 };
@@ -99,4 +99,19 @@ export type PowerUp = {
   description: string;
   price: number;
   purchased: boolean;
+};
+
+// Tutorial Types
+export type TutorialLevelIndex = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 9999;
+export type TutorialStep = {
+  documentation: string;
+  displayText: string;
+};
+export type TutorialLevel = {
+  description: string;
+  steps: TutorialStep[];
+};
+
+export type TutorialData = {
+  [key in TutorialLevelIndex]: TutorialLevel;
 };
